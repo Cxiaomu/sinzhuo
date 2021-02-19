@@ -1,12 +1,13 @@
+<!-- 高新公司 -->
 <template>
   <div>
-    SFooter
+      高新公司
   </div>
 </template>
 
 <script>
 export default {
-  name: "SFooter",
+  name: "Firm",
   data() {
     return { }
   },

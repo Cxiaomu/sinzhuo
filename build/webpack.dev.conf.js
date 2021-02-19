@@ -10,6 +10,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
+// 请求本地Json数据
+const express = require('express')
+const app = express()
+//加载本地json文件
+const menuData = require('../static/json/menu.json') 
+const menuList = menuData.menu;
+
+const apiRoutes = express.Router()
+app.use('/api',apiRoutes)
+
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
@@ -42,7 +52,18 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
+    },
+
+    // 获取本地数据 start
+    before (app) {
+      app.get('/api/menuList', (req, res) => {
+        res.json({
+          errno: 0,
+          data: menuList
+        })
+      })
     }
+    // 获取本地数据 end
   },
   plugins: [
     new webpack.DefinePlugin({

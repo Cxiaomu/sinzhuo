@@ -68,16 +68,19 @@
                       >
                       </el-input>
                     </el-form-item>
-                    <el-form-item label="验证码：" required>
-                      <el-input
-                        class="form-input"
-                        v-model="securityCode"
-                        type="text"
-                        placeholder="请输入验证码"
-                      >
-                      </el-input>
-                    </el-form-item>
                   </el-form>
+                  <div class="login-detail">
+                    <el-row>
+                      <el-col :span="8">
+                        <el-checkbox v-model="remember" class="remember">
+                          <span>记住密码</span>
+                        </el-checkbox>
+                      </el-col>
+                      <el-col :span="16">
+                        <span class="forget" @click="toReSetPwd">忘记密码</span>
+                      </el-col>
+                    </el-row>
+                  </div>
                   <div class="btn-wrapper">
                     <el-button type="primary" @click="toLogin">登录</el-button>
                   </div>
@@ -142,7 +145,7 @@
                       >
                       </el-input>
                     </el-form-item>
-                    <el-form-item label="确认密码：" prop="password">
+                    <el-form-item label="确认密码：" prop="rePassword">
                       <el-input
                         class="form-input"
                         v-model="registerForm.rePassword"
@@ -153,22 +156,14 @@
                       >
                       </el-input>
                     </el-form-item>
-                    <el-form-item label="验证码：" required>
-                      <el-input
-                        class="form-input"
-                        v-model="securityCode"
-                        placeholder="请输入验证码"
-                        type="text"
-                      >
-                      </el-input>
-                    </el-form-item>
                   </el-form>
                   <div class="btn-wrapper">
-                    <el-button type="primary" @click="toRegister"
+                    <el-button
+                      type="primary"
+                      @click="toRegister"
+                      class="m-bottom-22"
                       >注册</el-button
                     >
-                    <br />
-                    <br />
                     <el-checkbox v-model="agree"
                       >阅读并接受<span class="treaty" @click="toTreaty"
                         >注册协议</span
@@ -194,6 +189,7 @@ export default {
   data() {
     return {
       activeType: "login", // 激活标签页 登录-login,注册-register
+      remember: true,
       roleArr: [
         {
           label: "企业",
@@ -208,7 +204,6 @@ export default {
           value: 3,
         },
       ],
-      securityCode: "", // 验证码
       loginForm: {
         role: "",
         userName: "",
@@ -225,7 +220,15 @@ export default {
             trigger: "blur",
           },
         ],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+        password: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          {
+            min: 8,
+            max: 14,
+            message: "长度在 8 到 14 个字符，且至少包含数字、字母",
+            trigger: "blur",
+          },
+        ],
       },
       agree: false,
       registerForm: {
@@ -255,7 +258,7 @@ export default {
             max: 14,
             message: "长度在 8 到 14 个字符，且至少包含数字、字母",
             trigger: "blur",
-          }
+          },
         ],
         rePassword: [
           { required: true, message: "请再次输入密码", trigger: "blur" },
@@ -287,8 +290,11 @@ export default {
 
     // 点击登录
     toLogin() {
-      this.$refs['loginForm'].validate(async (valid, object) => {
+      this.$refs["loginForm"].validate(async (valid, object) => {
         if (valid) {
+          if (this.remember) {
+            this.toRemember();
+          }
           let data = await this.userLogin({
             loginName: this.loginForm.userName,
             loginPwd: this.loginForm.password,
@@ -299,31 +305,46 @@ export default {
           console.log(data);
         } else {
           this.$message({
-            message: '请填写完整登录信息',
-            type: 'warning'
-          })
+            message: "请填写完整登录信息",
+            type: "warning",
+          });
         }
-      })
+      });
     },
+
+    // 记住密码
+    toRemember() {
+      if (typeof Storage !== "undefined") {
+        localStorage.setItem("userName", this.loginForm.userName);
+        localStorage.setItem("password", this.loginForm.password);
+      } else {
+        this.$message({
+          message: "记住密码失败！该浏览器暂不支持记住密码",
+          type: "warning",
+        });
+      }
+    },
+
+    // 忘记密码
+    toReSetPwd() {},
 
     // 点击注册
     toRegister() {
-      this.$refs['registerForm'].validate((valid) => {
+      this.$refs["registerForm"].validate((valid) => {
         if (valid) {
-
         } else {
           this.$message({
-            message: '请填写完整注册信息',
-            type: 'warning'
-          })
+            message: "请填写完整注册信息",
+            type: "warning",
+          });
         }
-      })
+      });
     },
 
     // 注册协议
     toTreaty() {
-      let routerJump = this.$router.resolve('/treaty');
-      window.open(routerJump.href, '_blank')
+      let routerJump = this.$router.resolve("/treaty");
+      window.open(routerJump.href, "_blank");
     },
   },
 };
@@ -379,8 +400,28 @@ export default {
         .form-input {
           width: 80%;
         }
+        .login-detail {
+          .remember {
+            float: right;
+          }
+          .forget {
+            float: right;
+            position: relative;
+            right: 20%;
+            color: #666666;
+            cursor: pointer;
+          }
+        }
         .btn-wrapper {
           text-align: center;
+          .el-button {
+            width: 40%;
+            display: block;
+            margin: 22px auto;
+          }
+          // .m-bottom-22 {
+          //   margin-bottom: 22px;
+          // }
           .treaty {
             color: #2e58ff;
           }

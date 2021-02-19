@@ -1,12 +1,13 @@
+<!-- 资深导师 -->
 <template>
   <div>
-    SFooter
+      资深导师
   </div>
 </template>
 
 <script>
 export default {
-  name: "SFooter",
+  name: "Mentor",
   data() {
     return { }
   },

@@ -1,12 +1,13 @@
+<!-- 个人中心 -->
 <template>
   <div>
-    SFooter
+      个人中心
   </div>
 </template>
 
 <script>
 export default {
-  name: "SFooter",
+  name: "Personal",
   data() {
     return { }
   },

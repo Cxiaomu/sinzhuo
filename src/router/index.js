@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/views/Index'
+import Layout from '@/views/Layout'
 
 Vue.use(Router)
 
@@ -9,15 +9,50 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: "Layout",
+      component: Layout,
       redirect:{
         name:"Index"
-      }
+      },
+      children: [
+        {
+          path: '/index',
+          name: 'Index',
+          component: () => import("@/views/Index")
+        },
+        {
+          path: '/project',
+          name: 'Project',
+          component: () => import("@/views/Project/Project")
+        },
+        {
+          path: '/post',
+          name: 'Post',
+          component: () => import("@/views/Post/Post")
+        },
+        {
+          path: '/firm',
+          name: 'Firm',
+          component: () => import("@/views/Firm/Firm")
+        },
+        {
+          path: '/mentor',
+          name: 'Mentor',
+          component: () => import("@/views/Mentor/Mentor")
+        },
+        {
+          path: '/his',
+          name: 'His',
+          component: () => import("@/views/His/His")
+        },
+        {
+          path: '/personal',
+          name: 'Personal',
+          component: () => import("@/views/Personal/Personal")
+        },
+      ]
     },
-    {
-      path: '/index',
-      name: 'Index',
-      component: Index
-    },
+    
     {
       path: '/login',
       name: 'Login',
@@ -28,6 +63,7 @@ export default new Router({
       name: 'Treaty',
       component: () => import("@/views/Treaty")
     },
+    
     {
       path: '*',
       redirect:{

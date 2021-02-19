@@ -1,12 +1,13 @@
+<!-- 优质岗位 -->
 <template>
   <div>
-    SFooter
+      优质岗位
   </div>
 </template>
 
 <script>
 export default {
-  name: "SFooter",
+  name: "Post",
   data() {
     return { }
   },

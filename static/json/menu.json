@@ -1,0 +1,45 @@
+{
+  "menu": [{
+      "id": "1",
+      "name": "官网首页",
+      "icon": "iconshouye",
+      "path": "/index"
+
+    },
+    {
+      "id": "2",
+      "name": "创意项目",
+      "icon": "iconxiangmu",
+      "path": "/project"
+
+    },
+    {
+      "id": "3",
+      "name": "优质岗位",
+      "icon": "iconzhaopingangwei",
+      "path": "/post"
+
+    },
+    {
+      "id": "4",
+      "name": "高新企业",
+      "icon": "iconqiye",
+      "path": "/firm"
+
+    },
+    {
+      "id": "5",
+      "name": "资深导师",
+      "icon": "iconiconfontdaoshi",
+      "path": "/mentor"
+
+    },
+    {
+      "id": "6",
+      "name": "潜力人才",
+      "icon": "iconrencaizhongxin",
+      "path": "/his"
+
+    }
+  ]
+}

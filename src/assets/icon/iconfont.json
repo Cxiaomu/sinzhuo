@@ -1,0 +1,79 @@
+{
+  "id": "2372256",
+  "name": "sinzhuo",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "莘灼",
+  "glyphs": [
+    {
+      "icon_id": "7068817",
+      "name": "注册",
+      "font_class": "zhuce1",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "467283",
+      "name": "导师",
+      "font_class": "iconfontdaoshi",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "680985",
+      "name": "企业",
+      "font_class": "qiye",
+      "unicode": "e724",
+      "unicode_decimal": 59172
+    },
+    {
+      "icon_id": "949572",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "e663",
+      "unicode_decimal": 58979
+    },
+    {
+      "icon_id": "1263353",
+      "name": "人才中心",
+      "font_class": "rencaizhongxin",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "2578488",
+      "name": "登录",
+      "font_class": "denglu",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "4320335",
+      "name": "登录",
+      "font_class": "denglu1",
+      "unicode": "e653",
+      "unicode_decimal": 58963
+    },
+    {
+      "icon_id": "6851465",
+      "name": "注册",
+      "font_class": "zhuce",
+      "unicode": "e6d6",
+      "unicode_decimal": 59094
+    },
+    {
+      "icon_id": "10149991",
+      "name": "招聘岗位",
+      "font_class": "zhaopingangwei",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "15015462",
+      "name": "项目",
+      "font_class": "xiangmu",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    }
+  ]
+}

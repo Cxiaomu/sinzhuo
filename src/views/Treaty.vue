@@ -1,3 +1,4 @@
+<!-- 用户协议 -->
 <template>
   <div id="treaty">
     <!--  logo start -->

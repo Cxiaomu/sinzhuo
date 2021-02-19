@@ -1,12 +1,13 @@
+<!-- 创意项目 -->
 <template>
   <div>
-    SFooter
+      创意项目
   </div>
 </template>
 
 <script>
 export default {
-  name: "SFooter",
+  name: "Project",
   data() {
     return { }
   },

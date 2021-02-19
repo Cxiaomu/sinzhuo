@@ -1,12 +1,13 @@
+<!-- 潜力人才 -->
 <template>
   <div>
-    SFooter
+      潜力人才
   </div>
 </template>
 
 <script>
 export default {
-  name: "SFooter",
+  name: "His",
   data() {
     return { }
   },

@@ -1,3 +1,4 @@
+<!-- 404 -->
 <template>
   <div>
     <div class="error-page">
