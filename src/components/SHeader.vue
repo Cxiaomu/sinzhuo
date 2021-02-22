@@ -1,7 +1,7 @@
 <template>
   <div id="header-wrapper">
     <div class="header-container">
-      <img class="logo-img" src="../assets/img/logo-all.png" />
+      <img class="logo-img" @click="toIndex" src="../assets/img/logo-all.png" />
       <div style="display: inline-block; float: right" class="nav-wrapper">
         <el-menu
           :default-active="activeMenu"
@@ -15,6 +15,7 @@
             :index="menu.id"
           >
             <template slot="title">
+              <span :class="['iconfont', 'iconyonghu' ,'nav-icon', menu.icon]"></span>
               <span class="nav-title" v-text="menu.name"></span>
             </template>
           </el-menu-item>
@@ -22,7 +23,8 @@
           <el-menu-item index="7">
             <template slot="title">
               <div class="nav-title" v-if="!isLogin">
-                <span @click="toLogin">登录</span> |
+                <span @click="toLogin">登录</span>
+                <el-divider direction="vertical"></el-divider>
                 <span @click="toRegister">注册</span>
               </div>
               <div class="nav-title userName" v-else @click="toPersonal">
@@ -49,7 +51,7 @@ export default {
   name: "SHeader",
   data() {
     return {
-      activeMenu: "1",
+      activeMenu: "0",
       menuList: [],
       username: "啦啦啦啦",
     };
@@ -87,8 +89,14 @@ export default {
       }
     },
 
+    // 去首页
+    toIndex() {
+      this.$router.push('/index')
+    },
+    
     // 登录
     toLogin() {
+      console.log(this.$router)
       let params = {
         activeType: "login",
       };
@@ -122,11 +130,11 @@ export default {
   padding: 1rem 2rem;
   .header-container {
     width: 90%;
-    // background-color: #fff;
     margin: 0 auto;
     .logo-img {
       width: 9.6rem;
       height: 4rem;
+      cursor: pointer;
     }
     .nav-wrapper {
       .el-menu.el-menu--horizontal {

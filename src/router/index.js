@@ -31,6 +31,11 @@ export default new Router({
           component: () => import("@/views/Post/Post")
         },
         {
+          path: '/course',
+          name: 'Course',
+          component: () => import("@/views/Course/Course")
+        },
+        {
           path: '/firm',
           name: 'Firm',
           component: () => import("@/views/Firm/Firm")

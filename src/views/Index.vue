@@ -1,19 +1,31 @@
 <!-- 首页 -->
 <template>
   <div>
-    <h1>index</h1>
+    <s-swiper></s-swiper>
+    <s-index-project></s-index-project>
+    <s-index-post></s-index-post>
+    <s-index-course></s-index-course>
     <button @click="toLogin">去登录</button>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import SIndexCourse from '../components/SIndexCourse.vue';
+import SIndexPost from '../components/SIndexPost.vue';
+import SIndexProject from '../components/SIndexProject.vue';
+import SSwiper from '../components/SSwiper.vue';
 export default {
   name: "Index",
   data() {
     return {};
   },
-  components: {},
+  components: {
+    SSwiper,
+    SIndexProject,
+    SIndexPost,
+    SIndexCourse
+    },
 
   watch: {},
 
