@@ -7,7 +7,7 @@
       <el-col class="hidden-sm-and-down" :md="12" :lg="12" :xl="12">
         <div class="text-wrapper">
           <div>
-            <img class="logo-img" src="../assets/img/logo-all-gray.png" />
+            <img class="logo-img" src="../assets/img/logo/logo-all-gray.png" />
           </div>
           <div class="logo-text">
             <span class="logo-bold">莘</span>莘学子<br />
@@ -359,7 +359,7 @@ export default {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-image: url("../assets/img/bj2.jpg");
+  background-image: url("../assets/img/bg/bj2.jpg");
   background-size: cover;
   .text-wrapper {
     .logo-img {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="project-wrapper">
       项目
   </div>
 </template>
@@ -22,5 +22,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+#project-wrapper {
+  
+}
 </style>

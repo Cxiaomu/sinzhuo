@@ -1,7 +1,7 @@
 <template>
   <div id="header-wrapper">
     <div class="header-container">
-      <img class="logo-img" @click="toIndex" src="../assets/img/logo-all.png" />
+      <img class="logo-img" @click="toIndex" src="../assets/img/logo/logo-all.png" />
       <div style="display: inline-block; float: right" class="nav-wrapper">
         <el-menu
           :default-active="activeMenu"

@@ -5,7 +5,7 @@
     <el-row class="logo-wrapper">
       <el-col :span="24">
         <div class="logo-content">
-          <img class="logo-img" src="../assets/img/logo-all.png" />
+          <img class="logo-img" src="../assets/img/logo/logo-all.png" />
         </div>
       </el-col>
     </el-row>

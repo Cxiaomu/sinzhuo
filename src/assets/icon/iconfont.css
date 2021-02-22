@@ -15,13 +15,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.iconyonghu:before {
+  content: "\e640";
+}
+
 .iconkecheng:before {
   content: "\e60a";
 }
 
-.iconyonghu:before {
-  content: "\e640";
-}
+
 
 .iconzhuce1:before {
   content: "\e62e";

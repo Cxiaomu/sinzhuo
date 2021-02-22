@@ -24,19 +24,19 @@ export default {
       swiperImg: [
         {
           id: 1,
-          url: require("@/assets/img/banner1.jpg"),
+          url: require("@/assets/img/banner/banner1.jpg"),
         },
         {
           id: 2,
-          url: require("@/assets/img/banner2.jpg"),
+          url: require("@/assets/img/banner/banner2.jpg"),
         },
         {
           id: 3,
-          url: require("@/assets/img/banner3.jpg"),
+          url: require("@/assets/img/banner/banner3.jpg"),
         },
         {
           id: 4,
-          url: require("@/assets/img/banner4.jpg"),
+          url: require("@/assets/img/banner/banner4.jpg"),
         },
       ],
     };
