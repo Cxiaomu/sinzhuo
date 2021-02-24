@@ -141,8 +141,8 @@ $bgColor: #025492;
   padding: 1rem 2rem;
 }
 .margin {
-  margin-block-start: 0.5em;
-  margin-block-end: 0.5em;
+  margin-block-start: 0.5rem;
+  margin-block-end: 0.5rem;
 }
 #footer-wrapper {
   .footer-container-first {

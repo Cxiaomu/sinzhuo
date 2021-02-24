@@ -15,7 +15,7 @@
             :index="menu.id"
           >
             <template slot="title">
-              <span :class="['iconfont', 'iconyonghu' ,'nav-icon', menu.icon]"></span>
+              <!-- <span :class="['iconfont', 'iconyonghu' ,'nav-icon', menu.icon]"></span> -->
               <span class="nav-title" v-text="menu.name"></span>
             </template>
           </el-menu-item>

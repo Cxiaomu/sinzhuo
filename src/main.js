@@ -10,7 +10,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './styles/element-variables.scss'
 import 'element-ui/lib/theme-chalk/display.css';
 import './assets/icon/iconfont.css'
-
+import './styles/global.scss'
 import store from './store/index'
 
 Vue.config.productionTip = false
