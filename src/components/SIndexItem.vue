@@ -7,6 +7,9 @@
       <div>
         <slot name="index-item-content"></slot>
       </div>
+      <div class="index-item-more">
+        <slot name="inde-item-more"></slot>
+      </div>
     </div>
   </div>
 </template>

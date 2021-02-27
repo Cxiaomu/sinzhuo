@@ -9,21 +9,32 @@ $activeColor: #31b4f2;
 
 .index-item-wrapper {
   text-align: center;
-
   .index-item-container {
     @extend .f-container;
-
     .index-item-title {
         font-size: 2rem;
         color: #282828;
     }
-
-    .index-item-detail {}
+    // .index-item-detail {}
     .index-item-line {
       width: 3rem;
       height: 0.2rem;
       margin: 1.5rem auto 1rem;
       background-color: $activeColor;
+    }
+    .index-item-more {
+      padding: 3rem 0 1rem 0;
+      button {
+        width: 10rem;
+        height: 3rem;
+        font-size: 1.05rem;
+        color: $activeColor;
+        border-color: $activeColor;
+        &:hover {
+          background-color: $activeColor;
+          color: #ffffff;
+        }
+      }
     }
   }
 

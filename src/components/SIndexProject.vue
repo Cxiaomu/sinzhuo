@@ -15,7 +15,7 @@
             <div class="project-wrapper">
               <el-row :gutter="12" class="project-container">
                 <el-col :xs="24" :sm="24" :md="9" :lg="9" :xl="9">
-                  <div class="project-img-box" ref="imgBox">
+                  <div class="project-img-box" ref="imgBox" @click="toProjectById(project.id)">
                     <img class="project-img" :src="project.imgUrl" />
                   </div>
                 </el-col>
@@ -30,6 +30,13 @@
             </div>
           </el-col>
         </el-row>
+      </template>
+      <template v-slot:inde-item-more>
+        <el-button 
+        type="primary" 
+        class="more-button"
+        @click="toProject"
+        plain>查看更多</el-button>
       </template>
     </s-index-item>
   </div>
@@ -123,12 +130,18 @@ export default {
         path: '/project',
         query: query
       })
+    },
+
+    // 前往项目目录
+    toProject() {
+      this.$router.push('/project')
     }
   },
 };
 </script>
 
 <style scoped lang="scss">
+$activeColor: #31b4f2;
 .margin {
   margin-block-start: 0.5rem;
   margin-block-end: 0.5rem;
@@ -142,7 +155,7 @@ export default {
 }
 .project-wrapper {
   text-align: left;
-  margin: 1rem 1.8rem;
+  margin: 1rem;
   padding: 1.5rem;
   background-color: #fff;
   transition: transform 0.25s;
@@ -168,13 +181,24 @@ export default {
         cursor: pointer;
         @extend .margin;
         @extend .more-text;
+        &:hover {
+          color: #2ea1d6;
+        }
       }
       .project-detail {
         @extend .margin;
         @extend .more-text;
         -webkit-line-clamp: 4;
+        color: #6b7484;
       }
     }
   }
+}
+.more-button {
+  // color: $activeColor;
+  // border-color: $activeColor;
+  // &:hover {
+  //   background-color: $activeColor;
+  // }
 }
 </style>

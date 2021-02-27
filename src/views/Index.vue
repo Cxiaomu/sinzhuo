@@ -5,7 +5,6 @@
     <s-index-project></s-index-project>
     <s-index-post></s-index-post>
     <s-index-course></s-index-course>
-    <button @click="toLogin">去登录</button>
   </div>
 </template>
 

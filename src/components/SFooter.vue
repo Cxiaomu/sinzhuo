@@ -4,7 +4,7 @@
     <div class="footer-container-first">
       <div class="footer-detail">
         <el-row>
-          <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+          <el-col :xs="24" :sm="24" :md="9" :lg="9" :xl="9">
             <div class="detail-item">
               <h3 class="item-title">平台介绍</h3>
               <p class="item-text">
@@ -15,7 +15,7 @@
               </p>
             </div>
           </el-col>
-          <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+          <el-col :xs="24" :sm="24" :md="9" :lg="9" :xl="9">
             <div class="detail-item">
               <h3 class="item-title">平台特色</h3>
               <p class="item-text">
@@ -26,7 +26,7 @@
               </p>
             </div>
           </el-col>
-          <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+          <el-col :xs="24" :sm="24" :md="6" :lg="6" :xl="6">
             <div class="detail-item">
               <h3 class="item-title">联系我们</h3>
               <p class="item-text">Q Q：2691091258</p>

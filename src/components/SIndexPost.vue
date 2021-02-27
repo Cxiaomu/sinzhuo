@@ -2,7 +2,7 @@
   <div>
     <s-index-item :title="title" :bgColor="bgColor" :detail="detail">
       <template v-slot:index-item-content>
-        <el-row :gutter="10">
+        <el-row>
           <el-col
             :xs="24"
             :sm="12"
@@ -13,7 +13,7 @@
             :key="post.id"
           >
             <div class="post-wrapper">
-              <div class="post-img-box">
+              <div class="post-img-box" @click="toPostById(post.id)">
                 <img :src="post.imgUrl" class="post-img" />
               </div>
               <div class="post-detail-box">
@@ -22,6 +22,13 @@
             </div>
           </el-col>
         </el-row>
+      </template>
+      <template v-slot:inde-item-more>
+        <el-button 
+        type="primary" 
+        class="more-button"
+        @click="toPost"
+        plain>查看更多</el-button>
       </template>
     </s-index-item>
   </div>
@@ -93,7 +100,21 @@ export default {
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    toPostById(id) {
+      let query  = {
+        id: id
+      }
+      this.$router.push({
+        path: '/post',
+        query: query
+      })
+    },
+
+    toPost() {
+      this.$router.push('/post')
+    }
+  },
 };
 </script>
 
@@ -110,6 +131,14 @@ export default {
   -webkit-box-orient: vertical;
 }
 .post-wrapper {
+  margin: 1rem;
+  margin-bottom: 2rem;
+  border: solid 2px #fff;
+  &:hover {
+    background-color: #2ea1d6;
+    color: #fff;
+    border-color: #2ea1d6;
+  }
   .post-img-box {
     overflow: hidden;
     cursor: pointer;
@@ -117,12 +146,18 @@ export default {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 1.4s;
+      -webkit-transition: transform 1.4s;
+      &:hover {
+        transform: scale(1.2)
+      }
     }
   }
   .post-detail-box {
     .post-title {
       @extend .margin;
       @extend .more-text;
+      line-height: 2.5rem;
     }
   }
 }
