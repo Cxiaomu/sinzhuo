@@ -17,6 +17,10 @@ const app = express()
 const menuData = require('../static/json/menu.json') 
 const menuList = menuData.menu;
 
+const projectData = require('../static/json/project.json')
+const fieldList = projectData.fieldList
+const phaseList = projectData.phaseList
+
 const apiRoutes = express.Router()
 app.use('/api',apiRoutes)
 
@@ -61,7 +65,19 @@ const devWebpackConfig = merge(baseWebpackConfig, {
           errno: 0,
           data: menuList
         })
-      })
+      });
+      app.get('/api/projectField', (req, res) => {
+        res.json({
+          errno: 0,
+          data: fieldList
+        })
+      });
+      app.get('/api/projectPhase', (req, res) => {
+        res.json({
+          errno: 0,
+          data: phaseList
+        })
+      });
     }
     // 获取本地数据 end
   },
