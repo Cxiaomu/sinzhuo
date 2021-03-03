@@ -136,7 +136,7 @@ $bgColor: #025492;
   font-size: 0.9rem;
 }
 .f-container {
-  width: 90%;
+  width: 85%;
   margin: 1rem auto;
   padding: 1rem 2rem;
 }
@@ -150,7 +150,7 @@ $bgColor: #025492;
     .footer-detail {
       @extend .f-container;
       .detail-item {
-        padding: 0 1.8rem;
+        padding-right: 1.8rem;
         text-align: left;
         color: #fff;
         .item-title {

@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 
-import ElementUI from 'element-ui'
+import ElementUI, { TabPane } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './styles/element-variables.scss'
 import 'element-ui/lib/theme-chalk/display.css';
@@ -26,4 +26,14 @@ new Vue({
   store,
   components: { App },
   template: '<App/>'
+})
+
+// 路由全局守卫
+router.beforeEach((to, from, next) => {
+  to,from;
+  if (to.fullPath === from.fullPath) {
+    return
+  } else {
+    next();
+  }
 })

@@ -4,6 +4,12 @@ import Layout from '@/views/Layout'
 
 Vue.use(Router)
 
+// 防止重复跳转相同路由
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 export default new Router({
   mode: 'history',
   routes: [
@@ -24,6 +30,11 @@ export default new Router({
           path: '/project',
           name: 'Project',
           component: () => import("@/views/Project/Project")
+        },
+        {
+          path: '/projectDetail',
+          name: 'ProjectDetail',
+          component: () => import("@/views/Project/ProjectDetail")
         },
         {
           path: '/post',

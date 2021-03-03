@@ -1,0 +1,200 @@
+<template>
+  <div id="project-list-wrapper" class="content-wrapper">
+    <el-table
+      :data="projectList"
+      :header-cell-style="{background: '#2ea1d6', color: '#fff'}"
+      @row-click="toProjectDetail"
+    >
+      <el-table-column align="center" label="项目">
+        <template slot-scope="scope">
+          <el-row>
+            <el-col :span="12">
+              <el-image :src="scope.row.imgUrl" fit="cover"></el-image>
+            </el-col>
+            <el-col :span="12">
+              <span v-text="scope.row.name"></span>
+            </el-col>
+          </el-row>
+        </template>
+      </el-table-column>
+      <el-table-column align="center" prop="abstract" label="项目概述">
+        <template slot-scope="scope">
+          <span v-text="scope.row.abstract" class="more-text"></span>
+        </template>
+      </el-table-column>
+      <el-table-column align="center" prop="author" label="负责人">
+      </el-table-column>
+      <el-table-column align="center" prop="field" label="项目阶段">
+      </el-table-column>
+      <el-table-column align="center" label="需要融资">
+        <template slot-scope="scope">
+          <span v-if="scope.row.financing">是</span>
+          <span v-else>否</span>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "ProjectList",
+  data() {
+    return {
+      columns: [
+        {
+          title: "",
+          prop: "imgUrl",
+        },
+        {
+          title: "项目",
+          prop: "name",
+        },
+
+        {
+          title: "项目概述",
+          prop: "abstract",
+        },
+        {
+          title: "负责人",
+          prop: "author",
+        },
+        {
+          title: "项目阶段",
+          prop: "phase",
+        },
+        {
+          title: "需要融资",
+          prop: "financing",
+        },
+      ],
+      constProjectList: [], // 请求的项目列表
+      projectList: [
+        //处理后的项目列表
+        {
+          id: "1",
+          name: "航空巴拉巴拉巴拉案例",
+          imgUrl: require("../../../assets/img/project/1-project.jpg"),
+          abstract: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
+          航空公司建立了长期的合作关系，如在深圳航空公司，翡翠国际货运航空公司，中国南方航空公司，
+          中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。`,
+          field: "001",
+          author: "Cxiaomu",
+          phase: "001",
+          financing: true,
+        },
+        {
+          id: "2",
+          name: "航空",
+          imgUrl: require("../../../assets/img/project/2-project.jpg"),
+          abstract: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
+          航空公司建立了长期的合作关系，如在深圳航空公司，翡翠国际货运航空公司，中国南方航空公司，
+          中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。
+          翡翠国际货运航空公司，中国南方航空公司，中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，
+          是一家值得信赖的深圳航空货运公司。`,
+          field: "002",
+          author: "阿爸阿爸吧6",
+          phase: "002",
+          financing: true,
+        },
+        {
+          id: "3",
+          name: "航空巴拉巴拉巴拉案例",
+          imgUrl: require("../../../assets/img/project/3-project.jpg"),
+          abstract: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
+          航空公司建立了长期的合作关系。`,
+          field: "003",
+          author: "顺丰物流有限公司承接",
+          phase: "003",
+          financing: true,
+        },
+        {
+          id: "4",
+          name: "航空巴拉",
+          imgUrl: require("../../../assets/img/project/4-project.jpg"),
+          abstract: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
+          航空公司建立了长期的合作关系，如在深圳航空公司，翡翠国际货运航空公司，中国南方航空公司，
+          中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。`,
+          author: "深圳市顺丰物流有限公司承接深圳至全国",
+          field: "004",
+          phase: "004",
+          financing: true,
+        },
+        {
+          id: "5",
+          name: "航空巴拉巴拉巴拉案例",
+          imgUrl: require("../../../assets/img/project/5-project.jpg"),
+          abstract: `深圳市顺丰物流有限公司承接深圳至全国。`,
+          author: "vgggggggggggggggggggggggggggggg",
+          field: "005",
+          phase: "005",
+          financing: true,
+        },
+      ],
+    };
+  },
+  props: {
+    field: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  components: {},
+
+  watch: {
+    // 监听所属领域数据
+    field: {
+      handler(val) {
+        if (val) {
+          this.projectList.forEach((item) => {
+            val.forEach((field) => {
+              if (field.id == item.field) {
+                item.field = field.name;
+              }
+            });
+          });
+        }
+      },
+    },
+  },
+
+  created() {},
+
+  methods: {
+    // 前往项目详情页
+    toProjectDetail(rowData, columnData, event) {
+      debugger;
+      this.$router.push({
+        path: '/projectDetail',
+        query: {
+          projectId: rowData.id
+        }
+      });
+    },
+  },
+};
+</script>
+
+<style scoped lang="scss">
+.el-row >>> .el-col {
+  text-align: center;
+}
+$activeColor: #31b4f2;
+.more-text {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.collapse-title {
+  width: 95%;
+  margin: 1rem auto;
+}
+.tag-text {
+  font-size: 0.9rem;
+}
+#project-list-wrapper {
+  padding: 0rem 2rem 1rem;
+}
+</style>

@@ -58,7 +58,23 @@ export default {
   },
   components: {},
 
-  watch: {},
+  watch: {
+    $route: {
+      // 导航栏高亮 
+      handler(val) {
+        let nowPath = val.path;
+        switch(nowPath) {
+          case '/project': this.activeMenu = '1'; break;
+          case '/post': this.activeMenu = '2'; break;
+          case '/course': this.activeMenu = '3'; break;
+          case '/firm': this.activeMenu = '4'; break;
+          case '/mentor': this.activeMenu = '5'; break;
+          case '/his': this.activeMenu = '6'; break;
+          default: this.activeMenu = '0'
+        }
+      }
+    }
+  },
 
   computed: {
     ...mapGetters(["isLogin"]),
@@ -69,16 +85,11 @@ export default {
 
   methods: {
     // 获取导航栏数据
-    getMenu() {
-      return getMenu(this).then((res) => {
-        let tmpRes = [];
-        if (res === -1) {
-          console.log("获取导航栏出错!");
-        } else {
-          tmpRes = res.data;
-        }
-        this.menuList = tmpRes;
-      });
+    async getMenu() {
+      let res = await getMenu(this);
+      if (res) {
+        this.menuList = res;
+      }
     },
 
     // 点击菜单栏
@@ -127,10 +138,10 @@ export default {
 
 <style scoped lang="scss">
 #header-wrapper {
-  padding: 1rem 2rem;
-  .header-container {
-    width: 90%;
+    width: 85%;
     margin: 0 auto;
+  .header-container {
+    padding: 1rem 0;
     .logo-img {
       width: 9.6rem;
       height: 4rem;

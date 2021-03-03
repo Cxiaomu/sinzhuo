@@ -1,12 +1,12 @@
 $activeColor: #31b4f2;
 
 .f-container {
-  width: 90%;
+  width: 85%;
   margin: 0.2rem auto;
   padding: 1rem 2rem;
 }
 
-
+// 首页项目、岗位、精品课程通用组件
 .index-item-wrapper {
   text-align: center;
   .index-item-container {
@@ -37,5 +37,11 @@ $activeColor: #31b4f2;
       }
     }
   }
+}
 
+// 页面主题
+.content-wrapper {
+  @extend .f-container;
+  .content-container {
+  }
 }
