@@ -122,13 +122,14 @@ export default {
   mounted() {
     // 监听所属领域数据，取得则上传参数与事件
     this.$watch('filterOptions', () => {
-        if (this.filterOptions[2].optionList) {
-          this.$emit('getField', this.filterOptions[2].optionList)
+      let phase = this.filterOptions[1].optionList;
+      let field = this.filterOptions[2].optionList;
+        if (field && phase) {
+          this.$emit('getField', field, phase)
         }
       }, {
         deep: true
       })
-    
   },
   methods: {
     async getPorjectConfig() {

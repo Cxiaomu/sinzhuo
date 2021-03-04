@@ -28,7 +28,7 @@
                 <span @click="toRegister">注册</span>
               </div>
               <div class="nav-title userName" v-else @click="toPersonal">
-                <span class="iconfont iconyonghu nav-icon"></span>
+                <!-- <span class="iconfont iconyonghu nav-icon"></span> -->
                 <span
                   class=""
                   v-text="username"
@@ -62,16 +62,7 @@ export default {
     $route: {
       // 导航栏高亮 
       handler(val) {
-        let nowPath = val.path;
-        switch(nowPath) {
-          case '/project': this.activeMenu = '1'; break;
-          case '/post': this.activeMenu = '2'; break;
-          case '/course': this.activeMenu = '3'; break;
-          case '/firm': this.activeMenu = '4'; break;
-          case '/mentor': this.activeMenu = '5'; break;
-          case '/his': this.activeMenu = '6'; break;
-          default: this.activeMenu = '0'
-        }
+        this.activeHeader(val);
       }
     }
   },
@@ -81,8 +72,8 @@ export default {
   },
   created() {
     this.getMenu();
+    this.activeHeader(this.$route)
   },
-
   methods: {
     // 获取导航栏数据
     async getMenu() {
@@ -104,7 +95,21 @@ export default {
     toIndex() {
       this.$router.push('/index')
     },
-    
+
+    // 导航栏高亮 
+    activeHeader(route) {
+      let nowPath = route.path;
+      switch(nowPath) {
+        case '/project': this.activeMenu = '1'; break;
+        case '/post': this.activeMenu = '2'; break;
+        case '/course': this.activeMenu = '3'; break;
+        case '/firm': this.activeMenu = '4'; break;
+        case '/mentor': this.activeMenu = '5'; break;
+        case '/his': this.activeMenu = '6'; break;
+        default: this.activeMenu = '0'
+      }
+    },
+
     // 登录
     toLogin() {
       console.log(this.$router)

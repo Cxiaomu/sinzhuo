@@ -6,10 +6,8 @@
     </div>
     <!-- <div style="background-color: #f4f4f4; height: 25px"></div> -->
     <div>
-      <project-list ref="proList" :field="field"></project-list>
+      <project-list ref="proList" :field="field" :phase="phase"></project-list>
     </div>
-
-    创意项目
   </div>
 </template>
 
@@ -21,6 +19,7 @@ export default {
   data() {
     return {
       field: [],
+      phase: []
     };
   },
   components: {
@@ -37,8 +36,10 @@ export default {
     toSearch() {
       // 上传事件 获取关键字、筛选类型
     },
-    getField() {
-      this.field = this.$refs.proFilter.filterOptions[2].optionList;
+    // 获取所属领域并传递给projectList
+    getField(field, phase) {
+      this.field = field;
+      this.phase = phase;
     },
   },
 };
