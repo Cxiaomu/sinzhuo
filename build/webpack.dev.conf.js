@@ -16,6 +16,7 @@ const app = express()
 //加载本地json文件
 const menuData = require('../static/json/menu.json') 
 const menuList = menuData.menu;
+const navList = menuData.nav;
 
 const projectData = require('../static/json/project.json')
 const fieldList = projectData.fieldList
@@ -64,6 +65,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         res.json({
           errno: 0,
           data: menuList
+        })
+      });
+      app.get('/api/navList', (req, res) => {
+        res.json({
+          errno: 0,
+          data: navList
         })
       });
       app.get('/api/projectField', (req, res) => {

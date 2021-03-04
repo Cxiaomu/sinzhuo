@@ -6,18 +6,60 @@
   "description": "莘灼",
   "glyphs": [
     {
+      "icon_id": "913744",
+      "name": "关注",
+      "font_class": "chakantieziguanzhu",
+      "unicode": "e662",
+      "unicode_decimal": 58978
+    },
+    {
+      "icon_id": "2732218",
+      "name": "个人设置",
+      "font_class": "gerenshezhi",
+      "unicode": "e6a1",
+      "unicode_decimal": 59041
+    },
+    {
+      "icon_id": "2959100",
+      "name": "项目管理",
+      "font_class": "xiangmuguanli",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "11372718",
+      "name": "我的关注",
+      "font_class": "wodeguanzhu",
+      "unicode": "e8bc",
+      "unicode_decimal": 59580
+    },
+    {
+      "icon_id": "12702655",
+      "name": "消息",
+      "font_class": "xiaoxi",
+      "unicode": "e657",
+      "unicode_decimal": 58967
+    },
+    {
+      "icon_id": "17822452",
+      "name": "邮箱",
+      "font_class": "youxiang",
+      "unicode": "e68b",
+      "unicode_decimal": 59019
+    },
+    {
+      "icon_id": "18311748",
+      "name": "电 话",
+      "font_class": "dianhua",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
       "icon_id": "6560965",
       "name": "课程",
       "font_class": "kecheng",
       "unicode": "e60a",
       "unicode_decimal": 58890
-    },
-    {
-      "icon_id": "7556335",
-      "name": "用户",
-      "font_class": "yonghu",
-      "unicode": "e640",
-      "unicode_decimal": 58944
     },
     {
       "icon_id": "7068817",
@@ -53,13 +95,6 @@
       "font_class": "rencaizhongxin",
       "unicode": "e63c",
       "unicode_decimal": 58940
-    },
-    {
-      "icon_id": "2578488",
-      "name": "登录",
-      "font_class": "denglu",
-      "unicode": "e611",
-      "unicode_decimal": 58897
     },
     {
       "icon_id": "4320335",

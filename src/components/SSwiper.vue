@@ -76,7 +76,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 .swiper-container {
-width: 100%;
+  width: 100%;
   background-color: #ffffff;
   --swiper-theme-color: #fff;
   --swiper-pagination-color: #c2e9fb;

@@ -1,27 +1,62 @@
 <!-- 个人中心 -->
 <template>
   <div>
-      个人中心
+    <el-container id="personal-wrapper">
+      <el-header style="height: auto;">
+        <personal-header></personal-header>
+      </el-header>
+      <el-container class="f-container">
+        <el-aside width="200px">
+          <personal-nav></personal-nav>
+        </el-aside>
+        <el-main>Main</el-main>
+      </el-container>
+    </el-container>
+
+    <!-- <div id="personal-wrapper">
+      <div id="personal-header-wrapper"></div>
+      <div id="personal-nav-wrapper"></div>
+    </div> -->
   </div>
 </template>
 
 <script>
+import PersonalHeader from './components/PersonalHeader.vue';
+import PersonalNav from './components/PersonalNav.vue';
 export default {
   name: "Personal",
   data() {
-    return { }
+    return {
+      
+    };
   },
-  components: { },
+  components: {
+    PersonalHeader,
+    PersonalNav
+  },
 
-  watch: { },
+  watch:{},
 
-  created() { },
+  created() {},
 
-  methods: { },
-
-}
+  methods: {},
+};
 </script>
 
 <style scoped lang="scss">
-
+.el-header,
+.el-main,
+.el-container,
+#personal-wrapper {
+  padding: 0;
+}
+>>> .el-header {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-color: #141038;
+}
+#personal-wrapper {
+  
+}
 </style>

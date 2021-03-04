@@ -42,5 +42,56 @@
       "path": "/his"
 
     }
+  ],
+  "nav": [
+    {
+      "id": "1",
+      "name": "我的项目",
+      "icon": "iconxiangmuguanli",
+      "path": "",
+      "type": ["3"]
+    },
+    {
+      "id": "2",
+      "name": "我的课程",
+      "icon": "iconkecheng",
+      "path": "",
+      "type": ["2"]
+    },
+    {
+      "id": "3",
+      "name": "我的岗位",
+      "icon": "iconzhaopingangwei",
+      "path": "",
+      "type": ["3", "2"]
+    },
+    {
+      "id": "4",
+      "name": "我的企业",
+      "icon": "iconqiye",
+      "path": "",
+      "type": ["1"]
+    },
+    {
+      "id": "5",
+      "name": "我的关注",
+      "icon": "iconchakantieziguanzhu",
+      "path": "",
+      "type": ["0"]
+    },
+    {
+      "id": "6",
+      "name": "我的消息",
+      "icon": "iconxiaoxi",
+      "path": "",
+      "type": ["0"]
+    },
+    {
+      "id": "7",
+      "name": "个人设置",
+      "icon": "icongerenshezhi",
+      "path": "",
+      "type": ["0"]
+    }
   ]
 }
