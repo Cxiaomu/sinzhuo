@@ -147,6 +147,7 @@ export default {
     margin: 0 auto;
   .header-container {
     padding: 1rem 0;
+    overflow: hidden;
     .logo-img {
       width: 9.6rem;
       height: 4rem;

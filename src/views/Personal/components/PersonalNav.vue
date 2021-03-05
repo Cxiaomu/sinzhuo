@@ -1,15 +1,22 @@
 <template>
   <div>
     <el-menu
-      active-text-color="#31b4f2"
-      default-active="1"
       class="el-menu-vertical-demo"
+      active-text-color="#31b4f2"
+      :default-active="activeIndex"
+      @select="changePath"
     >
-      <el-menu-item v-for="(nav, index) in navList" :key="index" :index="index">
-        <span slot="title">
-          <span :class="['iconfont', nav.icon]"></span>
-          <span v-text="nav.name"></span>
-        </span>
+      <el-menu-item
+        :index="index.toString()"
+        v-for="(nav, index) in navList"
+        :key="index"
+      >
+        <template slot="title">
+          <div class="nav-item">
+            <span :class="['iconfont', nav.icon]"></span>
+            <span v-text="nav.name"></span>
+          </div>
+        </template>
       </el-menu-item>
     </el-menu>
   </div>
@@ -22,6 +29,7 @@ export default {
   data() {
     return {
       userStatus: "1", // 1-企业，2-教师，3-学生
+      activeIndex: "0",
       navList: [],
     };
   },
@@ -42,7 +50,11 @@ export default {
         });
         this.navList = navList;
       }
-      debugger;
+    },
+    // 切换当前页
+    changePath(index) {
+      let path = this.navList[index].path;
+      this.$router.push(path);
     },
   },
 };
@@ -50,4 +62,10 @@ export default {
 
 <style scoped lang="scss">
 $activeColor: #31b4f2;
+.nav-item {
+  font-size: 1rem;
+  .iconfont {
+    font-size: 1.2rem;
+  }
+}
 </style>

@@ -9,14 +9,11 @@
         <el-aside width="200px">
           <personal-nav></personal-nav>
         </el-aside>
-        <el-main>Main</el-main>
+        <el-main style="height: 1000px">
+          <router-view></router-view>
+        </el-main>
       </el-container>
     </el-container>
-
-    <!-- <div id="personal-wrapper">
-      <div id="personal-header-wrapper"></div>
-      <div id="personal-nav-wrapper"></div>
-    </div> -->
   </div>
 </template>
 

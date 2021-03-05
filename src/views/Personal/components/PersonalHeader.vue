@@ -2,28 +2,30 @@
   <div>
     <div id="header-wrapper" class="f-container">
       <el-row>
-        <el-col :span="3">
+        <el-col :span="3" class="hidden-sm-and-down">
           <div class="avatar-box">
             <!-- <el-avatar size="large" :src="userAvatar"></el-avatar> -->
             <img class="personal-avatar" :src="userAvatar" />
           </div>
         </el-col>
-        <el-col :span="12">
-          <div class="personal-name">
-            <span class="name" v-text="userInfo.name"></span>
-          </div>
-          <div class="personal-work">
-            <span class="info-text unit" v-text="userInfo.work.unit"></span>
-            <span class="info-text" v-text="userInfo.work.department"></span>
-          </div>
-          <div class="personal-contact">
-            <div class="personal-tel-box">
-              <span class="iconfont icondianhua"></span>
-              <span class="info-text" v-text="userInfo.tel"></span>
+        <el-col :span="21">
+          <div class="info-box">
+            <div class="personal-name">
+              <span class="name" v-text="userInfo.name"></span>
             </div>
-            <div class="personal-email-box">
-              <span class="iconfont iconyouxiang"></span>
-              <span class="info-text" v-text="userInfo.email"></span>
+            <div class="personal-work">
+              <span class="info-text unit" v-text="userInfo.work.unit"></span>
+              <span class="info-text" v-text="userInfo.work.department"></span>
+            </div>
+            <div class="personal-contact">
+              <div class="personal-tel-box">
+                <span class="iconfont icondianhua"></span>
+                <span class="info-text" v-text="userInfo.tel"></span>
+              </div>
+              <div class="personal-email-box">
+                <span class="iconfont iconyouxiang"></span>
+                <span class="info-text" v-text="userInfo.email"></span>
+              </div>
             </div>
           </div>
         </el-col>
@@ -75,28 +77,23 @@ $activeColor: #31b4f2;
       border-radius: 50%;
     }
   }
-  .personal-name {
-    .name {
-      color: #60c7f7;
-      font-size: 1.5rem;
-      font-weight: 700;
+  .info-box {
+    padding: 1rem;
+    .personal-name {
+      .name {
+        color: #60c7f7;
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 2rem;
+      }
+    }
+    .info-text {
+      color: #fff;
       line-height: 2rem;
+      display: inline-block;
     }
-  }
-  .info-text {
-    color: #fff;
-    line-height: 2rem;
-    display: inline-block;
-  }
-  .unit {
-    margin-right: 1rem;
-  }
-  .personal-work {
-  }
-  .personal-contact {
-    .personal-tel-box {
-    }
-    .personal-email-box {
+    .unit {
+      margin-right: 1rem;
     }
   }
 }

@@ -64,7 +64,47 @@ export default new Router({
         {
           path: '/personal',
           name: 'Personal',
-          component: () => import("@/views/Personal/Personal")
+          component: () => import("@/views/Personal/Personal"),
+          redirect:{
+            name:"MyNews"
+          },
+          children: [
+            {
+              path: '/myNews',
+              name: 'MyNews',
+              component: () => import("@/views/Personal/MyNews/MyNews")
+            },
+            {
+              path: '/myCourse',
+              name: 'MyCourse',
+              component: () => import("@/views/Personal/MyCourse/MyCourse")
+            },
+            {
+              path: '/myFirm',
+              name: 'MyFirm',
+              component: () => import("@/views/Personal/MyFirm/MyFirm")
+            },
+            {
+              path: '/myFocus',
+              name: 'MyFocus',
+              component: () => import("@/views/Personal/MyFocus/MyFocus")
+            },
+            {
+              path: '/myPost',
+              name: 'MyPost',
+              component: () => import("@/views/Personal/MyPost/MyPost")
+            },
+            {
+              path: '/myProject',
+              name: 'MyProject',
+              component: () => import("@/views/Personal/MyProject/MyProject")
+            },
+            {
+              path: '/mySetting',
+              name: 'MySetting',
+              component: () => import("@/views/Personal/MySetting/MySetting")
+            },
+          ]
         },
       ]
     },
