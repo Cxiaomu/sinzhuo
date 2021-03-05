@@ -6,6 +6,13 @@
   "description": "莘灼",
   "glyphs": [
     {
+      "icon_id": "10274899",
+      "name": "新建",
+      "font_class": "xinjian",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
       "icon_id": "913744",
       "name": "关注",
       "font_class": "chakantieziguanzhu",

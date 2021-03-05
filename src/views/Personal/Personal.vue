@@ -6,7 +6,7 @@
         <personal-header></personal-header>
       </el-header>
       <el-container class="f-container">
-        <el-aside width="200px">
+        <el-aside width="150px">
           <personal-nav></personal-nav>
         </el-aside>
         <el-main style="height: 1000px">
@@ -52,6 +52,9 @@ export default {
   height: 100%;
   background-size: cover;
   background-color: #141038;
+}
+>>> .el-aside {
+  margin-right: 1rem;
 }
 #personal-wrapper {
   

@@ -28,7 +28,7 @@ export default {
   name: "PersonalNav",
   data() {
     return {
-      userStatus: "1", // 1-企业，2-教师，3-学生
+      userStatus: "3", // 1-企业，2-教师，3-学生
       activeIndex: "0",
       navList: [],
     };
@@ -65,7 +65,7 @@ $activeColor: #31b4f2;
 .nav-item {
   font-size: 1rem;
   .iconfont {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 }
 </style>

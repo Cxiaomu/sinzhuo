@@ -70,7 +70,7 @@
       "name": "我的岗位",
       "icon": "iconzhaopingangwei",
       "path": "/myPost",
-      "type": ["3", "2"]
+      "type": ["1", "2"]
     },
     {
       "id": "5",
