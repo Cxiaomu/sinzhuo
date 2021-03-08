@@ -106,9 +106,13 @@ export default new Router({
             },
           ]
         },
+        {
+          path: '/createProject',
+          name: 'CreateProject',
+          component: () => import("@/views/Personal/MyProject/CreateProject")
+        },
       ]
     },
-    
     {
       path: '/login',
       name: 'Login',

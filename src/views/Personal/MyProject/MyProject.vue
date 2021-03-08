@@ -12,31 +12,36 @@
         v-for="project in projectList"
         :key="project.id"
       >
-        <div class="project-item-wrapper">
+        <div class="project-item-wrapper" ref="projectCard">
           <el-card shadow="hover">
             <div>
               <h3 v-text="project.name" class="project-title"></h3>
-              <p>进度：<span v-text="project.phase"></span></p>
-              <p>领域：<span v-text="project.field"></span></p>
+              <p class="more-text">
+                进度：<span v-text="project.phase"></span>
+              </p>
+              <p class="more-text">
+                领域：<span v-text="project.field"></span>
+              </p>
               <p v-if="project.financing">需要融资</p>
               <p v-else>暂不融资</p>
             </div>
             <div style="text-align: right">
-              <el-button type="text" @click="toEdit(project.id)">编辑</el-button>
-              <el-button type="text" @click="toDelete(project.id)">删除</el-button>
+              <el-button type="text" @click="toEdit(project.id)"
+                >编辑</el-button
+              >
+              <el-button type="text" @click="toDelete(project.id)"
+                >删除</el-button
+              >
             </div>
           </el-card>
         </div>
       </el-col>
-      <el-col :xs="24"
-        :sm="12"
-        :md="8"
-        :lg="6"
-        :xl="6">
-        <div class="project-item-wrapper">
-          <el-card shadow="hover">
-            <div style="text-align:center">
+      <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
+        <div class="project-item-wrapper" @click="toCreateProject">
+          <el-card shadow="hover" ref="newCard" :body-style="styleObj">
+            <div class="newIcon-box">
               <span class="iconfont iconxinjian"></span>
+              <p class="new-text">创建项目</p>
             </div>
           </el-card>
         </div>
@@ -47,10 +52,14 @@
 
 <script>
 import MyProjectList from "./components/MyProjectList.vue";
+import { getProjectField, getProjectPhase } from "@/api/getJson.js";
 export default {
   name: "MyProject",
   data() {
     return {
+      styleObj: {
+        height: "",
+      },
       projectList: [
         //处理后的项目列表
         {
@@ -95,25 +104,58 @@ export default {
 
   watch: {},
 
-  created() {},
-
+  created() {
+    this.handleProject();
+  },
+  mounted() {
+    this.setNewCardHeigh();
+    window.addEventListener("resize", this.setNewCardHeight);
+  },
   methods: {
+    setNewCardHeigh() {
+      this.styleObj.height = this.$refs.projectCard[0].clientHeight - 21 + "px";
+    },
+    async handleProject() {
+      let phase = await getProjectPhase(this);
+      let field = await getProjectField(this);
+      if (phase && field) {
+        this.projectList.forEach((item) => {
+          // 阶段id改成阶段名称
+          phase.forEach((phaseItem) => {
+            if (item.phase === phaseItem.id) {
+              item.phase = phaseItem.name;
+            }
+          });
+          // 项目领域id改成领域名称
+          field.forEach((fieldItem) => {
+            if (item.field === fieldItem.id) {
+              item.field = fieldItem.name;
+            }
+          });
+        });
+      }
+    },
     // 编辑
     toEdit(projectId) {
-      debugger
+      debugger;
     },
 
     // 删除
     toDelete(projectId) {
-      debugger
-    }
+      debugger;
+    },
+
+    // 新建项目
+    toCreateProject() {
+      this.$router.push("/createProject");
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
 >>> .el-card__body {
-    padding: 10px 20px;
+  padding: 10px 20px;
 }
 $activeColor: #31b4f2;
 .margin {
@@ -138,11 +180,22 @@ $activeColor: #31b4f2;
       color: $activeColor;
     }
   }
-  .iconxinjian {
+  .newIcon-box {
     display: inline-block;
-    margin: 0  auto;
-    font-size: 4rem;
-    color: #cccccc;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    .new-text {
+      @extend .more-text;
+      color: #999;
+    }
+    .iconxinjian {
+      display: inline-block;
+      margin: 0 auto;
+      font-size: 4rem;
+      color: #cccccc;
+    }
   }
 }
 </style>
