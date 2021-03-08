@@ -45,3 +45,15 @@ $activeColor: #31b4f2;
   .content-container {
   }
 }
+
+
+// 新建/编辑项目组件
+.button-wrapper {
+  width: 100%;
+  margin-top: 3rem;
+  text-align: center;
+  button {
+    width: 8rem;
+    height: 2.5rem;
+  }
+}

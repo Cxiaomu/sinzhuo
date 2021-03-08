@@ -137,6 +137,13 @@ export default {
     },
     // 编辑
     toEdit(projectId) {
+      let route = {
+        path: "/createProject",
+        query: {
+          projectId: projectId,
+        },
+      };
+      this.$router.push(route)
       debugger;
     },
 

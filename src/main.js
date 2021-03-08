@@ -37,3 +37,8 @@ router.beforeEach((to, from, next) => {
     next();
   }
 })
+
+// 页面跳转 滚动到顶部
+router.afterEach((to,from,next) => {
+  window.scrollTo(0,0);
+});

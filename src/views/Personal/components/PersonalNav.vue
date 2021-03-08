@@ -41,6 +41,26 @@ export default {
     this.getNavList();
   },
 
+  mounted() {
+    // 侧边栏高亮
+    this.$watch(
+      "navList",
+      () => {
+        if (this.navList) {
+          this.navList.forEach((item, index) => {
+            if (item.path === this.$route.path) {
+              this.activeIndex = index.toString();
+              return;
+            }
+          });
+        }
+      },
+      {
+        deep: true,
+      }
+    );
+  },
+
   methods: {
     async getNavList() {
       let res = await getNav(this);
