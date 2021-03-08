@@ -8,7 +8,11 @@
         <slot name="index-item-content"></slot>
       </div>
       <div class="index-item-more">
-        <slot name="inde-item-more"></slot>
+        <el-button 
+        type="primary" 
+        class="more-button"
+        @click="toMore"
+        plain>查看更多</el-button>
       </div>
     </div>
   </div>
@@ -32,7 +36,11 @@ export default {
 
   created() { },
 
-  methods: { },
+  methods: {
+    toMore() {
+      this.$emit('toMore')
+    }
+  },
 
 }
 </script>

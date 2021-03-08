@@ -1,6 +1,6 @@
 <template>
   <div>
-    <s-index-item :title="title" :bgColor="bgColor" :detail="detail">
+    <s-index-item :title="title" :bgColor="bgColor" :detail="detail" @toMore="toProject">
       <template v-slot:index-item-content>
         <el-row>
           <el-col
@@ -30,13 +30,6 @@
             </div>
           </el-col>
         </el-row>
-      </template>
-      <template v-slot:inde-item-more>
-        <el-button 
-        type="primary" 
-        class="more-button"
-        @click="toProject"
-        plain>查看更多</el-button>
       </template>
     </s-index-item>
   </div>

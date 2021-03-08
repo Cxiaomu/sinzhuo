@@ -1,6 +1,6 @@
 <template>
   <div>
-    <s-index-item :title="title" :bgColor="bgColor" :detail="detail">
+    <s-index-item :title="title" :bgColor="bgColor" :detail="detail" @toMore="toPost">
       <template v-slot:index-item-content>
         <el-row>
           <el-col
@@ -22,13 +22,6 @@
             </div>
           </el-col>
         </el-row>
-      </template>
-      <template v-slot:inde-item-more>
-        <el-button 
-        type="primary" 
-        class="more-button"
-        @click="toPost"
-        plain>查看更多</el-button>
       </template>
     </s-index-item>
   </div>
@@ -84,11 +77,11 @@ export default {
           imgUrl: require("../assets/img/post/8-test.jpg"),
           name: "测试工程师",
         },
-        {
-          id: "009",
-          imgUrl: require("../assets/img/post/9-improve.jpg"),
-          name: "运维工程师",
-        },
+        // {
+        //   id: "009",
+        //   imgUrl: require("../assets/img/post/9-improve.jpg"),
+        //   name: "运维工程师",
+        // },
       ],
     };
   },
