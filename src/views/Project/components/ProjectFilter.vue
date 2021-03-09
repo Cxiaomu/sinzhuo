@@ -217,25 +217,6 @@ $activeColor: #31b4f2;
       }
       .filter-item-tag {
         display: inline-block;
-        .item-tag {
-          display: inline-block;
-          height: 32px;
-          font-size: 0.9rem;
-          line-height: 32px;
-          margin: 0rem 1.2rem 1rem;
-          border: solid 1px #fff;
-          border-radius: 3px;
-          padding: 0 0.9rem;
-          &:hover {
-            cursor: pointer;
-            color: $activeColor;
-          }
-        }
-        .item-activetag {
-          color: $activeColor;
-          border-color: rgba($activeColor, 0.3);
-          background-color: rgba($activeColor, 0.1);
-        }
       }
     }
   }

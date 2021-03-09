@@ -1,6 +1,7 @@
 <!-- 个人设置 -->
 <template>
   <div id="my-setting-wrapper">
+    <!-- 页面个人信息 start -->
     <div class="f-container">
       <el-form
         :model="userForm"
@@ -8,19 +9,29 @@
         ref="userForm"
         label-width="100px"
         label-position="left"
-        class="demo-userForm"
+        class="setting-userForm"
       >
         <el-form-item label="姓名：" prop="name">
-          <el-input v-model="userForm.name" :disabled="!isNew"></el-input>
+          <el-input
+            v-model="userForm.name"
+            :disabled="!isNew"
+            clearable
+            class="input-3"
+          ></el-input>
         </el-form-item>
         <el-form-item label="性别：" prop="sex">
-          <el-radio-group v-model="userForm.sex"  :disabled="!isNew">
+          <el-radio-group v-model="userForm.sex" :disabled="!isNew">
             <el-radio label="男"></el-radio>
             <el-radio label="女"></el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="身份：" prop="role">
-          <el-select v-model="userForm.role" disabled="true">
+          <el-select
+            v-model="userForm.role"
+            :disabled="true"
+            clearable
+            class="input-3"
+          >
             <el-option
               v-for="item in roleArr"
               :key="item.value"
@@ -31,37 +42,105 @@
           </el-select>
         </el-form-item>
         <el-form-item label="账号：" prop="userName">
-          <el-input v-model="userForm.userName" disabled="true"></el-input>
+          <el-input
+            v-model="userForm.userName"
+            :disabled="true"
+            clearable
+            class="input-3"
+          ></el-input>
         </el-form-item>
         <el-form-item label="密码：" prop="password">
-          <el-input type="password" v-model="userForm.password" disabled="true"></el-input>
-          修改密码
+          <el-input
+            type="password"
+            v-model="userForm.password"
+            :disabled="true"
+            clearable
+            class="input-3"
+          ></el-input>
+          <el-button type="text" class="change-btn" @click="showModel"
+            >修改密码</el-button
+          >
         </el-form-item>
         <el-form-item label="单位/学校：" prop="unit">
-          <el-input v-model="userForm.unit"  :disabled="!isNew"></el-input>
+          <el-input
+            v-model="userForm.unit"
+            :disabled="!isNew"
+            clearable
+            class="input-3"
+          ></el-input>
         </el-form-item>
         <el-form-item label="部门/学院：" prop="department">
-          <el-input v-model="userForm.department" :disabled="!isNew"></el-input>
+          <el-input
+            v-model="userForm.department"
+            :disabled="!isNew"
+            clearable
+            class="input-3"
+          ></el-input>
         </el-form-item>
         <el-form-item label="电话号码：" prop="tel">
-          <el-input v-model="userForm.tel"></el-input>
+          <el-input v-model="userForm.tel" clearable class="input-3"></el-input>
         </el-form-item>
         <el-form-item label="邮箱：" prop="email">
-          <el-input v-model="userForm.email"></el-input>
+          <el-input
+            v-model="userForm.email"
+            clearable
+            class="input-3"
+          ></el-input>
         </el-form-item>
         <el-form-item label="个人简介：" prop="abstract">
           <el-input
             type="textarea"
             :rows="5"
             v-model="userForm.abstract"
+            class="input-3"
           ></el-input>
         </el-form-item>
       </el-form>
       <div class="button-wrapper">
-          <el-button type="primary" @click="toChange">确认修改</el-button>
-          <el-button @click="toQuite">取消修改</el-button>
-        </div>
+        <el-button type="primary" @click="toChange">确认修改</el-button>
+        <el-button @click="toQuite">取消修改</el-button>
+      </div>
     </div>
+    <!-- 页面个人信息 start -->
+    <!-- 修改密码dialog start -->
+    <el-dialog title="修改密码" :visible.sync="showPwdModel" width="30%" center>
+      <el-form
+        :model="pwdForm"
+        :rules="pwdrules"
+        ref="pwdForm"
+        label-width="100px"
+        label-position="left"
+      >
+        <el-form-item label="账号：" prop="userName">
+          <el-input
+            v-model="pwdForm.userName"
+            clearable
+            class="input-3"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="原密码：" prop="password">
+          <el-input
+            type="password"
+            v-model="pwdForm.password"
+            clearable
+            class="input-3"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="确认密码：" prop="rePassword">
+          <el-input
+            type="password"
+            v-model="pwdForm.rePassword"
+            clearable
+            class="input-3"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="showPwdModel = false">取 消</el-button>
+        <el-button type="primary" @click="changePwd">确 定</el-button>
+      </span>
+    </el-dialog>
+    <!-- 修改密码dialog end -->
   </div>
 </template>
 
@@ -71,6 +150,7 @@ export default {
   data() {
     return {
       isNew: true,
+      showPwdModel: false,
       roleArr: [
         {
           label: "企业",
@@ -85,6 +165,11 @@ export default {
           value: 3,
         },
       ],
+      pwdForm: {
+        userName: "",
+        password: "",
+        rePassword: "",
+      },
       userForm: {
         name: "陈柘含",
         sex: "男",
@@ -98,6 +183,13 @@ export default {
         abstract: `快乐池塘栽种了梦想就变成海洋 鼓的眼睛大嘴巴同样唱的响亮 
         借我一双小翅膀就能飞向太阳 我相信奇迹就在身上 啦啦啦啦啦 有你相伴 leap frog
         啦啦啦啦啦 自信成长有你相伴 leap frog  快乐的一只小青蛙`,
+      },
+      pwdrules: {
+        userName: [{ required: true, message: "请输入账号", trigger: "blur" }],
+        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+        rePassword: [
+          { required: true, message: "请确认密码", trigger: "blur" },
+        ],
       },
       rules: {
         name: [
@@ -142,18 +234,43 @@ export default {
   created() {},
 
   methods: {
+    // 修改密码dialog
+    showModel() {
+      this.showPwdModel = true;
+      this.pwdForm.userName = this.userForm.userName;
+      this.pwdForm.password = this.userForm.password;
+    },
+
+    // 修改基本信息
     toChange() {
-      this.$refs['userForm'].validate((valid) => {
+      this.$refs["userForm"].validate((valid) => {
         if (valid) {
           alert("submit!");
         } else {
-          console.log("error submit!!");
-          return false;
+          this.$message({
+            type: "warning",
+            message: "请填写完成完整信息！",
+          });
         }
       });
     },
-    toQuite() {
-      
+
+    // 取消修改
+    toQuite() {},
+
+    // 修改密码
+    changePwd() {
+      this.$refs["pwdForm"].validate((valid) => {
+        if (valid) {
+          alert("submit!");
+          this.showPwdModel = false;
+        } else {
+          this.$message({
+            type: "warning",
+            message: "请填写完成完整信息！",
+          });
+        }
+      });
     },
   },
 };
@@ -161,5 +278,16 @@ export default {
 
 <style scoped lang="scss">
 #my-setting-wrapper {
+  .setting-userForm {
+    width: 80%;
+    margin: 2rem auto;
+    .change-btn {
+      color: #f56c6c;
+    }
+  }
+  .input-3 {
+    width: 90%;
+    min-width: 10rem;
+  }
 }
 </style>
