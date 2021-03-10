@@ -12,13 +12,13 @@
           v-for="(post, index) in postList"
           :key="index"
         >
-          <div class="post-item">
+          <div class="post-item" @click="toPostDetail(post.id)">
             <div class="item-header">
               <h2 v-text="post.name"></h2>
               <p class="price-box">
                 月薪
                 <span v-text="post.price[0]"></span> -
-                <span v-text="post.price[0]"></span>
+                <span v-text="post.price[1]"></span>
               </p>
             </div>
             <div class="item-content">
@@ -47,57 +47,57 @@ export default {
       postList: [
         {
           id: "001",
-          name: "WEB前端开发",
-          price: ["8k", "12k"],
-          company: "上海数慧",
-          scale: [100, 200],
-          user: "XXX人",
-          address: "上海 浦东",
+          name: "WEB前端开发", // 岗位名称
+          price: ["8k", "12k"], //薪资范围
+          company: "稀里哗啦", //公司名
+          scale: [100, 200], // 公司规模
+          user: "XXX人", // 发布者
+          address: "上海 洋浦", //工作地址
         },
         {
           id: "002",
           name: " Java开发工程师",
           price: ["8k", "12k"],
-          company: "上海数慧",
+          company: "稀里哗啦",
           scale: [100, 200],
           user: "XXX人",
-          address: "上海 浦东",
+          address: "上海 洋浦",
         },
         {
           id: "003",
           name: "测试工程师",
           price: ["8k", "12k"],
-          company: "上海数慧",
+          company: "稀里哗啦",
           scale: [100, 200],
           user: "XXX人",
-          address: "上海 浦东",
+          address: "上海 洋浦",
         },
         {
           id: "004",
           name: "运维工程师",
           price: ["8k", "12k"],
-          company: "上海数慧",
+          company: "稀里哗啦",
           scale: [100, 200],
           user: "XXX人",
-          address: "上海 浦东",
+          address: "上海 洋浦",
         },
         {
           id: "005",
           name: "UI设计师",
           price: ["8k", "12k"],
-          company: "上海数慧",
+          company: "稀里哗啦",
           scale: [100, 200],
           user: "XXX人",
-          address: "上海 浦东",
+          address: "上海 洋浦",
         },
         {
           id: "006",
           name: "WEB前端开发",
           price: ["8k", "12k"],
-          company: "上海数慧",
+          company: "稀里哗啦",
           scale: [100, 200],
           user: "XXX人",
-          address: "上海 浦东",
+          address: "上海 洋浦",
         },
       ],
     };
@@ -108,7 +108,17 @@ export default {
 
   created() {},
 
-  methods: {},
+  methods: {
+    toPostDetail(postId) {
+      let route = {
+        path: '/postDetail',
+        query: {
+          postId: postId
+        }
+      }
+      this.$router.push(route)
+    }
+  },
 };
 </script>
 
@@ -122,6 +132,7 @@ $activeColor: #31b4f2;
       background-color: #fff;
       margin: 0.5rem;
       padding: 1.2rem;
+      cursor: pointer;
       .item-header {
         h2 {
           display: inline-block;
