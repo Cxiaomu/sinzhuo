@@ -28,7 +28,7 @@ export default {
   name: "PersonalNav",
   data() {
     return {
-      userStatus: "3", // 1-企业，2-教师，3-学生
+      userStatus: "1", // 1-企业，2-教师，3-学生
       activeIndex: "0",
       navList: [],
     };

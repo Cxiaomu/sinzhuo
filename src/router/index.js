@@ -116,6 +116,11 @@ export default new Router({
           name: 'CreateProject',
           component: () => import("@/views/Personal/MyProject/CreateProject")
         },
+        {
+          path: '/createPost',
+          name: 'CreatePost',
+          component: () => import("@/views/Personal/MyPost/CreatePost")
+        },
       ]
     },
     {

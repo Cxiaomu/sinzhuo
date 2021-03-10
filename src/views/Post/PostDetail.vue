@@ -17,7 +17,8 @@
             <el-divider direction="vertical"></el-divider>
             经验：<span v-text="postInfo.experience" ></span>
             <el-divider direction="vertical"></el-divider>
-            招聘人数：<span v-text="postInfo.experience"></span>
+            招聘人数：<span v-text="postInfo.need[0]"></span> -
+            <span v-text="postInfo.need[1]"></span> 人
             <el-divider direction="vertical"></el-divider>
             发布时间：<span v-text="postInfo.time" ></span>
           </p>

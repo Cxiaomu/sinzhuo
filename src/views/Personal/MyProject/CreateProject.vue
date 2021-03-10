@@ -3,7 +3,7 @@
     <div class="f-container create-project-container">
       <div class="f-container">
         <el-form
-          :model="prjectForm"
+          :model="projectForm"
           :rules="projectRule"
           ref="newProject"
           label-width="100px"
@@ -17,9 +17,9 @@
               :on-remove="handleRemove"
               :before-remove="beforeRemove"
               multiple
-              :limit="3"
+              :limit="1"
               :on-exceed="handleExceed"
-              :file-list="prjectForm.logoImg"
+              :file-list="projectForm.logoImg"
             >
               <el-button size="small" type="primary">点击上传</el-button>
               <div slot="tip" class="el-upload__tip">
@@ -29,13 +29,13 @@
           </el-form-item>
           <el-form-item label="项目名称：" prop="name">
             <el-input
-              v-model="prjectForm.name"
+              v-model="projectForm.name"
               class="project-name"
               :disabled="!isCreate"
             ></el-input>
           </el-form-item>
           <el-form-item label="所属领域：" prop="field">
-            <el-radio-group v-model="prjectForm.field">
+            <el-radio-group v-model="projectForm.field">
               <el-radio
                 v-for="(field, index) in fieldList"
                 :key="index"
@@ -45,7 +45,7 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="项目阶段：" prop="phase">
-            <el-radio-group v-model="prjectForm.phase">
+            <el-radio-group v-model="projectForm.phase">
               <el-radio
                 v-for="(phase, index) in phaseList"
                 :key="index"
@@ -54,7 +54,7 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="需要融资：" prop="financing">
-            <el-radio-group v-model="prjectForm.financing">
+            <el-radio-group v-model="projectForm.financing">
               <el-radio :label="true">是</el-radio>
               <el-radio :label="false">否</el-radio>
             </el-radio-group>
@@ -63,7 +63,7 @@
             <el-input
               type="textarea"
               :rows="10"
-              v-model="prjectForm.abstract"
+              v-model="projectForm.abstract"
             ></el-input>
           </el-form-item>
         </el-form>
@@ -86,10 +86,11 @@ export default {
       projectId: "",
       fieldList: [],
       phaseList: [],
-      prjectForm: {
+      projectForm: {
         logoImg: [{ name: "LOGO", url: "" }],
         name: "创新测试",
         field: "住宿和餐饮业",
+        time: '',
         abstract: `一、新颖全面且线上线下深度融合，出行是人类活动的刚需。
         二、“微校通”是利用现代信息技术实现家庭与学校快捷、实时沟通的教育网络平台。
         是一套可以有效解决老师和家长之间沟通，帮助孩子健康成长的、集先进的计算机技
@@ -170,7 +171,7 @@ export default {
     },
     handleExceed(files, fileList) {
       this.$message.warning(
-        `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
+        `当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
           files.length + fileList.length
         } 个文件`
       );
@@ -183,6 +184,7 @@ export default {
     toPublish() {
       this.$refs["newProject"].validate((valid) => {
         if (valid) {
+          this.projectForm.time = new Date().getTime();
           // 请求接口
           let route = {
             path: "/projectDetail",
