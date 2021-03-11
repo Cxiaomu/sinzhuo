@@ -112,25 +112,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.margin {
-  margin-block-start: 0.5rem;
-  margin-block-end: 0.5rem;
-}
-.more-text {
-  display: -webkit-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-}
+@import '@/styles/global.scss';
+$courseColor: #2ea1d6;
 .post-wrapper {
   margin: 1rem;
   margin-bottom: 2rem;
-  border: solid 2px #fff;
+  border: solid 2px $white;
   &:hover {
-    background-color: #2ea1d6;
-    color: #fff;
-    border-color: #2ea1d6;
+    background-color: $courseColor;
+    color: $white;
+    border-color: $courseColor;
   }
   .post-img-box {
     overflow: hidden;
@@ -149,7 +140,7 @@ export default {
   .post-detail-box {
     .post-title {
       @extend .margin;
-      @extend .more-text;
+      @include more-text;
       line-height: 2.5rem;
     }
   }

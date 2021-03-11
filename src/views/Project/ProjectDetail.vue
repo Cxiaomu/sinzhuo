@@ -91,12 +91,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$white: #ffffff;
+$darkenWhite: #f4f4f4;
 #project-detail-wrapper {
   padding: 1rem 0;
-  background-color: #f4f4f4;
+  background-color: $darkenWhite;
   .project-detail-container {
     padding: 2rem 0;
-    background-color: #fff;
+    background-color: $white;
     >>> .el-row {
       padding-left: 0.8rem;
     }

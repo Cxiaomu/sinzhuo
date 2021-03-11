@@ -62,9 +62,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$activeColor: #31b4f2;
+@import '@/styles/global.scss';
 .iconfont {
-  color: #fff;
+  color: $white;
   display: inline-block;
   margin-right: 5px;
 }
@@ -81,14 +81,14 @@ $activeColor: #31b4f2;
     padding: 1rem;
     .personal-name {
       .name {
-        color: #60c7f7;
+        color: $lightActiveColor;
         font-size: 1.5rem;
         font-weight: 700;
         line-height: 2rem;
       }
     }
     .info-text {
-      color: #fff;
+      color: $white;
       line-height: 2rem;
       display: inline-block;
     }

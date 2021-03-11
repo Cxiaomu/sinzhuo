@@ -76,12 +76,12 @@ export default {
         {
           title: "项目概述",
           prop: "abstract",
-          styleClass: "more-text"
+          styleClass: "more-text-3"
         },
         {
           title: "所属领域",
           prop: "field",
-          styleClass: "more-text"
+          styleClass: "more-text-3"
         },
         {
           title: "负责人",
@@ -228,19 +228,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/global.scss';
 .el-row >>> .el-col {
   text-align: center;
 }
 >>>.el-table__row {
   cursor: pointer;
 }
-$activeColor: #31b4f2;
-.more-text {
-  display: -webkit-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+.more-text-3 {
+  @include more-text(3);
 }
 .collapse-title {
   width: 95%;
@@ -258,8 +254,7 @@ $activeColor: #31b4f2;
     vertical-align: middle;
   }
   .on-line {
-    @extend .more-text;
-    -webkit-line-clamp: 1;
+    @include more-text;
   }
   .project-list-pagination {
     text-align: right;
@@ -267,7 +262,7 @@ $activeColor: #31b4f2;
   }
   .project-list-pagination >>>.el-pager li.active {
     background-color: $activeColor;
-    color: #FFF;
+    color: $white;
   }
 }
 </style>

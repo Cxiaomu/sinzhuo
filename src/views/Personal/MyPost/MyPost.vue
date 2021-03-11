@@ -158,26 +158,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/global.scss';
 >>> .el-card__body {
   padding: 10px 20px;
-}
-$activeColor: #31b4f2;
-.margin {
-  margin-block-start: 0.5rem;
-  margin-block-end: 0.5rem;
-}
-.more-text {
-  display: -webkit-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
 }
 .post-item-wrapper {
   margin: 0.5rem;
   .post-title {
     @extend .margin;
-    @extend .more-text;
+    @include more-text;
     text-align: center;
     cursor: pointer;
     &:hover {
@@ -191,14 +180,14 @@ $activeColor: #31b4f2;
     left: 50%;
     transform: translate(-50%, -50%);
     .new-text {
-      @extend .more-text;
-      color: #999;
+      @include more-text;
+      color: $darkenGrayText;
     }
     .iconxinjian {
       display: inline-block;
       margin: 0 auto;
       font-size: 4rem;
-      color: #cccccc;
+      color: $createIconColor;
     }
   }
 }

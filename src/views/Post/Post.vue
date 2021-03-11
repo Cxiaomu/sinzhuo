@@ -123,13 +123,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$activeColor: #31b4f2;
+@import '@/styles/global.scss';
 #post-wrapper {
-  background-color: #f4f4f4;
+  background-color: $darkenWhite;
   .post-container {
     padding: 1rem 0;
     .post-item {
-      background-color: #fff;
+      background-color: $white;
       margin: 0.5rem;
       padding: 1.2rem;
       cursor: pointer;

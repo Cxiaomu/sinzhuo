@@ -178,10 +178,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/global.scss';
 #project-filter-wrapper >>> .el-collapse-item__content {
   padding-bottom: 0;
 }
-$activeColor: #31b4f2;
 .collapse-title {
   width: 95%;
   margin: 1rem auto;
@@ -201,7 +201,7 @@ $activeColor: #31b4f2;
     }
     button {
       background-color: $activeColor;
-      color: #ffffff;
+      color: $white;
       &:hover {
         background-color: darken($activeColor, 10%);
       }

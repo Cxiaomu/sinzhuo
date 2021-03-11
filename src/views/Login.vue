@@ -351,6 +351,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$white: #ffffff;
 .el-row {
   height: 100%;
 }
@@ -374,7 +375,7 @@ export default {
       top: 2rem;
       left: 3rem;
       font-size: 4rem;
-      color: #fff;
+      color: $white;
       letter-spacing: 1rem;
       font-weight: 300;
       .logo-bold {

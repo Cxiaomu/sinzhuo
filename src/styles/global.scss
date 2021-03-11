@@ -1,9 +1,44 @@
+/**  
+ * 颜色变量
+*/
 $activeColor: #31b4f2;
-
+$lightActiveColor: #60c7f7;
+$darkenActiveColor: #025492;
+$white: #ffffff;
+$darkenWhite: #f4f4f4;
+$grayText: #eeeeee;
+$darkenGrayText: #999999;
+$createIconColor: #cccccc;
+/**  
+ * 继承
+*/
+// 内层布局
 .f-container {
   width: 85%;
   margin: 0.2rem auto;
   padding: 1rem 2rem;
+}
+// h2 p margin
+.margin {
+  margin-block-start: 0.5rem;
+  margin-block-end: 0.5rem;
+}
+
+.more-text {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+/**  
+ * 混合
+*/
+// 文本溢出显示省略号
+@mixin more-text($num: 1) {
+  @extend .more-text;
+  -webkit-line-clamp: $num;
 }
 
 // 首页项目、岗位、精品课程通用组件
@@ -77,10 +112,4 @@ $activeColor: #31b4f2;
     width: 8rem;
     height: 2.5rem;
   }
-}
-
-// h2 p margin
-.margin {
-  margin-block-start: 0.5rem;
-  margin-block-end: 0.5rem;
 }

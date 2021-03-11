@@ -167,22 +167,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.margin {
-  margin-block-start: 0.5rem;
-  margin-block-end: 0.5rem;
-}
-.more-text {
-  display: -webkit-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-}
+@import '@/styles/global.scss';
+$courseColor: #6b7484;
 .course-wrapper {
   margin: 1rem;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  background-color: #ffffff;
+  background-color: $white;
   transition: transform 0.25s;
   -webkit-transition: transform 0.25s;
   &:hover {
@@ -202,21 +193,19 @@ export default {
   .course-detail-box {
     .course-title {
       @extend .margin;
-      @extend .more-text;
+      @include more-text;
       line-height: 2.5rem;
     }
     .course-detail {
-      // @extend .margin;
-      @extend .more-text;
+      @include more-text(4);
       margin-bottom: 2rem;
       padding: 0 1rem;
       text-align: left;
-      color: #6b7484;
+      color: $courseColor;
       text-indent: 1rem;
-      -webkit-line-clamp: 4;
     }
     .course-info {
-      color: #6b7484;
+      color: $courseColor;
     }
   }
 }

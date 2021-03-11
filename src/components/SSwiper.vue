@@ -75,10 +75,11 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
+$white: #ffffff;
 .swiper-container {
   width: 100%;
-  background-color: #ffffff;
-  --swiper-theme-color: #fff;
+  background-color: $white;
+  --swiper-theme-color: $white;
   --swiper-pagination-color: #c2e9fb;
   .swiper-img {
     width: 100%;

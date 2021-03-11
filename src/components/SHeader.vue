@@ -142,6 +142,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/global.scss';
 #header-wrapper {
     width: 85%;
     margin: 0 auto;
@@ -155,12 +156,12 @@ export default {
     }
     .nav-wrapper {
       .el-menu.el-menu--horizontal {
-        border-bottom: solid 1px #fff;
+        border-bottom: solid 1px $white;
       }
       .el-menu--horizontal > .el-menu-item {
         color: #212529;
         &:hover {
-          color: #31b4f2;
+          color: $activeColor;
         }
       }
       .iconfont {

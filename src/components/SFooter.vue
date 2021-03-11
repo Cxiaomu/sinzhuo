@@ -128,37 +128,28 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$activeColor: #31b4f2;
-$bgColor: #025492;
+@import '@/styles/global.scss';
 .link {
   line-height: 25px;
-  color: #999;
+  color: $darkenGrayText;
   font-size: 0.9rem;
-}
-.f-container {
-  width: 85%;
-  margin: 1rem auto;
-  padding: 1rem 2rem;
-}
-.margin {
-  margin-block-start: 0.5rem;
-  margin-block-end: 0.5rem;
 }
 #footer-wrapper {
   .footer-container-first {
-    background-color: $bgColor;
+    background-color: $darkenActiveColor;
     .footer-detail {
       @extend .f-container;
+      margin: 1rem auto;
       .detail-item {
         padding-right: 1.8rem;
         text-align: left;
-        color: #fff;
+        color: $white;
         .item-title {
           letter-spacing: 0.1rem;
           font-weight: 500;
         }
         .item-text {
-          color: #eeeeee;
+          color: $grayText;
           font-size: 0.9rem;
           letter-spacing: 0.07rem;
           line-height: 160%;
@@ -169,8 +160,9 @@ $bgColor: #025492;
   .footer-container-second {
     .footer-link {
       @extend .f-container, .link;
+      margin: 1rem auto;
       text-align: center;
-      background-color: #fff;
+      background-color: $white;
       ul {
         list-style: none;
         @extend .margin;

@@ -206,15 +206,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/global.scss';
 >>> .el-radio-group {
   line-height: 40px;
 }
 #create-project-wrapper {
   padding: 1rem 0;
-  background-color: #f4f4f4;
+  background-color: $darkenWhite;
   .create-project-container {
     padding: 2rem 0;
-    background-color: #fff;
+    background-color:  $white;
   }
 }
 .project-name {

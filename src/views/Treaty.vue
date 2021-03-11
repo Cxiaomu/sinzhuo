@@ -188,6 +188,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$grayText: #eeeeee;
 #treaty {
   .logo-wrapper {
     width: 75%;
@@ -201,8 +202,8 @@ export default {
   }
   .title-wrapper {
     height: 2.5rem;
-    border-top: 1px solid #eeeeee;
-    border-bottom: 1px solid #eeeeee;
+    border-top: 1px solid $grayText;
+    border-bottom: 1px solid $grayText;
     background-color: #fafafa;
     box-shadow: 1px 1px 2px #f7f7f7;
     .title-content {

@@ -134,23 +134,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$activeColor: #31b4f2;
-.margin {
-  margin-block-start: 0.5rem;
-  margin-block-end: 0.5rem;
-}
-.more-text {
-  display: -webkit-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-}
+@import '@/styles/global.scss';
 .project-wrapper {
   text-align: left;
   margin: 1rem;
   padding: 1.5rem;
-  background-color: #fff;
+  background-color: $white;
   transition: transform 0.25s;
   -webkit-transition: transform 0.25s;
   &:hover {
@@ -173,25 +162,17 @@ $activeColor: #31b4f2;
       .project-title {
         cursor: pointer;
         @extend .margin;
-        @extend .more-text;
+        @include more-text;
         &:hover {
           color: #2ea1d6;
         }
       }
       .project-detail {
         @extend .margin;
-        @extend .more-text;
-        -webkit-line-clamp: 4;
+        @include more-text(4);
         color: #6b7484;
       }
     }
   }
-}
-.more-button {
-  // color: $activeColor;
-  // border-color: $activeColor;
-  // &:hover {
-  //   background-color: $activeColor;
-  // }
 }
 </style>
