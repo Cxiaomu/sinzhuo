@@ -1,5 +1,5 @@
 <template>
-  <div id="project-filter-wrapper" class="content-wrapper">
+  <div id="firm-filter-wrapper" class="content-wrapper">
     <el-collapse v-model="activeName" accordion>
       <el-collapse-item name="1">
         <!-- filter title start -->
@@ -27,7 +27,7 @@
         </template>
         <!-- filter title start -->
         <!-- filter content start -->
-        <div class="project-filter-container">
+        <div class="firm-filter-container">
           <el-row
             class="filter-item"
             v-for="filter in filterOptions"
@@ -61,43 +61,15 @@
 </template>
 
 <script>
-import { getProjectPhase, getProjectField } from "../../../api/getJson";
+import { getProjectField } from "@/api/getJson";
 export default {
-  name: "ProjectFilter",
+  name: "FirmFilter",
   data() {
     return {
       activeName: "1",
       keywords: "",
-      isFinancing: 0, // 需要融资激活索引
-      isPhase: 0, // 项目阶段激活索引
       isField: 0, // 所属领域激活索引
       filterOptions: [
-        {
-          title: "需要融资",
-          class: "financing",
-          optionList: [
-            {
-              id: "000",
-              name: "全部",
-              type: "000",
-            },
-            {
-              id: "001",
-              name: "是",
-              type: "000",
-            },
-            {
-              id: "002",
-              name: "否",
-              type: "000",
-            },
-          ],
-        },
-        {
-          title: "项目阶段",
-          class: "phase",
-          optionList: [],
-        },
         {
           title: "所属领域",
           class: "field",
@@ -122,10 +94,9 @@ export default {
   mounted() {
     // 监听所属领域数据，取得则上传参数与事件
     this.$watch('filterOptions', () => {
-      let phase = this.filterOptions[1].optionList;
-      let field = this.filterOptions[2].optionList;
-        if (field && phase) {
-          this.$emit('getField', field, phase)
+      let field = this.filterOptions[0].optionList;
+        if (field) {
+          this.$emit('getField', field)
         }
       }, {
         deep: true
@@ -133,15 +104,10 @@ export default {
   },
   methods: {
     async getPorjectConfig() {
-      // 项目阶段
-      let resPhase = await getProjectPhase(this);
-      if (resPhase) {
-        this.filterOptions[1].optionList = resPhase;
-      }
       // 项目领域
       let resField = await getProjectField(this);
       if (resField) {
-        this.filterOptions[2].optionList = resField;
+        this.filterOptions[0].optionList = resField;
       }
     },
 
@@ -166,10 +132,6 @@ export default {
     toFilter(type, index) {
       if (type == "financing") {
         this.isFinancing = index;
-      } else if (type == "phase") {
-        this.isPhase = index;
-      } else if (type == "field") {
-        this.isField = index;
       }
       // 上传参数过滤
     },
@@ -179,7 +141,7 @@ export default {
 
 <style scoped lang="scss">
 @import '@/styles/global.scss';
-#project-filter-wrapper >>> .el-collapse-item__content {
+#firm-filter-wrapper >>> .el-collapse-item__content {
   padding-bottom: 0;
 }
 .collapse-title {
@@ -189,7 +151,7 @@ export default {
 .tag-text {
   font-size: 0.9rem;
 }
-#project-filter-wrapper {
+#firm-filter-wrapper {
   padding: 0rem 2rem;
   .filter-title {
     font-size: 1rem;
@@ -207,7 +169,7 @@ export default {
       }
     }
   }
-  .project-filter-container {
+  .firm-filter-container {
     border-top: 1px solid #ebeef5;
     .filter-item {
       @extend .collapse-title;

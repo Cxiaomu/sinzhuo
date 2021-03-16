@@ -57,6 +57,11 @@ export default new Router({
           component: () => import("@/views/Firm/Firm")
         },
         {
+          path: '/firmDetail',
+          name: 'FirmDetail',
+          component: () => import("@/views/Firm/FirmDetail")
+        },
+        {
           path: '/mentor',
           name: 'Mentor',
           component: () => import("@/views/Mentor/Mentor")
