@@ -1,7 +1,7 @@
 <!-- 创意项目 -->
 <template>
-  <div>
-    <div>
+  <div style="background-color: #f4f4f4;">
+    <div style="margin-bottom: 1rem">
       <project-filter ref="proFilter" @getField="getField"></project-filter>
     </div>
     <!-- <div style="background-color: #f4f4f4; height: 25px"></div> -->

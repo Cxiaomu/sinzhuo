@@ -260,6 +260,11 @@ export default {
     text-align: right;
     margin: 2rem 0 1rem;
   }
+  .project-list-pagination >>>.btn-prev,
+  .project-list-pagination >>>.btn-next,
+  .project-list-pagination >>>.el-pager li {
+    background-color: $white;
+  }
   .project-list-pagination >>>.el-pager li.active {
     background-color: $activeColor;
     color: $white;
