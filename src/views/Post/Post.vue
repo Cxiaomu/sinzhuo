@@ -35,6 +35,17 @@
           </div>
         </el-col>
       </el-row>
+      <div class="post-list-pagination">
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :page-size="3"
+        :pager-count="5"
+        :total="postList.length"
+        @current-change="changePage"
+      >
+      </el-pagination>
+    </div>
     </div>
   </div>
 </template>
@@ -51,7 +62,7 @@ export default {
           price: ["8k", "12k"], //薪资范围
           company: "稀里哗啦", //公司名
           scale: [100, 200], // 公司规模
-          user: "XXX人", // 发布者
+          user: "HR姓名", // 发布者
           address: "上海 洋浦", //工作地址
         },
         {
@@ -60,7 +71,7 @@ export default {
           price: ["8k", "12k"],
           company: "稀里哗啦",
           scale: [100, 200],
-          user: "XXX人",
+          user: "HR姓名",
           address: "上海 洋浦",
         },
         {
@@ -69,7 +80,7 @@ export default {
           price: ["8k", "12k"],
           company: "稀里哗啦",
           scale: [100, 200],
-          user: "XXX人",
+          user: "HR姓名",
           address: "上海 洋浦",
         },
         {
@@ -78,7 +89,7 @@ export default {
           price: ["8k", "12k"],
           company: "稀里哗啦",
           scale: [100, 200],
-          user: "XXX人",
+          user: "HR姓名",
           address: "上海 洋浦",
         },
         {
@@ -87,7 +98,7 @@ export default {
           price: ["8k", "12k"],
           company: "稀里哗啦",
           scale: [100, 200],
-          user: "XXX人",
+          user: "HR姓名",
           address: "上海 洋浦",
         },
         {
@@ -96,7 +107,7 @@ export default {
           price: ["8k", "12k"],
           company: "稀里哗啦",
           scale: [100, 200],
-          user: "XXX人",
+          user: "HR姓名",
           address: "上海 洋浦",
         },
       ],
@@ -111,19 +122,22 @@ export default {
   methods: {
     toPostDetail(postId) {
       let route = {
-        path: '/postDetail',
+        path: "/postDetail",
         query: {
-          postId: postId
-        }
-      }
-      this.$router.push(route)
-    }
+          postId: postId,
+        },
+      };
+      this.$router.push(route);
+    },
+    // 当前页改变 nowPage（改变后的页数）
+    changePage(nowPage) {
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/global.scss';
+@import "@/styles/global.scss";
 #post-wrapper {
   background-color: $darkenWhite;
   .post-container {
@@ -133,6 +147,13 @@ export default {
       margin: 0.5rem;
       padding: 1.2rem;
       cursor: pointer;
+      transition: transform 0.25s;
+      -webkit-transition: transform 0.25s;
+      &:hover {
+        position: relative;
+        transform: translate(-3px, -5px);
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+      }
       .item-header {
         h2 {
           display: inline-block;
@@ -144,10 +165,22 @@ export default {
           font-size: 1.2rem;
           margin-top: 0.9rem;
           color: $activeColor;
-          
         }
       }
     }
+    .post-list-pagination {
+    text-align: right;
+    margin: 2rem 0 1rem;
+  }
+  .post-list-pagination >>>.btn-prev,
+  .post-list-pagination >>>.btn-next,
+  .post-list-pagination >>>.el-pager li {
+    background-color: $white;
+  }
+  .post-list-pagination >>>.el-pager li.active {
+    background-color: $activeColor;
+    color: $white;
+  }
   }
 }
 </style>

@@ -9,7 +9,7 @@
         <el-aside width="150px">
           <personal-nav></personal-nav>
         </el-aside>
-        <el-main style="height: 1000px">
+        <el-main>
           <router-view></router-view>
         </el-main>
       </el-container>

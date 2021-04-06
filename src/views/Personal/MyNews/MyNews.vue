@@ -18,7 +18,7 @@
               <p class="news-content" v-text="news.content"></p>
             </el-col>
             <el-col :span="2" style="text-align: right">
-              <el-button type="text" @click="toDelete(news.id)">删除</el-button>
+              <el-button type="text" @click="toDelete(news.id)" style="color: #f56c6c">删除</el-button>
             </el-col>
           </el-row>
         </div>

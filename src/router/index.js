@@ -5,23 +5,21 @@ import Layout from '@/views/Layout'
 Vue.use(Router)
 
 // 防止重复跳转相同路由
-const originalPush = Router.prototype.push
-Router.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch(err => err)
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
 }
 
 export default new Router({
   mode: 'history',
-  routes: [
-    {
+  routes: [{
       path: '/',
       name: "Layout",
       component: Layout,
-      redirect:{
-        name:"Index"
+      redirect: {
+        name: "Index"
       },
-      children: [
-        {
+      children: [{
           path: '/index',
           name: 'Index',
           component: () => import("@/views/Index")
@@ -75,11 +73,10 @@ export default new Router({
           path: '/personal',
           name: 'Personal',
           component: () => import("@/views/Personal/Personal"),
-          redirect:{
-            name:"MyNews"
+          redirect: {
+            name: "MyNews"
           },
-          children: [
-            {
+          children: [{
               path: '/myNews',
               name: 'MyNews',
               component: () => import("@/views/Personal/MyNews/MyNews")
@@ -126,6 +123,11 @@ export default new Router({
           name: 'CreatePost',
           component: () => import("@/views/Personal/MyPost/CreatePost")
         },
+        {
+          path: '/createFirm',
+          name: 'CreateFirm',
+          component: () => import("@/views/Personal/MyFirm/CreateFirm")
+        },
       ]
     },
     {
@@ -138,10 +140,10 @@ export default new Router({
       name: 'Treaty',
       component: () => import("@/views/Treaty")
     },
-    
+
     {
       path: '*',
-      redirect:{
+      redirect: {
         name: "NotFound"
       }
     },

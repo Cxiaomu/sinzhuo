@@ -45,10 +45,10 @@
                 <span
                   :class="[
                     'item-tag',
-                    { 'item-activetag': getActiveStatus(filter.class, index) },
+                    { 'item-activetag': getActiveStatus(index) },
                   ]"
                   v-text="item.name"
-                  @click="toFilter(filter.class, index)"
+                  @click="toFilter(index)"
                 ></span>
               </div>
             </el-col>
@@ -112,14 +112,8 @@ export default {
     },
 
     // 激活状态的span
-    getActiveStatus(type, index) {
-      if (type == "financing") {
-        return index == this.isFinancing;
-      } else if (type == "phase") {
-        return index == this.isPhase;
-      } else if (type == "field") {
+    getActiveStatus(index) {
         return index == this.isField;
-      }
     },
 
     // 防止点击搜索、输入框折叠面板展开/收缩
@@ -129,10 +123,9 @@ export default {
     toSearch() {},
 
     // 点击span进行切换、过滤
-    toFilter(type, index) {
-      if (type == "financing") {
-        this.isFinancing = index;
-      }
+    toFilter(index) {
+      debugger
+        this.isField = index;
       // 上传参数过滤
     },
   },

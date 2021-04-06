@@ -15,12 +15,12 @@
             :index="menu.id"
           >
             <template slot="title">
-              <!-- <span :class="['iconfont', 'iconyonghu' ,'nav-icon', menu.icon]"></span> -->
+              <span :class="['iconfont', 'iconyonghu' ,'nav-icon', menu.icon]"></span>
               <span class="nav-title" v-text="menu.name"></span>
             </template>
           </el-menu-item>
           <!-- 登录部分 start-->
-          <el-menu-item index="7">
+          <el-menu-item index="5">
             <template slot="title">
               <div class="nav-title" v-if="!isLogin">
                 <span @click="toLogin">登录</span>
@@ -28,7 +28,7 @@
                 <span @click="toRegister">注册</span>
               </div>
               <div class="nav-title userName" v-else @click="toPersonal">
-                <!-- <span class="iconfont iconyonghu nav-icon"></span> -->
+                <span class="iconfont iconyonghu nav-icon"></span>
                 <span
                   class=""
                   v-text="username"
@@ -51,7 +51,7 @@ export default {
   name: "SHeader",
   data() {
     return {
-      activeMenu: "0",
+      activeMenu: "1",
       menuList: [],
       username: "啦啦啦啦",
     };
@@ -85,7 +85,7 @@ export default {
 
     // 点击菜单栏
     changeMenu(index, indexPath) {
-      if (index !== '7') {
+      if (index !== '5') {
         let url = this.menuList[index-1].path
         this.$router.push(url);
       }
@@ -100,12 +100,10 @@ export default {
     activeHeader(route) {
       let nowPath = route.path;
       switch(nowPath) {
-        case '/project': this.activeMenu = '1'; break;
-        case '/post': this.activeMenu = '2'; break;
-        case '/course': this.activeMenu = '3'; break;
-        case '/firm': this.activeMenu = '4'; break;
-        case '/mentor': this.activeMenu = '5'; break;
-        case '/his': this.activeMenu = '6'; break;
+        case '/index': this.activeMenu = '1'; break;
+        case '/project': this.activeMenu = '2'; break;
+        case '/post': this.activeMenu = '3'; break;
+        case '/course': this.activeMenu = '4'; break;
         default: this.activeMenu = '0'
       }
     },
