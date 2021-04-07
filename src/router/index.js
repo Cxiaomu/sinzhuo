@@ -50,6 +50,11 @@ export default new Router({
           component: () => import("@/views/Course/Course")
         },
         {
+          path: '/courseDetail',
+          name: 'CourseDetail',
+          component: () => import("@/views/Course/CourseDetail")
+        },
+        {
           path: '/firm',
           name: 'Firm',
           component: () => import("@/views/Firm/Firm")
@@ -127,6 +132,11 @@ export default new Router({
           path: '/createFirm',
           name: 'CreateFirm',
           component: () => import("@/views/Personal/MyFirm/CreateFirm")
+        },
+        {
+          path: '/createCourse',
+          name: 'CreateCourse',
+          component: () => import("@/views/Personal/MyCourse/CreateCourse")
         },
       ]
     },

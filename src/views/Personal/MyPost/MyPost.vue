@@ -14,7 +14,11 @@
         <div class="post-item-wrapper" ref="postCard">
           <el-card shadow="hover">
             <div>
-              <h3 v-text="post.name" class="post-title"></h3>
+              <h3
+                v-text="post.name"
+                class="post-title"
+                @click="toPostById(post.id)"
+              ></h3>
               <p class="price-box">
                 薪资：
                 <span v-text="post.price[0]"></span> -
@@ -44,7 +48,7 @@
           <el-card shadow="hover" ref="newCard" :body-style="styleObj">
             <div class="newIcon-box">
               <span class="iconfont iconxinjian"></span>
-              <p class="new-text">创建岗位</p>
+              <p class="new-text">发布岗位</p>
             </div>
           </el-card>
         </div>
@@ -131,6 +135,15 @@ export default {
     setNewCardHeigh() {
       this.styleObj.height = this.$refs.postCard[0].clientHeight - 21 + "px";
     },
+    toPostById(id) {
+      let query = {
+        id: id,
+      };
+      this.$router.push({
+        path: "/postDetail",
+        query: query,
+      });
+    },
     async handlePost() {},
     // 编辑
     toEdit(postId) {
@@ -158,7 +171,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/global.scss';
+@import "@/styles/global.scss";
 >>> .el-card__body {
   padding: 10px 20px;
 }

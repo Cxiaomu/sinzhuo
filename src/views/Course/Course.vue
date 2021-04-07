@@ -1,62 +1,56 @@
+<!-- 精品课程 -->
 <template>
-<div style="background: #f4f4f4">
-  <div id="course-list-wrapper" class="content-wrapper">
-    <el-row>
-      <el-col
-        :xs="12"
-        :sm="8"
-        :md="8"
-        :lg="6"
-        :xl="6"
-        v-for="course in courseList"
-        :key="course.id"
-      >
-        <div class="course-wrapper">
-          <!-- <div class="course-img-box">
-            <img
-              :src="course.imgUrl"
-              class="course-img"
-              @click="toCourseById(course.id)"
-            />
-          </div> -->
-          <div class="course-detail-box">
-            <h3 class="course-title" v-text="course.name"></h3>
-            <p class="course-detail" v-text="course.intro"></p>
-            <div class="course-info">
-              <el-row>
-                <el-col :span="12">
-                  <el-rate
-                    v-model="course.score"
-                    disabled
-                    show-score
-                    text-color="#ff9900"
-                  ></el-rate>
-                </el-col>
-                <el-col :span="1">
-                  <el-divider direction="vertical"></el-divider>
-                </el-col>
-                <el-col :span="11">
-                  <span v-text="course.view"></span>人观看
-                </el-col>
-              </el-row>
+  <div style="background: #f4f4f4">
+    <div id="course-list-wrapper" class="content-wrapper">
+      <el-row>
+        <el-col
+          :xs="12"
+          :sm="8"
+          :md="8"
+          :lg="6"
+          :xl="6"
+          v-for="course in courseList"
+          :key="course.id"
+        >
+          <div class="course-wrapper" @click="toCourseById(course.id)">
+            <div class="course-detail-box">
+              <h3 class="course-title" v-text="course.name"></h3>
+              <p class="course-detail" v-text="course.intro"></p>
+              <div class="course-info">
+                <el-row>
+                  <el-col :span="12">
+                    <el-rate
+                      v-model="course.score"
+                      disabled
+                      show-score
+                      text-color="#ff9900"
+                    ></el-rate>
+                  </el-col>
+                  <el-col :span="1">
+                    <el-divider direction="vertical"></el-divider>
+                  </el-col>
+                  <el-col :span="11">
+                    <span v-text="course.view"></span>人观看
+                  </el-col>
+                </el-row>
+              </div>
             </div>
           </div>
-        </div>
-      </el-col>
-    </el-row>
-    <div class="course-list-pagination">
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :page-size="3"
-        :pager-count="5"
-        :total="courseList.length"
-        @current-change="changePage"
-      >
-      </el-pagination>
+        </el-col>
+      </el-row>
+      <div class="course-list-pagination">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :page-size="3"
+          :pager-count="5"
+          :total="courseList.length"
+          @current-change="changePage"
+        >
+        </el-pagination>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -166,7 +160,7 @@ export default {
         id: id,
       };
       this.$router.push({
-        path: "/course",
+        path: "/courseDetail",
         query: query,
       });
     },
@@ -174,10 +168,9 @@ export default {
     toCourse() {
       this.$router.push("/course");
     },
-    
+
     // 当前页改变 nowPage（改变后的页数）
-    changePage(nowPage) {
-    },
+    changePage(nowPage) {},
   },
 };
 </script>
@@ -188,6 +181,7 @@ $courseColor: #6b7484;
 #course-list-wrapper {
   padding: 0rem 2rem 1rem;
   .course-wrapper {
+    cursor: pointer;
     margin: 1rem 0.5rem;
     padding: 1rem;
     background-color: $white;
@@ -198,15 +192,6 @@ $courseColor: #6b7484;
       transform: translate(-4px, -6px);
       box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
     }
-    // .course-img-box {
-    //   overflow: hidden;
-    //   cursor: pointer;
-    //   .course-img {
-    //     width: 100%;
-    //     height: 100%;
-    //     object-fit: cover;
-    //   }
-    // }
     .course-detail-box {
       .course-title {
         text-align: center;
@@ -231,12 +216,12 @@ $courseColor: #6b7484;
     text-align: right;
     margin: 2rem 0 1rem;
   }
-  .course-list-pagination >>>.btn-prev,
-  .course-list-pagination >>>.btn-next,
-  .course-list-pagination >>>.el-pager li {
+  .course-list-pagination >>> .btn-prev,
+  .course-list-pagination >>> .btn-next,
+  .course-list-pagination >>> .el-pager li {
     background-color: $white;
   }
-  .course-list-pagination >>>.el-pager li.active {
+  .course-list-pagination >>> .el-pager li.active {
     background-color: $activeColor;
     color: $white;
   }

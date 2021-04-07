@@ -139,7 +139,7 @@ export default {
     background-color: $darkenActiveColor;
     .footer-detail {
       @extend .f-container;
-      margin: 1rem auto;
+      margin: 0rem auto;
       .detail-item {
         padding-right: 1.8rem;
         text-align: left;

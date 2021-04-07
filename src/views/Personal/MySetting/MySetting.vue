@@ -277,12 +277,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$delRed: #f56c6c;
 #my-setting-wrapper {
   .setting-userForm {
     width: 80%;
     margin: 2rem auto;
     .change-btn {
-      color: #f56c6c;
+      color: $delRed;
     }
   }
   .input-3 {

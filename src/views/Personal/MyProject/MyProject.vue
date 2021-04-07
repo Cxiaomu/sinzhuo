@@ -41,7 +41,7 @@
           <el-card shadow="hover" ref="newCard" :body-style="styleObj">
             <div class="newIcon-box">
               <span class="iconfont iconxinjian"></span>
-              <p class="new-text">创建项目</p>
+              <p class="new-text">发布项目</p>
             </div>
           </el-card>
         </div>
