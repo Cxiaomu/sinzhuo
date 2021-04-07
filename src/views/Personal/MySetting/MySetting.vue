@@ -185,7 +185,7 @@ export default {
         啦啦啦啦啦 自信成长有你相伴 leap frog  快乐的一只小青蛙`,
       },
       pwdrules: {
-        userName: [{ required: true, message: "请输入账号", trigger: "blur" }],
+        userName: [{ required: true, message: "请输入账号/手机号", trigger: "blur" }],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
         rePassword: [
           { required: true, message: "请确认密码", trigger: "blur" },
@@ -198,7 +198,7 @@ export default {
         ],
         sex: [{ required: true, message: "请选择性别", trigger: "change" }],
         role: [{ required: true, message: "请选择身份", trigger: "change" }],
-        userName: [{ required: true, message: "请输入账号", trigger: "blur" }],
+        userName: [{ required: true, message: "请输入账号/手机号", trigger: "blur" }],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
         unit: [
           { required: true, message: "请输入所在单位或学校", trigger: "blur" },

@@ -52,7 +52,7 @@
                       <el-input
                         class="form-input"
                         v-model="loginForm.userName"
-                        placeholder="请输入账号"
+                        placeholder="请输入账号/手机号"
                         clearable
                       >
                       </el-input>
@@ -125,11 +125,11 @@
                       >
                       </el-input>
                     </el-form-item> -->
-                    <el-form-item label="账号：" prop="userName">
+                    <el-form-item label="手机号：" prop="userName">
                       <el-input
                         class="form-input"
                         v-model="registerForm.userName"
-                        placeholder="账号为企业代码/工号/学号"
+                        placeholder="请输入手机号"
                         clearable
                       >
                       </el-input>
