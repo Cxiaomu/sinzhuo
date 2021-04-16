@@ -34,10 +34,7 @@
           </el-form-item>
 
           <el-form-item label="课程链接：" prop="link">
-            <el-input
-              v-model="courseForm.link"
-              class="course-name"
-            ></el-input>
+            <el-input v-model="courseForm.link" class="course-name"></el-input>
           </el-form-item>
           <el-form-item label="课程简介：" prop="abstract">
             <el-input
