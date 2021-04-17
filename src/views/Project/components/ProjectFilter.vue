@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { getProjectPhase, getProjectField } from "../../../api/getJson";
+import { getProjectPhase, getProjectField } from "../../../api/home";
 export default {
   name: "ProjectFilter",
   data() {
@@ -134,14 +134,14 @@ export default {
   methods: {
     async getPorjectConfig() {
       // 项目阶段
-      let resPhase = await getProjectPhase(this);
+      let resPhase = await getProjectPhase();
       if (resPhase) {
-        this.filterOptions[1].optionList = resPhase;
+        this.filterOptions[1].optionList = resPhase.data;
       }
       // 项目领域
-      let resField = await getProjectField(this);
+      let resField = await getProjectField();
       if (resField) {
-        this.filterOptions[2].optionList = resField;
+        this.filterOptions[2].optionList = resField.data;
       }
     },
 

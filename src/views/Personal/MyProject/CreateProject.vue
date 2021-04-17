@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import { getProjectField, getProjectPhase } from "@/api/getJson.js";
+import { getProjectField, getProjectPhase } from "@/api/home.js";
 export default {
   name: "CreateProject",
   data() {
@@ -144,9 +144,9 @@ export default {
   methods: {
     // 获取项目领域列表
     async getFieldList() {
-      let field = await getProjectField(this);
+      let field = await getProjectField();
       if (field) {
-        this.fieldList = field.filter((item) => {
+        this.fieldList = field.data.filter((item) => {
           return item.id !== "000";
         });
       }
@@ -154,9 +154,9 @@ export default {
 
     // 获取项目阶段列表
     async getPhaseList() {
-      let phase = await getProjectPhase(this);
+      let phase = await getProjectPhase();
       if (phase) {
-        this.phaseList = phase.filter((item) => {
+        this.phaseList = phase.data.filter((item) => {
           return item.id !== "000";
         });
       }

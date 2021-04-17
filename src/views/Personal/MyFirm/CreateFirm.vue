@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import { getProjectField } from "@/api/getJson.js";
+import { getProjectField } from "@/api/home.js";
 export default {
   name: "CreateFirm",
   data() {
@@ -215,9 +215,9 @@ export default {
   methods: {
     // 获取公司领域列表
     async getFieldList() {
-      let field = await getProjectField(this);
+      let field = await getProjectField();
       if (field) {
-        this.fieldList = field.filter((item) => {
+        this.fieldList = field.data.filter((item) => {
           return item.id !== "000";
         });
       }

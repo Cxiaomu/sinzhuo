@@ -184,6 +184,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { getUserInfo, registerUser } from "@/api/user";
 export default {
   name: "Login",
   data() {
@@ -205,7 +206,7 @@ export default {
         },
       ],
       loginForm: {
-        role: "",
+        role: 1,
         userName: "",
         password: "",
       },
@@ -232,7 +233,7 @@ export default {
       },
       agree: false,
       registerForm: {
-        role: "",
+        role: 1,
         // name: "",
         userName: "",
         password: "",
@@ -290,19 +291,31 @@ export default {
 
     // 点击登录
     toLogin() {
-      this.$refs["loginForm"].validate(async (valid, object) => {
+      this.$refs["loginForm"].validate(async (valid) => {
         if (valid) {
           if (this.remember) {
             this.toRemember();
           }
-          let data = await this.userLogin({
-            loginName: this.loginForm.userName,
-            loginPwd: this.loginForm.password,
-          });
-          if (data) {
-            this.$router.push("/index");
+          let params = {
+            role: this.loginForm.role,
+            tel: this.loginForm.userName,
+            password: this.loginForm.password,
+          };
+          let res = await getUserInfo(params);
+          debugger;
+          // 用户存在
+          if (res.length > 0) {
+            let data = await this.userLogin(params);
+            if (data) {
+              this.$router.push("/index");
+            }
+          } else {
+            this.$message({
+              message: "用户信息错误",
+              type: "warning",
+            });
           }
-          console.log(data);
+          console.log(res);
         } else {
           this.$message({
             message: "请填写完整登录信息",
@@ -315,6 +328,7 @@ export default {
     // 记住密码
     toRemember() {
       if (typeof Storage !== "undefined") {
+        localStorage.setItem("role", this.loginForm.role);
         localStorage.setItem("userName", this.loginForm.userName);
         localStorage.setItem("password", this.loginForm.password);
       } else {
@@ -330,8 +344,15 @@ export default {
 
     // 点击注册
     toRegister() {
-      this.$refs["registerForm"].validate((valid) => {
+      this.$refs["registerForm"].validate(async (valid) => {
         if (valid) {
+          let params = {
+            role: this.registerForm.role,
+            username: this.registerForm.userName,
+            password: this.registerForm.password,
+          };
+        let res = await registerUser(params)
+        debugger
         } else {
           this.$message({
             message: "请填写完整注册信息",

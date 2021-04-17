@@ -23,12 +23,12 @@
 </template>
 
 <script>
-import { getNav } from "@/api/getJson.js";
+import { getNav } from "@/api/home.js";
 export default {
   name: "PersonalNav",
   data() {
     return {
-      userStatus: "3", // 1-企业，2-教师，3-学生
+      userStatus: "2", // 1-企业，2-教师，3-学生
       activeIndex: "0",
       navList: [],
     };
@@ -63,9 +63,9 @@ export default {
 
   methods: {
     async getNavList() {
-      let res = await getNav(this);
+      let res = await getNav();
       if (res) {
-        let navList = res.filter((item) => {
+        let navList = res.data.filter((item) => {
           return item.type.includes("0") || item.type.includes(this.userStatus);
         });
         this.navList = navList;

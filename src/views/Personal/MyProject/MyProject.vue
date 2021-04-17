@@ -52,7 +52,7 @@
 
 <script>
 import MyProjectList from "./components/MyProjectList.vue";
-import { getProjectField, getProjectPhase } from "@/api/getJson.js";
+import { getProjectField, getProjectPhase } from "@/api/home.js";
 export default {
   name: "MyProject",
   data() {
@@ -116,18 +116,18 @@ export default {
       this.styleObj.height = this.$refs.projectCard[0].clientHeight - 21 + "px";
     },
     async handleProject() {
-      let phase = await getProjectPhase(this);
-      let field = await getProjectField(this);
+      let phase = await getProjectPhase();
+      let field = await getProjectField();
       if (phase && field) {
         this.projectList.forEach((item) => {
           // 阶段id改成阶段名称
-          phase.forEach((phaseItem) => {
+          phase.data.forEach((phaseItem) => {
             if (item.phase === phaseItem.id) {
               item.phase = phaseItem.name;
             }
           });
           // 项目领域id改成领域名称
-          field.forEach((fieldItem) => {
+          field.data.forEach((fieldItem) => {
             if (item.field === fieldItem.id) {
               item.field = fieldItem.name;
             }

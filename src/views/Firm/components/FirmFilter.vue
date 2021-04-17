@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { getProjectField } from "@/api/getJson";
+import { getProjectField } from "@/api/home";
 export default {
   name: "FirmFilter",
   data() {
@@ -105,9 +105,9 @@ export default {
   methods: {
     async getPorjectConfig() {
       // 项目领域
-      let resField = await getProjectField(this);
+      let resField = await getProjectField();
       if (resField) {
-        this.filterOptions[0].optionList = resField;
+        this.filterOptions[0].optionList = resField.data
       }
     },
 

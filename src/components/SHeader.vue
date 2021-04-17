@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { getMenu } from "@/api/getJson.js";
+import { getMenu } from "@/api/home.js";
 import { mapGetters } from "vuex";
 export default {
   name: "SHeader",
@@ -77,9 +77,9 @@ export default {
   methods: {
     // 获取导航栏数据
     async getMenu() {
-      let res = await getMenu(this);
+      let res = await getMenu();
       if (res) {
-        this.menuList = res;
+        this.menuList = res.data;
       }
     },
 

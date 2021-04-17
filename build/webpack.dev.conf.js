@@ -12,18 +12,6 @@ const portfinder = require('portfinder')
 
 // 请求本地Json数据
 const express = require('express')
-const app = express()
-//加载本地json文件
-const menuData = require('../static/json/menu.json') 
-const menuList = menuData.menu;
-const navList = menuData.nav;
-
-const projectData = require('../static/json/project.json')
-const fieldList = projectData.fieldList
-const phaseList = projectData.phaseList
-
-const apiRoutes = express.Router()
-app.use('/api',apiRoutes)
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -58,35 +46,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     watchOptions: {
       poll: config.dev.poll,
     },
-
-    // 获取本地数据 start
-    before (app) {
-      app.get('/api/menuList', (req, res) => {
-        res.json({
-          errno: 0,
-          data: menuList
-        })
-      });
-      app.get('/api/navList', (req, res) => {
-        res.json({
-          errno: 0,
-          data: navList
-        })
-      });
-      app.get('/api/projectField', (req, res) => {
-        res.json({
-          errno: 0,
-          data: fieldList
-        })
-      });
-      app.get('/api/projectPhase', (req, res) => {
-        res.json({
-          errno: 0,
-          data: phaseList
-        })
-      });
-    }
-    // 获取本地数据 end
   },
   plugins: [
     new webpack.DefinePlugin({
