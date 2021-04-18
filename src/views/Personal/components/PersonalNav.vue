@@ -28,7 +28,7 @@ export default {
   name: "PersonalNav",
   data() {
     return {
-      userStatus: "2", // 1-企业，2-教师，3-学生
+      userStatus: "3", // 1-企业，2-教师，3-学生
       activeIndex: "0",
       navList: [],
     };
@@ -71,6 +71,7 @@ export default {
         this.navList = navList;
       }
     },
+
     // 切换当前页
     changePath(index) {
       let path = this.navList[index].path;

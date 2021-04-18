@@ -22,7 +22,7 @@
               <p>
                 <span v-text="course.author"></span>
                 <el-divider direction="vertical"></el-divider>
-                <span v-text="course.organization"></span>
+                <span v-text="course.unit"></span>
               </p>
               <p>
                 <el-link :href="course.link" v-text="course.link"></el-link>
@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import { getMyCourse } from "@/api/course";
+import { formateDate } from "@/utils/ways";
 export default {
   name: "MyCourse",
   data() {
@@ -61,46 +63,13 @@ export default {
         height: "",
       },
       courseList: [
-        //处理后的岗位列表
         {
-          id: "001",
-          name: "前端开发",
-          author: "Cxiaomu12",
-          time: "2020-09-21",
-          organization: "山东建筑大学",
-          link: "http://localhost/iekcpt/index.php/Home/Teacher/gongxue.html",
-        },
-        {
-          id: "002",
-          name: "前端开发22",
-          author: "Cxiaomu",
-          time: "2020-09-21",
-          organization: "山东建筑大学",
-          link: "http://localhost/iekcpt/index.php/Home/Teacher/gongxue.html",
-        },
-        {
-          id: "003",
-          name: "前端开发3",
-          author: "Cxiaom3u",
-          time: "2020-09-21",
-          organization: "山东建筑大学",
-          link: "http://localhost/iekcpt/index.php/Home/Teacher/gongxue.html",
-        },
-        {
-          id: "004",
-          name: "前端开发4",
-          author: "Cxiaom4u",
-          time: "2020-09-21",
-          organization: "山东建筑大学",
-          link: "http://localhost/iekcpt/index.php/Home/Teacher/gongxue.html",
-        },
-        {
-          id: "005",
-          name: "前端开5发",
-          author: "Cxiaom5u",
-          time: "2020-09-21",
-          organization: "山东建筑大学",
-          link: "http://localhost/iekcpt/index.php/Home/Teacher/gongxue.html",
+          id: "",
+          name: "",
+          author: "",
+          time: "",
+          unit: "",
+          link: "",
         },
       ],
     };
@@ -111,19 +80,34 @@ export default {
 
   created() {
     this.handlePost();
+    this.initData();
   },
+
   mounted() {
     this.setNewCardHeigh();
     window.addEventListener("resize", this.setNewCardHeight);
   },
+
   methods: {
     setNewCardHeigh() {
       this.styleObj.height = this.$refs.courseCard[0].clientHeight - 21 + "px";
     },
 
+    // 初始化课程列表
+    async initData() {
+      let userId = localStorage.getItem("userId");
+      let res = await getMyCourse({ userId: 2 });
+      debugger;
+      this.courseList = res;
+      this.courseList.forEach((item) => {
+        item.time = formateDate(new Date(item.time));
+      });
+    },
+
+    // 前往课程详情
     toCourseById(id) {
       let query = {
-        id: id,
+        courserId: id,
       };
       this.$router.push({
         path: "/courseDetail",
@@ -132,6 +116,7 @@ export default {
     },
 
     async handlePost() {},
+
     // 编辑
     toEdit(courseId) {
       let route = {

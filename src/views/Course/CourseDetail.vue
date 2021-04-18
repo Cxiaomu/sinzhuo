@@ -19,11 +19,13 @@
         </div>
         <div class="detail-item">
           <h3>所属组织</h3>
-          <p v-text="courseInfo.organization"></p>
+          <p v-text="courseInfo.unit"></p>
           <h3>发布者</h3>
           <p v-text="courseInfo.publisher"></p>
           <h3>课程链接</h3>
-          <p><el-link :href="courseInfo.link" v-text="courseInfo.link"></el-link></p>
+          <p>
+            <el-link :href="courseInfo.link" v-text="courseInfo.link"></el-link>
+          </p>
           <h3>课程简介</h3>
           <p v-text="courseInfo.abstract"></p>
         </div>
@@ -33,25 +35,22 @@
 </template>
 
 <script>
+import { getCourseDetail } from "@/api/course";
+import { formateDate } from "@/utils/ways";
 export default {
   name: "CourseDetail",
   data() {
     return {
       courseId: "",
       courseInfo: {
-        id: "001",
-        name: "前端开发",
-        author: "Cxiaomu",
-        time: "2020-09-21",
-        organization: "山东建筑大学",
-        publisher: "Cxiaomu",
-        link: "http://localhost/iekcpt/index.php/Home/Teacher/gongxue.html",
-        abstract: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
-        航空公司建立了长期的合作关系，如在深圳航空公司，翡翠国际货运航空公司，中国南方航空公司，
-        中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。
-        中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。
-        中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。
-        中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。`,
+        id: "",
+        name: "",
+        author: "",
+        time: "",
+        unit: "",
+        publisher: "",
+        link: "",
+        abstract: "",
       },
     };
   },
@@ -61,14 +60,28 @@ export default {
 
   created() {
     this.courseId = this.$route.query.courseId;
+    this.initData();
   },
 
-  methods: {},
+  methods: {
+    // 初始化课程数据
+    async initData() {
+      let res = await getCourseDetail({ courseId: this.courseId });
+      debugger;
+      if (res.length > 0) {
+        this.courseInfo = res[0];
+        this.courseInfo.time = formateDate(
+          new Date(res[0]["time"]),
+          "YYYY-MM-DD"
+        );
+      }
+    },
+  },
 };
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/global.scss';
+@import "@/styles/global.scss";
 #course-detail-wrapper {
   padding: 1rem 0;
   background-color: $darkenWhite;
@@ -82,7 +95,8 @@ export default {
       margin: 1rem 0;
     }
     .detail-title {
-      h2, p {
+      h2,
+      p {
         @extend .margin;
       }
     }

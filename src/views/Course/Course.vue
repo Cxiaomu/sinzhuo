@@ -58,12 +58,9 @@ export default {
   name: "Course",
   data() {
     return {
-      title: "精品课程",
-      detail: "知命不惧，日日自新。",
-      bgColor: "#f4f4f4",
       courseList: [
         {
-          id: "001",
+          id: "1",
           imgUrl: require("@/assets/img/course/1-tumu.jpg"),
           name: "土木工程",
           intro: `理论力学、材料力学、结构力学、流体力学、土力学、建筑材料、混凝土结构与钢结构、
@@ -72,7 +69,7 @@ export default {
           view: 123,
         },
         {
-          id: "002",
+          id: "2",
           imgUrl: require("@/assets/img/course/2-jianzhu.jpg"),
           name: "建筑与设计",
           intro: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
@@ -81,7 +78,7 @@ export default {
           view: 123,
         },
         {
-          id: "003",
+          id: "3",
           imgUrl: require("@/assets/img/course/3-jixie.jpg"),
           name: "机械工程",
           intro: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
@@ -90,7 +87,7 @@ export default {
           view: 123,
         },
         {
-          id: "004",
+          id: "4",
           imgUrl: require("@/assets/img/course/4-dianqi.jpg"),
           name: "电气工程",
           intro: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
@@ -99,7 +96,7 @@ export default {
           view: 123,
         },
         {
-          id: "005",
+          id: "5",
           imgUrl: require("@/assets/img/course/5-jiaotong.jpg"),
           name: "交通与运输",
           intro: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
@@ -108,7 +105,7 @@ export default {
           view: 123,
         },
         {
-          id: "006",
+          id: "6",
           imgUrl: require("@/assets/img/course/6-jinji.jpg"),
           name: "经济管理",
           intro: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
@@ -117,7 +114,7 @@ export default {
           view: 123,
         },
         {
-          id: "007",
+          id: "7",
           imgUrl: require("@/assets/img/course/7-it.jpg"),
           name: "信息科学与技术",
           intro: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
@@ -126,7 +123,7 @@ export default {
           view: 123,
         },
         {
-          id: "008",
+          id: "8",
           imgUrl: require("@/assets/img/course/8-huanjing.jpg"),
           name: "地球科学与环境",
           intro: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
@@ -135,7 +132,7 @@ export default {
           view: 123,
         },
         {
-          id: "009",
+          id: "9",
           imgUrl: require("@/assets/img/course/9-cailiao.jpg"),
           name: "材料科学与工程",
           intro: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
@@ -155,9 +152,9 @@ export default {
   mounted() {},
 
   methods: {
-    toCourseById(id) {
+    toCourseById(courseId) {
       let query = {
-        id: id,
+        courseId: courseId,
       };
       this.$router.push({
         path: "/courseDetail",

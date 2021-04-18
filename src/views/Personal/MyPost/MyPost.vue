@@ -21,8 +21,8 @@
               ></h3>
               <p class="price-box">
                 薪资：
-                <span v-text="post.price[0]"></span> -
-                <span v-text="post.price[1]"></span> / 月
+                <span v-text="post.price[0]"></span>k -
+                <span v-text="post.price[1]"></span>k / 月
               </p>
               <p>
                 学历：<span v-text="post.education"></span>
@@ -31,7 +31,7 @@
               </p>
               <p>招聘人数：<span v-text="post.experience"></span></p>
               <p>
-                <span v-text="post.company"></span>
+                <span v-text="post.unit"></span>
                 <el-divider direction="vertical"></el-divider>
                 <span v-text="post.address"></span>
               </p>
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import { getMyPost } from "@/api/post";
 export default {
   name: "MyPost",
   data() {
@@ -66,85 +67,60 @@ export default {
         height: "",
       },
       postList: [
-        //处理后的岗位列表
         {
-          id: "001",
-          name: "WEB前端开发", // 岗位名称
-          price: ["8k", "12k"], //薪资范围
-          company: "稀里哗啦", //公司名
-          education: "本科", // 学历
-          experience: "不限", // 经验
-          need: [10, 20], // 招聘人数
-          address: "上海 洋浦", //工作地址
-        },
-        {
-          id: "002",
-          name: "Java开发工程师", // 岗位名称
-          price: ["9k", "14k"], //薪资范围
-          company: "稀里哗啦", //公司名
-          education: "本科", // 学历
-          experience: "不限", // 经验
-          need: [10, 20], // 招聘人数
-          address: "上海 洋浦", //工作地址
-        },
-        {
-          id: "003",
-          name: "UI设计师", // 岗位名称
-          price: ["6k", "9k"], //薪资范围
-          company: "稀里哗啦", //公司名
-          education: "本科", // 学历
-          experience: "不限", // 经验
-          need: [10, 20], // 招聘人数
-          address: "上海 洋浦", //工作地址
-        },
-        {
-          id: "004",
-          name: "测试工程师", // 岗位名称
-          price: ["8k", "12k"], //薪资范围
-          company: "稀里哗啦", //公司名
-          education: "本科", // 学历
-          experience: "不限", // 经验
-          need: [10, 20], // 招聘人数
-          address: "上海 洋浦", //工作地址
-        },
-        {
-          id: "005",
-          name: "运维工程师", // 岗位名称
-          price: ["4k", "8k"], //薪资范围
-          company: "稀里哗啦", //公司名
-          education: "本科", // 学历
-          experience: "不限", // 经验
-          need: [10, 20], // 招聘人数
-          address: "上海 洋浦", //工作地址
+          id: "",
+          name: "", // 岗位名称
+          price: [], //薪资范围
+          unit: "", //公司名
+          education: "", // 学历
+          experience: "", // 经验
+          need: [], // 招聘人数
+          address: "", //工作地址
         },
       ],
     };
   },
+
   components: {},
 
   watch: {},
 
   created() {
     this.handlePost();
+    this.initData();
   },
+
   mounted() {
     this.setNewCardHeigh();
     window.addEventListener("resize", this.setNewCardHeight);
   },
+
   methods: {
     setNewCardHeigh() {
       this.styleObj.height = this.$refs.postCard[0].clientHeight - 21 + "px";
     },
+
+    // 初始化岗位列表
+    async initData() {
+      let userId = localStorage.getItem("userId");
+      let res = await getMyPost({ userId: 2 });
+      debugger;
+      this.postList = res;
+    },
+
+    // 前往岗位详情
     toPostById(id) {
       let query = {
-        id: id,
+        postId: id,
       };
       this.$router.push({
         path: "/postDetail",
         query: query,
       });
     },
+
     async handlePost() {},
+
     // 编辑
     toEdit(postId) {
       let route = {
@@ -185,6 +161,9 @@ export default {
     &:hover {
       color: $activeColor;
     }
+  }
+  p {
+    @include more-text;
   }
   .newIcon-box {
     display: inline-block;

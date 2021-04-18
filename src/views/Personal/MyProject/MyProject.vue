@@ -15,15 +15,21 @@
         <div class="project-item-wrapper" ref="projectCard">
           <el-card shadow="hover">
             <div>
-              <h3 v-text="project.name" class="project-title"></h3>
+              <h3
+                v-text="project.name"
+                class="project-title"
+                @click="toProjectById(project.id)"
+              ></h3>
               <p class="more-text">
                 进度：<span v-text="project.phase"></span>
               </p>
               <p class="more-text">
                 领域：<span v-text="project.field"></span>
               </p>
-              <p v-if="project.financing">需要融资</p>
-              <p v-else>暂不融资</p>
+              <p class="more-text">
+                需要融资：<span v-if="project.financing">是</span>
+                <span v-else>否</span>
+              </p>
             </div>
             <div style="text-align: right">
               <el-button type="text" @click="toEdit(project.id)"
@@ -52,7 +58,7 @@
 
 <script>
 import MyProjectList from "./components/MyProjectList.vue";
-import { getProjectField, getProjectPhase } from "@/api/home.js";
+import { getMyProject } from "@/api/project";
 export default {
   name: "MyProject",
   data() {
@@ -61,80 +67,54 @@ export default {
         height: "",
       },
       projectList: [
-        //处理后的项目列表
         {
-          id: "1",
-          name: "航空巴拉巴拉巴拉",
-          phase: "001",
-          field: "001",
-          financing: true,
-        },
-        {
-          id: "2",
-          name: "航空",
-          field: "002",
-          phase: "002",
-          financing: false,
-        },
-        {
-          id: "3",
-          name: "航空巴拉巴拉巴拉案例",
-          field: "003",
-          phase: "003",
-          financing: true,
-        },
-        {
-          id: "4",
-          name: "航空巴拉",
-          field: "004",
-          phase: "004",
-          financing: false,
-        },
-        {
-          id: "5",
-          name: "航空巴拉巴拉巴拉案例",
-          field: "005",
-          phase: "005",
+          id: "",
+          name: "",
+          phase: "",
+          field: "",
           financing: true,
         },
       ],
     };
   },
+
   components: { MyProjectList },
 
   watch: {},
 
   created() {
-    this.handleProject();
+    this.initData();
   },
+
   mounted() {
     this.setNewCardHeigh();
     window.addEventListener("resize", this.setNewCardHeight);
   },
   methods: {
+    // 设置卡片高度
     setNewCardHeigh() {
       this.styleObj.height = this.$refs.projectCard[0].clientHeight - 21 + "px";
     },
-    async handleProject() {
-      let phase = await getProjectPhase();
-      let field = await getProjectField();
-      if (phase && field) {
-        this.projectList.forEach((item) => {
-          // 阶段id改成阶段名称
-          phase.data.forEach((phaseItem) => {
-            if (item.phase === phaseItem.id) {
-              item.phase = phaseItem.name;
-            }
-          });
-          // 项目领域id改成领域名称
-          field.data.forEach((fieldItem) => {
-            if (item.field === fieldItem.id) {
-              item.field = fieldItem.name;
-            }
-          });
-        });
-      }
+
+    // 初始化项目列表
+    async initData() {
+      let userId = localStorage.getItem("userId");
+      let res = await getMyProject({ userId: 1 });
+      debugger;
+      this.projectList = res;
     },
+
+    // 前往项目详情
+    toProjectById(id) {
+      let query = {
+        projectId: id,
+      };
+      this.$router.push({
+        path: "/projectDetail",
+        query: query,
+      });
+    },
+
     // 编辑
     toEdit(projectId) {
       let route = {
@@ -143,7 +123,7 @@ export default {
           projectId: projectId,
         },
       };
-      this.$router.push(route)
+      this.$router.push(route);
       debugger;
     },
 
@@ -161,7 +141,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/global.scss';
+@import "@/styles/global.scss";
 >>> .el-card__body {
   padding: 10px 20px;
 }

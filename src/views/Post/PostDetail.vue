@@ -6,21 +6,25 @@
         <div class="post-header">
           <h2 v-text="postInfo.name" class="margin"></h2>
           <p class="price-box">
-            <span v-text="postInfo.price[0]"></span> -
-            <span v-text="postInfo.price[1]"></span> / 月
+            <span v-text="postInfo.price[0]"></span>k -
+            <span v-text="postInfo.price[1]"></span>k / 月
           </p>
           <h3 class="margin">
-            <span v-text="postInfo.company" class="post-company" @click="toFirm"></span>
+            <span
+              v-text="postInfo.company"
+              class="post-company"
+              @click="toFirm"
+            ></span>
           </h3>
           <p>
             学历：<span v-text="postInfo.education"></span>
             <el-divider direction="vertical"></el-divider>
-            经验：<span v-text="postInfo.experience" ></span>
+            经验：<span v-text="postInfo.experience"></span>
             <el-divider direction="vertical"></el-divider>
             招聘人数：<span v-text="postInfo.need[0]"></span> -
             <span v-text="postInfo.need[1]"></span> 人
             <el-divider direction="vertical"></el-divider>
-            发布时间：<span v-text="postInfo.time" ></span>
+            发布时间：<span v-text="postInfo.time"></span>
           </p>
         </div>
         <!-- post header end -->
@@ -39,56 +43,91 @@
         </div>
       </div>
     </div>
+    <!-- 联系对话框 start -->
+    <el-dialog title="申请岗位" :visible.sync="applyDialog" width="30%" center>
+      <div class="dialog-content">
+        <ul>
+          <li>
+            <p>联系人：<span v-text="author.name"></span></p>
+          </li>
+          <li>
+            <p>联系电话：<span v-text="author.tel"></span></p>
+          </li>
+          <li>
+            <p>联系邮箱：<span v-text="author.email"></span></p>
+          </li>
+        </ul>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="applyDialog = false">取 消</el-button>
+        <el-button type="primary" @click="applyDialog = false">确 定</el-button>
+      </span>
+    </el-dialog>
+    <!-- 联系对话框 end -->
   </div>
 </template>
 
 <script>
+import { getPostDetail } from "@/api/post";
+import { formateDate } from "@/utils/ways";
 export default {
   name: "PostDetail",
   data() {
     return {
       postId: "",
+      applyDialog: false,
+      author: {
+        name: "",
+        tel: "",
+        email: "",
+      },
       postInfo: {
-        id: "001",
-        name: "WEB前端开发", // 岗位名称
-        time: "2020-09-21", // 发布时间
-        company: "稀里哗啦有限公司", //公司名
-        price: ["8k", "12k"], //薪资范围
-        education: "本科", // 学历
-        experience: "不限", // 经验
-        need: [10, 20], // 招聘人数
-        // 岗位职责
-        duty: `1、根据用户及公司需求，负责php端的开发；
-               2、不断优化用户体验以及php服务端的性能；
-               3、负责产品系统的开发，编写、接口的开发；
-               4、配合产品设计、ui、ue设计师完成产品的调试开发；
-               5、维护相关系统、保证系统运行的稳定性；
-               6、配合后期IT系统建设，提出系统功能的改进建议；
-               7、使用php语言开发应用服务、平台及接口。`,
-        // 岗位要求
-        require: `1、可以熟练使用php开发框架；
-                  2、熟悉SQLSERVER，oracle等数据库；
-                  3、可以编程、善于学习、可以独立完成上级下发的任务；
-                  4、对php语言开发有足够的热情;
-                  5、对服务器端的负载性嫩有一定理解可以进行评估优化；
-                  6、善于沟通，有良好的沟通能力以及责任心，有团队合作精神。`,
-        address: "上海 洋浦新江湾街道东方瑾缘1-601", //工作地址
+        id: "",
+        name: "", // 岗位名称
+        time: "", // 发布时间
+        unit: "", //公司名
+        price: [], //薪资范围
+        education: "", // 学历
+        experience: "", // 经验
+        need: [], // 招聘人数
+        duty: "", // 岗位职责
+        require: "", // 岗位要求
+        address: "", //工作地址
       },
     };
   },
+
   components: {},
 
   watch: {},
 
   created() {
     this.postId = this.$route.query.postId;
+    this.initData();
   },
 
   methods: {
-    toFirm() {
-      this.$router.push("/firm")
+    // 初始化岗位数据
+    async initData() {
+      let res = await getPostDetail({ postId: this.postId });
+      debugger;
+      if (res.length > 0) {
+        this.postInfo = res[0];
+        this.postInfo.time = formateDate(
+          new Date(res[0]["time"]),
+          "YYYY-MM-DD"
+        );
+        this.author = res[1];
+        debugger;
+      }
     },
+
+    toFirm() {
+      this.$router.push("/firm");
+    },
+
     toApply() {
+      this.applyDialog = true;
       debugger;
     },
   },
@@ -96,7 +135,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/global.scss';
+@import "@/styles/global.scss";
 #post-detail-wrapper {
   padding: 1rem 0;
   background-color: $darkenWhite;
@@ -131,6 +170,19 @@ export default {
         p {
           margin-bottom: 2rem;
         }
+      }
+    }
+  }
+  .dialog-content {
+    ul {
+      list-style: none;
+      margin-block-start: 0;
+      margin-block-end: 0;
+      padding-inline-start: 0;
+      p {
+        padding-left: 2rem;
+        line-height: 1.6rem;
+        font-size: 1rem;
       }
     }
   }

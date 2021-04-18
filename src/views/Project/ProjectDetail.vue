@@ -9,7 +9,8 @@
           <el-col :span="20">
             <div class="detail-title">
               <h2 v-text="projectInfo.name"></h2>
-              <p>需要融资： 
+              <p>
+                需要融资：
                 <span v-if="projectInfo.financing">是</span>
                 <span else>否</span>
               </p>
@@ -50,43 +51,57 @@
 </template>
 
 <script>
+import { getProjectDetail } from "@/api/project";
+import { formateDate } from "@/utils/ways";
 export default {
   name: "ProjectDetail",
   data() {
     return {
       projectId: "",
       author: {
-        name: "作者名字",
-        tel: "17860618426",
-        email: "cxiaomu_la@163.com",
+        name: "",
+        tel: "",
+        email: "",
       },
       projectInfo: {
-        id: "001",
-        name: "航空巴拉巴拉巴拉案例",
+        id: "",
+        name: "",
         imgUrl: require("@/assets/img/project/1-project.jpg"),
-        field: "住宿和餐饮业",
-        phase: "项目规划",
+        field: "",
+        phase: "",
         financing: false,
-        time: "2020-09-21",
-        label: ["制造业", "航天航空"],
-        abstract: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
-        航空公司建立了长期的合作关系，如在深圳航空公司，翡翠国际货运航空公司，中国南方航空公司，
-        中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。
-        中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。
-        中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。
-        中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。`,
+        time: "",
+        label: [],
+        abstract: ``,
       },
     };
   },
+
   components: {},
 
   watch: {},
 
   created() {
     this.projectId = this.$route.query.projectId;
+    this.initData();
   },
 
-  methods: {},
+  methods: {
+    // 初始化项目数据
+    async initData() {
+      let res = await getProjectDetail({ projectId: this.projectId });
+      debugger;
+      if (res.length > 0) {
+        this.projectInfo = res[0];
+        this.projectInfo.time = formateDate(
+          new Date(res[0]["time"]),
+          "YYYY-MM-DD"
+        );
+        this.author = res[1];
+        debugger;
+      }
+    },
+  },
 };
 </script>
 

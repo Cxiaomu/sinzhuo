@@ -2,7 +2,7 @@
 <template>
   <div>
     <el-container id="personal-wrapper">
-      <el-header style="height: auto;">
+      <el-header style="height: auto">
         <personal-header></personal-header>
       </el-header>
       <el-container class="f-container">
@@ -18,21 +18,19 @@
 </template>
 
 <script>
-import PersonalHeader from './components/PersonalHeader.vue';
-import PersonalNav from './components/PersonalNav.vue';
+import PersonalHeader from "./components/PersonalHeader.vue";
+import PersonalNav from "./components/PersonalNav.vue";
 export default {
   name: "Personal",
   data() {
-    return {
-      
-    };
+    return {};
   },
   components: {
     PersonalHeader,
-    PersonalNav
+    PersonalNav,
   },
 
-  watch:{},
+  watch: {},
 
   created() {},
 
@@ -47,6 +45,9 @@ export default {
 #personal-wrapper {
   padding: 0;
 }
+>>> .el-main {
+  min-height: 300px;
+}
 >>> .el-header {
   width: 100%;
   height: 100%;
@@ -55,8 +56,5 @@ export default {
 }
 >>> .el-aside {
   margin-right: 1rem;
-}
-#personal-wrapper {
-  
 }
 </style>
