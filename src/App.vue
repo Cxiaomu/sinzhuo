@@ -5,8 +5,29 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
-  name: 'App'
+  name: 'App',
+  computed: {
+    ...mapGetters(["isLogin"]),
+    ...mapGetters(["role"]),
+    ...mapGetters(["userInfo"])
+  },
+  created() {
+    if (localStorage.getItem('loginStatus')) {
+      let params = localStorage.getItem('userInfo')
+      this.userLogin(params);
+    }
+
+    //在页面刷新时将vuex里的信息保存到sessionStorage里
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem('role', this.role);
+      localStorage.setItem('userInfo', this.userInfo);
+    });
+  },
+  methods: {
+    ...mapActions(["userLogin"]),
+  }
 }
 </script>
 

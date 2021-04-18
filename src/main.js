@@ -30,7 +30,6 @@ new Vue({
 
 // 路由全局守卫
 router.beforeEach((to, from, next) => {
-  to,from;
   if (to.fullPath === from.fullPath) {
     return
   } else {

@@ -6,36 +6,6 @@
       :header-cell-style="{ background: '#2ea1d6', color: '#fff' }"
       @row-click="toProjectDetail"
     >
-      <!-- <el-table-column align="center" label="项目">
-        <template slot-scope="scope">
-          <span v-text="scope.row.name" class="on-line"></span>
-          <el-row style="vertical-align: middle;">
-            <el-col :span="4">
-              <el-image :src="scope.row.imgUrl" fit="cover"></el-image>
-            </el-col>
-            <el-col :span="20" style="vertical-align: middle;">
-              <span v-text="scope.row.name" class="on-line"></span>
-            </el-col>
-          </el-row>
-        </template>
-      </el-table-column> -->
-      <!-- <el-table-column align="center" label="项目概述">
-        <template slot-scope="scope">
-          <span v-text="scope.row.abstract" class="more-text"></span>
-        </template>
-      </el-table-column>
-      <el-table-column align="center" label="所属领域">
-        <template slot-scope="scope">
-          <span v-text="scope.row.field" class="more-text"></span>
-        </template>
-      </el-table-column>
-      <el-table-column align="center" label="负责人">
-        <template slot-scope="scope">
-          <span v-text="scope.row.author" class="on-line"></span>
-        </template>
-      </el-table-column>
-      <el-table-column align="center" prop="phase" label="项目阶段">
-      </el-table-column> -->
       <el-table-column v-for="(column, index) in columns" :key="index" align="center" :label="column.title"> 
         <template slot-scope="scope">
           <div v-if="column.prop === 'financing'">

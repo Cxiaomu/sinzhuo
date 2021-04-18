@@ -20,11 +20,7 @@ export const get = function (url, params) {
 
 export const post = function (url, params) {
   debugger
-  return axios.post(url, params, {
-      headers: {
-        'content-type': 'application/x-www-form-urlencoded'
-      }
-    })
+  return axios.post(url, params)
     .then(res => res.data)
     .catch((err) => {
       console.log(err)

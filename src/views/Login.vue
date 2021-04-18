@@ -125,10 +125,10 @@
                       >
                       </el-input>
                     </el-form-item> -->
-                    <el-form-item label="手机号：" prop="userName">
+                    <el-form-item label="手机号：" prop="tel">
                       <el-input
                         class="form-input"
-                        v-model="registerForm.userName"
+                        v-model="registerForm.tel"
                         placeholder="请输入手机号"
                         clearable
                       >
@@ -185,6 +185,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { getUserInfo, registerUser } from "@/api/user";
+import { RegTel } from "@/utils/ways"
 export default {
   name: "Login",
   data() {
@@ -235,23 +236,14 @@ export default {
       registerForm: {
         role: 1,
         // name: "",
-        userName: "",
+        tel: "",
         password: "",
         rePassword: "",
-        agree: false,
       },
       registerRule: {
         role: [{ required: true, message: "请选择身份", trigger: "change" }],
         // name: [{ required: true, message: "请输入姓名", trigger: "blur" }],
-        userName: [
-          { required: true, message: "请输入账号", trigger: "blur" },
-          {
-            min: 3,
-            max: 15,
-            message: "长度在 3 到 15 个数字",
-            trigger: "blur",
-          },
-        ],
+
         password: [
           { required: true, message: "请输入密码", trigger: "blur" },
           {
@@ -264,8 +256,8 @@ export default {
         rePassword: [
           { required: true, message: "请再次输入密码", trigger: "blur" },
         ],
-        agree: [
-          { required: true, message: "请勾选同意注册协议", trigger: "change" },
+         tel: [
+          { required: true, message: "请输入手机号", trigger: "blur" },
         ],
       },
     };
@@ -298,7 +290,7 @@ export default {
           }
           let params = {
             role: this.loginForm.role,
-            tel: this.loginForm.userName,
+            username: this.loginForm.userName,
             password: this.loginForm.password,
           };
           let res = await getUserInfo(params);
@@ -328,9 +320,9 @@ export default {
     // 记住密码
     toRemember() {
       if (typeof Storage !== "undefined") {
+        localStorage.setItem("loginStatus", true);
         localStorage.setItem("role", this.loginForm.role);
-        localStorage.setItem("userName", this.loginForm.userName);
-        localStorage.setItem("password", this.loginForm.password);
+        localStorage.setItem("userInfo", this.loginForm);
       } else {
         this.$message({
           message: "记住密码失败！该浏览器暂不支持记住密码",
@@ -346,13 +338,28 @@ export default {
     toRegister() {
       this.$refs["registerForm"].validate(async (valid) => {
         if (valid) {
-          let params = {
-            role: this.registerForm.role,
-            username: this.registerForm.userName,
-            password: this.registerForm.password,
-          };
-        let res = await registerUser(params)
-        debugger
+          if (this.registerForm.password !== this.registerForm.rePassword) {
+            this.$message({
+              message: "两次密码不一致",
+              type: "warning",
+            });
+            return
+          }
+          if ( !RegTel(this.registerForm.tel)) {
+            this.$message({
+              message: "手机号格式不正确",
+              type: "warning",
+            });
+            return
+          }
+           if (!this.agree) {
+            this.$message({
+              message: "同意注册协议",
+              type: "warning",
+            });
+            return
+          }
+          this.registerApi();
         } else {
           this.$message({
             message: "请填写完整注册信息",
@@ -361,7 +368,32 @@ export default {
         }
       });
     },
-
+    // 请求注册接口 
+    async registerApi() {
+      let params = {
+        role: this.registerForm.role,
+        tel: this.registerForm.tel,
+        password: this.registerForm.password,
+      };
+      // 注册
+      let res = await registerUser(params);
+      if (res.success && !res.exist) {
+        this.$message({
+          message: "注册成功，请切换登录",
+          type: "success",
+        });
+      } else if (res.exist){
+        this.$message({
+          message: "该用户已存在",
+          type: "warning",
+        });
+      } else {
+        this.$message({
+          message: "注册失败",
+          type: "warning",
+        });
+      }
+    },
     // 注册协议
     toTreaty() {
       let routerJump = this.$router.resolve("/treaty");
