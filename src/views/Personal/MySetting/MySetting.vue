@@ -247,10 +247,7 @@ export default {
         if (valid) {
           alert("submit!");
         } else {
-          this.$message({
-            type: "warning",
-            message: "请填写完成完整信息！",
-          });
+          this.$message.warning("请填写完成完整信息！");
         }
       });
     },
@@ -265,10 +262,7 @@ export default {
           alert("submit!");
           this.showPwdModel = false;
         } else {
-          this.$message({
-            type: "warning",
-            message: "请填写完成完整信息！",
-          });
+          this.$message.warning("请填写完成完整信息！");
         }
       });
     },

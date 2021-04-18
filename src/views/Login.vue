@@ -302,17 +302,11 @@ export default {
               this.$router.push("/index");
             }
           } else {
-            this.$message({
-              message: "用户信息错误",
-              type: "warning",
-            });
+            this.$message.warning("用户信息错误");
           }
           console.log(res);
         } else {
-          this.$message({
-            message: "请填写完整登录信息",
-            type: "warning",
-          });
+          this.$message.warning( "请填写完整登录信息");
         }
       });
     },
@@ -324,10 +318,7 @@ export default {
         localStorage.setItem("role", this.loginForm.role);
         localStorage.setItem("userInfo", this.loginForm);
       } else {
-        this.$message({
-          message: "记住密码失败！该浏览器暂不支持记住密码",
-          type: "warning",
-        });
+        this.$message.warning("记住密码失败！该浏览器暂不支持记住密码");
       }
     },
 
@@ -339,32 +330,20 @@ export default {
       this.$refs["registerForm"].validate(async (valid) => {
         if (valid) {
           if (this.registerForm.password !== this.registerForm.rePassword) {
-            this.$message({
-              message: "两次密码不一致",
-              type: "warning",
-            });
+            this.$message.warning("两次密码不一致");
             return
           }
           if ( !RegTel(this.registerForm.tel)) {
-            this.$message({
-              message: "手机号格式不正确",
-              type: "warning",
-            });
+            this.$message.warning("手机号格式不正确");
             return
           }
            if (!this.agree) {
-            this.$message({
-              message: "同意注册协议",
-              type: "warning",
-            });
+            this.$message.warning("同意注册协议");
             return
           }
           this.registerApi();
         } else {
-          this.$message({
-            message: "请填写完整注册信息",
-            type: "warning",
-          });
+          this.$message.warning("请填写完整注册信息");
         }
       });
     },
@@ -378,20 +357,11 @@ export default {
       // 注册
       let res = await registerUser(params);
       if (res.success && !res.exist) {
-        this.$message({
-          message: "注册成功，请切换登录",
-          type: "success",
-        });
+        this.$message.success("注册成功，请切换登录");
       } else if (res.exist){
-        this.$message({
-          message: "该用户已存在",
-          type: "warning",
-        });
+        this.$message.warning("该用户已存在");
       } else {
-        this.$message({
-          message: "注册失败",
-          type: "warning",
-        });
+        this.$message.warning("注册失败");
       }
     },
     // 注册协议

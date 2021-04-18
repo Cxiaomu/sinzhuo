@@ -18,3 +18,18 @@ export function getProjectDetail(params) {
 export function getMyProject(params) {
   return get("/project/projectOwn", params);
 }
+
+// 新建项目
+export function createProject(params) {
+  return post("/project/createProject", params);
+}
+
+// 编辑项目
+export function updateProject(params) {
+  return post("/project/updateProject", params);
+}
+
+// 删除项目
+export function delProject(params) {
+  return get("/project/delProject", params);
+}

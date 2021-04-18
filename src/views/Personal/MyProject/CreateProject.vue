@@ -9,7 +9,7 @@
           label-width="100px"
           label-position="left"
         >
-          <el-form-item label="项目logo：" prop="logoImg">
+          <el-form-item label="项目logo：" prop="imgUrl">
             <el-upload
               class="upload-demo"
               action="https://jsonplaceholder.typicode.com/posts/"
@@ -19,7 +19,7 @@
               multiple
               :limit="1"
               :on-exceed="handleExceed"
-              :file-list="projectForm.logoImg"
+              :file-list="projectForm.imgUrl"
             >
               <el-button size="small" type="primary">点击上传</el-button>
               <div slot="tip" class="el-upload__tip">
@@ -55,8 +55,8 @@
           </el-form-item>
           <el-form-item label="需要融资：" prop="financing">
             <el-radio-group v-model="projectForm.financing">
-              <el-radio :label="true">是</el-radio>
-              <el-radio :label="false">否</el-radio>
+              <el-radio :label="1">是</el-radio>
+              <el-radio :label="0">否</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="项目概述：" prop="abstract">
@@ -68,7 +68,7 @@
           </el-form-item>
         </el-form>
         <div class="button-wrapper">
-          <el-button type="primary" @click="toPublish">发布</el-button>
+          <el-button type="primary" @click="toPublish">{{ btnText }}</el-button>
           <el-button @click="toQuite">取消</el-button>
         </div>
       </div>
@@ -78,33 +78,27 @@
 
 <script>
 import { getProjectField, getProjectPhase } from "@/api/home.js";
+import { getProjectDetail, createProject, updateProject } from "@/api/project";
 export default {
   name: "CreateProject",
   data() {
     return {
       isCreate: true, // 是否为新建
+      btnText: "发布",
       projectId: "",
       fieldList: [],
       phaseList: [],
       projectForm: {
-        logoImg: [{ name: "LOGO", url: "" }],
-        name: "创新测试",
-        field: "住宿和餐饮业",
-        time: '',
-        abstract: `一、新颖全面且线上线下深度融合，出行是人类活动的刚需。
-        二、“微校通”是利用现代信息技术实现家庭与学校快捷、实时沟通的教育网络平台。
-        是一套可以有效解决老师和家长之间沟通，帮助孩子健康成长的、集先进的计算机技
-        术和无线通信技术于一体的信息交流系统。三、他可以让家长每天都能了解到自己孩子
-        在学校的情况，也可以让家长随时、随地的向老师提出建议或反映孩子在家里的表现。
-        他充分调动社会教育资源，利用现代信息技术架起学校、家庭之间实时、快捷、有效沟
-        通的桥梁，形成社会、学校、家庭和谐共育的局面，促进学生健康成长。`,
-        phase: "项目规划",
-        financing: false,
+        imgUrl: [{ name: "LOGO", url: "" }],
+        // imgUrl: [],
+        name: "",
+        field: "",
+        time: "",
+        abstract: "",
+        phase: "",
+        financing: null,
       },
       projectRule: {
-        logoImg: [
-          { required: true, message: "请上传项目logo", trigger: "blur" },
-        ],
         name: [
           { required: true, message: "请输入项目名称", trigger: "blur" },
           {
@@ -136,8 +130,11 @@ export default {
     if (this.$route.query.projectId) {
       this.projectId = this.$route.query.projectId;
       this.isCreate = false;
+      this.btnText = "更新";
+      this.initData();
     } else {
       this.isCreate = true;
+      this.btnText = "发布";
     }
   },
 
@@ -147,7 +144,7 @@ export default {
       let field = await getProjectField();
       if (field) {
         this.fieldList = field.data.filter((item) => {
-          return item.id !== "000";
+          return item.id !== "0";
         });
       }
     },
@@ -157,42 +154,91 @@ export default {
       let phase = await getProjectPhase();
       if (phase) {
         this.phaseList = phase.data.filter((item) => {
-          return item.id !== "000";
+          return item.id !== "0";
         });
       }
     },
 
+    // 初始化项目数据
+    async initData() {
+      let res = await getProjectDetail({ projectId: this.projectId });
+      debugger;
+      if (res.length > 0) {
+        this.projectForm = res[0];
+        this.projectForm.imgUrl = [
+          { name: "logo", url: this.projectForm.imgUrl },
+        ];
+        debugger;
+      }
+    },
+
     // 项目logo相关方法
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
+    handleRemove(file, imgUrl) {
+      console.log(file, imgUrl);
     },
     handlePreview(file) {
       console.log(file);
     },
-    handleExceed(files, fileList) {
+    handleExceed(files, imgUrl) {
       this.$message.warning(
         `当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
-          files.length + fileList.length
+          files.length + imgUrl.length
         } 个文件`
       );
     },
-    beforeRemove(file, fileList) {
+    beforeRemove(file, imgUrl) {
       return this.$confirm(`确定移除 ${file.name}？`);
     },
 
-    // 发布
+    // 发布 或 更新
     toPublish() {
-      this.$refs["newProject"].validate((valid) => {
+      this.$refs["newProject"].validate(async (valid) => {
         if (valid) {
-          this.projectForm.time = new Date().getTime();
-          // 请求接口
-          let route = {
-            path: "/projectDetail",
-            query: {
-              projectId: "0010",
-            },
-          };
-          this.$router.replace(route);
+          let params = {};
+          let res = [];
+          // 处理数据
+          this.phaseList.forEach((item) => {
+            if (item.name === this.projectForm.phase) {
+              this.projectForm.phase = item.id;
+            }
+          });
+          // 发布
+          if (this.btnText === "发布") {
+            this.fieldList.forEach((item) => {
+              if (item.name === this.projectForm.field) {
+                this.projectForm.field = item.id;
+              }
+            });
+            params = {
+              userId: "1",
+              ...this.projectForm,
+              imgUrl: this.projectForm.imgUrl[0]["url"],
+            };
+            res = await createProject(params);
+            debugger;
+          } else {
+            // 更新
+            params = {
+              projectId: this.projectId,
+              userId: "1",
+              phase: this.projectForm.phase,
+              financing: this.projectForm.financing,
+              abstract: this.projectForm.abstract,
+              imgUrl: this.projectForm.imgUrl[0]["url"],
+            };
+            res = await updateProject(params);
+            debugger;
+          }
+          if (res.success) {
+            // 请求接口
+            let route = {
+              path: "/projectDetail",
+              query: {
+                projectId: this.projectId,
+              },
+            };
+            this.$router.replace(route);
+          }
         }
       });
     },
@@ -206,7 +252,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/global.scss';
+@import "@/styles/global.scss";
 >>> .el-radio-group {
   line-height: 40px;
 }
@@ -215,7 +261,14 @@ export default {
   background-color: $darkenWhite;
   .create-project-container {
     padding: 2rem 0;
-    background-color:  $white;
+    background-color: $white;
+    >>> label[for="imgUrl"] {
+      &:before {
+        content: "*";
+        color: #f56c6c;
+        margin-right: 4px;
+      }
+    }
   }
 }
 .project-name {

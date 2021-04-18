@@ -58,7 +58,7 @@
 
 <script>
 import MyProjectList from "./components/MyProjectList.vue";
-import { getMyProject } from "@/api/project";
+import { getMyProject, delProject } from "@/api/project";
 export default {
   name: "MyProject",
   data() {
@@ -128,7 +128,14 @@ export default {
     },
 
     // 删除
-    toDelete(projectId) {
+    async toDelete(projectId) {
+      let params = { projectId: projectId };
+      let res = await delProject(params);
+      if (res.success) {
+        this.$message.success("删除成功！")
+      } else {
+        this.$message.error("删除失败！")
+      }
       debugger;
     },
 
