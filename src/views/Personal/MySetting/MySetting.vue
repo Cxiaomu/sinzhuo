@@ -115,21 +115,22 @@
           <el-input
             v-model="pwdForm.userName"
             clearable
+            disabled
             class="input-3"
           ></el-input>
         </el-form-item>
-        <el-form-item label="原密码：" prop="password">
+        <el-form-item label="原密码：" prop="oldPassword">
           <el-input
             type="password"
-            v-model="pwdForm.password"
+            v-model="pwdForm.oldPassword"
             clearable
             class="input-3"
           ></el-input>
         </el-form-item>
-        <el-form-item label="确认密码：" prop="rePassword">
+        <el-form-item label="新密码：" prop="newPassword">
           <el-input
             type="password"
-            v-model="pwdForm.rePassword"
+            v-model="pwdForm.newPassword"
             clearable
             class="input-3"
           ></el-input>
@@ -145,6 +146,7 @@
 </template>
 
 <script>
+import { getUser, changePwd, changeInfo } from "@/api/user";
 export default {
   name: "MySetting",
   data() {
@@ -167,8 +169,8 @@ export default {
       ],
       pwdForm: {
         userName: "",
-        password: "",
-        rePassword: "",
+        oldPassword: "",
+        newPassword: "",
       },
       userForm: {
         name: "陈柘含",
@@ -185,10 +187,14 @@ export default {
         啦啦啦啦啦 自信成长有你相伴 leap frog  快乐的一只小青蛙`,
       },
       pwdrules: {
-        userName: [{ required: true, message: "请输入账号/手机号", trigger: "blur" }],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-        rePassword: [
-          { required: true, message: "请确认密码", trigger: "blur" },
+        userName: [
+          { required: true, message: "请输入账号/手机号", trigger: "blur" },
+        ],
+        oldPassword: [
+          { required: true, message: "请输入原密码", trigger: "blur" },
+        ],
+        newPassword: [
+          { required: true, message: "请输入新密码", trigger: "blur" },
         ],
       },
       rules: {
@@ -198,7 +204,9 @@ export default {
         ],
         sex: [{ required: true, message: "请选择性别", trigger: "change" }],
         role: [{ required: true, message: "请选择身份", trigger: "change" }],
-        userName: [{ required: true, message: "请输入账号/手机号", trigger: "blur" }],
+        userName: [
+          { required: true, message: "请输入账号/手机号", trigger: "blur" },
+        ],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
         unit: [
           { required: true, message: "请输入所在单位或学校", trigger: "blur" },
@@ -231,21 +239,43 @@ export default {
 
   watch: {},
 
-  created() {},
+  created() {
+    this.initData();
+  },
 
   methods: {
+    // 初始化个人信息
+    async initData() {
+      let params = { userId: "1" };
+      let res = await getUser(params);
+      if (res.length === 0) {
+        this.$message.warning("获取用户信息失败！");
+        return;
+      }
+      this.userForm = res[0];
+    },
+
     // 修改密码dialog
     showModel() {
       this.showPwdModel = true;
       this.pwdForm.userName = this.userForm.userName;
-      this.pwdForm.password = this.userForm.password;
+      this.pwdForm.oldPassword = null;
     },
 
     // 修改基本信息
     toChange() {
-      this.$refs["userForm"].validate((valid) => {
+      this.$refs["userForm"].validate(async (valid) => {
         if (valid) {
-          alert("submit!");
+          let params = {
+            ...this.userForm,
+          };
+          let res = await changeInfo(params);
+          debugger;
+          if (res.success) {
+            this.$message.success("个人信息修改成功！");
+          } else {
+            this.$message.warning("个人信息修改失败！");
+          }
         } else {
           this.$message.warning("请填写完成完整信息！");
         }
@@ -257,9 +287,21 @@ export default {
 
     // 修改密码
     changePwd() {
-      this.$refs["pwdForm"].validate((valid) => {
+      this.$refs["pwdForm"].validate(async (valid) => {
         if (valid) {
-          alert("submit!");
+          let params = {
+            id: "1",
+            oldPassword: this.pwdForm.oldPassword,
+            newPassword: this.pwdForm.newPassword,
+          };
+          let res = await changePwd(params);
+          if (res.success) {
+            this.$message.success("修改密码成功！");
+          } else if (res.error) {
+            this.$message.warning("原密码错误，请重试！");
+          } else {
+            this.$message.warning("修改密码失败！");
+          }
           this.showPwdModel = false;
         } else {
           this.$message.warning("请填写完成完整信息！");
