@@ -234,7 +234,7 @@ export default {
             let route = {
               path: "/projectDetail",
               query: {
-                projectId: this.projectId,
+                projectId: this.projectId || res.id,
               },
             };
             this.$router.replace(route);

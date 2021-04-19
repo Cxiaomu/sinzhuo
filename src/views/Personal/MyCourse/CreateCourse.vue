@@ -25,9 +25,9 @@
               :disabled="!isCreate"
             ></el-input>
           </el-form-item>
-          <el-form-item label="所属组织：" prop="organization">
+          <el-form-item label="所属组织：" prop="unit">
             <el-input
-              v-model="courseForm.organization"
+              v-model="courseForm.unit"
               class="course-name"
               :disabled="!isCreate"
             ></el-input>
@@ -46,7 +46,7 @@
         </el-form>
         <!-- 岗位表单 end -->
         <div class="button-wrapper">
-          <el-button type="primary" @click="toPublish">发布</el-button>
+          <el-button type="primary" @click="toPublish">{{ btnText }}</el-button>
           <el-button @click="toQuite">取消</el-button>
         </div>
       </div>
@@ -55,19 +55,19 @@
 </template>
 
 <script>
+import { getCourseDetail, createCourse, updateCourse } from "@/api/course";
 export default {
   name: "CreateCourse",
   data() {
     return {
       isCreate: true, // 是否为新建
+      btnText: "发布",
       courseId: "",
       courseForm: {
         id: "001",
         name: "前端开发",
         author: "Cxiaomu",
-        time: "2020-09-21",
-        organization: "山东建筑大学",
-        publisher: "Cxiaomu",
+        unit: "山东建筑大学",
         link: "http://localhost/iekcpt/index.php/Home/Teacher/gongxue.html",
         abstract: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
         航空公司建立了长期的合作关系，如在深圳航空公司，翡翠国际货运航空公司，中国南方航空公司，
@@ -94,9 +94,7 @@ export default {
             trigger: "blur",
           },
         ],
-        organization: [
-          { required: true, message: "请输入所属组织", trigger: "blur" },
-        ],
+        unit: [{ required: true, message: "请输入所属组织", trigger: "blur" }],
         link: [{ required: true, message: "请输入课程链接", trigger: "blur" }],
         abstract: [
           { required: true, message: "请输入课程简介", trigger: "blur" },
@@ -112,25 +110,60 @@ export default {
     if (this.$route.query.courseId) {
       this.courseId = this.$route.query.courseId;
       this.isCreate = false;
+      this.btnText = "更新";
+      this.initData();
     } else {
       this.isCreate = true;
+      this.btnText = "发布";
     }
   },
 
   methods: {
+    // 初始化项目数据
+    async initData() {
+      let res = await getCourseDetail({ courseId: this.courseId });
+      debugger;
+      if (res.length > 0) {
+        this.courseForm = res[0];
+        debugger;
+      }
+    },
+
     // 发布
     toPublish() {
-      this.$refs["newCourse"].validate((valid) => {
+      this.$refs["newCourse"].validate(async (valid) => {
         if (valid) {
-          this.courseForm.time = new Date().getTime();
-          // 请求接口
-          let route = {
-            path: "/courseDetail",
-            query: {
-              courseId: "0010",
-            },
-          };
-          this.$router.replace(route);
+          let params = {};
+          let res = [];
+          // 发布
+          if (this.btnText === "发布") {
+            params = {
+              userId: "2",
+              ...this.courseForm,
+            };
+            res = await createCourse(params);
+            debugger;
+          } else {
+            params = {
+              userId: "2",
+              courseId: this.courseId,
+              link: this.courseForm.link,
+              abstract: this.courseForm.abstract,
+            };
+            // 更新
+            params.courseId = this.courseId;
+            res = await updateCourse(params);
+            debugger;
+          }
+          if (res.success) {
+            let route = {
+              path: "/courseDetail",
+              query: {
+                courseId: this.courseId || res.id,
+              },
+            };
+            this.$router.replace(route);
+          }
         }
       });
     },

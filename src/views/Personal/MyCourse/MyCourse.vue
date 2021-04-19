@@ -39,7 +39,7 @@
         </div>
       </el-col>
       <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
-        <div class="course-item-wrapper" @click="toCreatePost">
+        <div class="course-item-wrapper" @click="toCreateCourse">
           <el-card shadow="hover" ref="newCard" :body-style="styleObj">
             <div class="newIcon-box">
               <span class="iconfont iconxinjian"></span>
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { getMyCourse } from "@/api/course";
+import { getMyCourse, delCourse } from "@/api/course";
 import { formateDate } from "@/utils/ways";
 export default {
   name: "MyCourse",
@@ -79,7 +79,7 @@ export default {
   watch: {},
 
   created() {
-    this.handlePost();
+    this.handleCourse();
     this.initData();
   },
 
@@ -97,7 +97,6 @@ export default {
     async initData() {
       let userId = localStorage.getItem("userId");
       let res = await getMyCourse({ userId: 2 });
-      debugger;
       this.courseList = res;
       this.courseList.forEach((item) => {
         item.time = formateDate(new Date(item.time));
@@ -115,12 +114,12 @@ export default {
       });
     },
 
-    async handlePost() {},
+    async handleCourse() {},
 
     // 编辑
     toEdit(courseId) {
       let route = {
-        path: "/createPost",
+        path: "/createCourse",
         query: {
           courseId: courseId,
         },
@@ -130,13 +129,21 @@ export default {
     },
 
     // 删除
-    toDelete(courseId) {
+    async toDelete(courseId) {
+      let params = { courseId: courseId };
+      let res = await delCourse(params);
+      if (res.success) {
+        this.$message.success("删除成功！");
+      } else {
+        this.$message.error("删除失败！");
+      }
+      this.initData();
       debugger;
     },
 
     // 新建岗位
-    toCreatePost() {
-      this.$router.push("/createPost");
+    toCreateCourse() {
+      this.$router.push("/createCourse");
     },
   },
 };

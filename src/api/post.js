@@ -18,3 +18,18 @@ export function getPostDetail(params) {
 export function getMyPost(params) {
   return get("/post/postOwn", params);
 }
+
+// 新建岗位
+export function createPost(params) {
+  return post("/post/createPost", params);
+}
+
+// 编辑岗位
+export function updatePost(params) {
+  return post("/post/updatePost", params);
+}
+
+// 删除岗位
+export function delPost(params) {
+  return get("/post/delPost", params);
+}

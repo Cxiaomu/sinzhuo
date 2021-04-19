@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { getMyPost } from "@/api/post";
+import { getMyPost, delPost } from "@/api/post";
 export default {
   name: "MyPost",
   data() {
@@ -134,7 +134,15 @@ export default {
     },
 
     // 删除
-    toDelete(postId) {
+    async toDelete(postId) {
+      let params = { postId: postId };
+      let res = await delPost(params);
+      if (res.success) {
+        this.$message.success("删除成功！");
+      } else {
+        this.$message.error("删除失败！");
+      }
+      this.initData();
       debugger;
     },
 

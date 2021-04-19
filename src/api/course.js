@@ -18,3 +18,18 @@ export function getCourseDetail(params) {
 export function getMyCourse(params) {
   return get("/course/courseOwn", params);
 }
+
+// 新建课程
+export function createCourse(params) {
+  return post("/course/createCourse", params);
+}
+
+// 编辑课程
+export function updateCourse(params) {
+  return post("/course/updateCourse", params);
+}
+
+// 删除课程
+export function delCourse(params) {
+  return get("/course/delCourse", params);
+}

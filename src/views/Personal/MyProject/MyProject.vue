@@ -132,10 +132,11 @@ export default {
       let params = { projectId: projectId };
       let res = await delProject(params);
       if (res.success) {
-        this.$message.success("删除成功！")
+        this.$message.success("删除成功！");
       } else {
-        this.$message.error("删除失败！")
+        this.$message.error("删除失败！");
       }
+      this.initData();
       debugger;
     },
 
