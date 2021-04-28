@@ -28,6 +28,19 @@ export const post = function (url, params) {
     })
 }
 
+export const postImg = function (url, params) {
+  debugger
+  return axios.post(url, params, {
+    headers: {
+      "content-type": "multipart/form-data"
+    }
+  }).then((res) => res.data)
+  .catch((err) => {
+    console.log(err)
+    throw err;
+  })
+}
+
 export const del = function (url, params) {
   return axios.delete(url, {
       params: params

@@ -6,7 +6,12 @@ import {
 
 // 根据筛选条件获取岗位列表
 export function getPostList(params) {
-  return get("/post/postList", params);
+  return get("/post/filter", params);
+}
+
+// 
+export function getPostTotal() {
+  return get("/post/postTotal");
 }
 
 // 获取岗位详情

@@ -15,7 +15,7 @@
           <div class="course-wrapper" @click="toCourseById(course.id)">
             <div class="course-detail-box">
               <h3 class="course-title" v-text="course.name"></h3>
-              <p class="course-detail" v-text="course.intro"></p>
+              <p class="course-detail" v-text="course.abtract"></p>
               <div class="course-info">
                 <el-row>
                   <el-col :span="12">
@@ -42,9 +42,9 @@
         <el-pagination
           background
           layout="prev, pager, next"
-          :page-size="3"
+          :page-size="this.pageSize"
           :pager-count="5"
-          :total="courseList.length"
+          :total="total"
           @current-change="changePage"
         >
         </el-pagination>
@@ -54,16 +54,20 @@
 </template>
 
 <script>
+import { getCourseList, getCourseTotal } from '@/api/course'
 export default {
   name: "Course",
   data() {
     return {
+      nowPage: 1,
+      pageSize: 10,
+      total: 10,
       courseList: [
         {
           id: "1",
           imgUrl: require("@/assets/img/course/1-tumu.jpg"),
           name: "土木工程",
-          intro: `理论力学、材料力学、结构力学、流体力学、土力学、建筑材料、混凝土结构与钢结构、
+          abtract: `理论力学、材料力学、结构力学、流体力学、土力学、建筑材料、混凝土结构与钢结构、
           房屋结构、桥梁结构、地下结构、道路勘测设计与路基路面结构、施工技术与管理。`,
           score: 4,
           view: 123,
@@ -72,7 +76,7 @@ export default {
           id: "2",
           imgUrl: require("@/assets/img/course/2-jianzhu.jpg"),
           name: "建筑与设计",
-          intro: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
+          abtract: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
           建筑设计原理等理论知识，创造功能合理、舒适优美、满足人们物质和精神生活需要的室内环境的学科。`,
           score: 4,
           view: 123,
@@ -81,7 +85,7 @@ export default {
           id: "3",
           imgUrl: require("@/assets/img/course/3-jixie.jpg"),
           name: "机械工程",
-          intro: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
+          abtract: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
           建筑设计原理等理论知识，创造功能合理、舒适优美、满足人们物质和精神生活需要的室内环境的学科。`,
           score: 4,
           view: 123,
@@ -90,7 +94,7 @@ export default {
           id: "4",
           imgUrl: require("@/assets/img/course/4-dianqi.jpg"),
           name: "电气工程",
-          intro: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
+          abtract: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
           建筑设计原理等理论知识，创造功能合理、舒适优美、满足人们物质和精神生活需要的室内环境的学科。`,
           score: 4,
           view: 123,
@@ -99,7 +103,7 @@ export default {
           id: "5",
           imgUrl: require("@/assets/img/course/5-jiaotong.jpg"),
           name: "交通与运输",
-          intro: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
+          abtract: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
           建筑设计原理等理论知识，创造功能合理、舒适优美、满足人们物质和精神生活需要的室内环境的学科。`,
           score: 4,
           view: 123,
@@ -108,7 +112,7 @@ export default {
           id: "6",
           imgUrl: require("@/assets/img/course/6-jinji.jpg"),
           name: "经济管理",
-          intro: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
+          abtract: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
           建筑设计原理等理论知识，创造功能合理、舒适优美、满足人们物质和精神生活需要的室内环境的学科。`,
           score: 4,
           view: 123,
@@ -117,7 +121,7 @@ export default {
           id: "7",
           imgUrl: require("@/assets/img/course/7-it.jpg"),
           name: "信息科学与技术",
-          intro: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
+          abtract: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
           建筑设计原理等理论知识，创造功能合理、舒适优美、满足人们物质和精神生活需要的室内环境的学科。`,
           score: 4,
           view: 123,
@@ -126,7 +130,7 @@ export default {
           id: "8",
           imgUrl: require("@/assets/img/course/8-huanjing.jpg"),
           name: "地球科学与环境",
-          intro: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
+          abtract: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
           建筑设计原理等理论知识，创造功能合理、舒适优美、满足人们物质和精神生活需要的室内环境的学科。`,
           score: 4,
           view: 123,
@@ -135,7 +139,7 @@ export default {
           id: "9",
           imgUrl: require("@/assets/img/course/9-cailiao.jpg"),
           name: "材料科学与工程",
-          intro: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
+          abtract: `室内设计"是一门根据建筑物的使用性质、所处环境和相应标准，运用物质技术手段和
           建筑设计原理等理论知识，创造功能合理、舒适优美、满足人们物质和精神生活需要的室内环境的学科。`,
           score: 4,
           view: 123,
@@ -147,11 +151,31 @@ export default {
 
   watch: {},
 
-  created() {},
+  created() {
+    this.getTotal()
+    this.initData(this.nowPage, this.pageSize);
+  },
 
   mounted() {},
 
   methods: {
+    // 获取岗位个数
+    async getTotal() {
+      let res = await getCourseTotal();
+      this.total = res.total
+      debugger
+    },
+
+    // 数据初始化
+    async initData(nowPage, pageSize) {
+      let params = {
+        nowPage,
+        pageSize,
+      };
+      this.courseList = await getCourseList(params);
+      debugger;
+    },
+
     toCourseById(courseId) {
       let query = {
         courseId: courseId,

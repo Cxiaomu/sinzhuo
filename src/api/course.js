@@ -4,9 +4,14 @@ import {
   del
 } from "@/utils/httpService";
 
-// 根据筛选条件获取课程列表
+// 根据筛选条件获取岗位列表
 export function getCourseList(params) {
-  return get("/course/courseList", params);
+  return get("/course/filter", params);
+}
+
+// 
+export function getCourseTotal() {
+  return get("/course/courseTotal");
 }
 
 // 获取课程详情

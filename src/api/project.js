@@ -1,6 +1,7 @@
 import {
   get,
   post,
+  postImg,
   del
 } from "@/utils/httpService";
 
@@ -32,4 +33,9 @@ export function updateProject(params) {
 // 删除项目
 export function delProject(params) {
   return get("/project/delProject", params);
+}
+
+// 上传项目logo
+export function uploadImg(params) {
+  return postImg("/project/projectLogo", params);
 }

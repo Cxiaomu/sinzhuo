@@ -12,12 +12,12 @@
           <el-form-item label="项目logo：" prop="imgUrl">
             <el-upload
               class="upload-demo"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :on-preview="handlePreview"
-              :on-remove="handleRemove"
-              :before-remove="beforeRemove"
-              multiple
+              :action="uploadUrl"
+              :on-success="successUpload"
+              :on-error="errorUpload"
               :limit="1"
+              list-type="picture"
+              :before-upload="beforeAvatarUpload"
               :on-exceed="handleExceed"
               :file-list="projectForm.imgUrl"
             >
@@ -84,6 +84,7 @@ export default {
   data() {
     return {
       isCreate: true, // 是否为新建
+      uploadUrl: "http://localhost:3000/project/projectLogo",
       btnText: "发布",
       projectId: "",
       fieldList: [],
@@ -173,21 +174,41 @@ export default {
     },
 
     // 项目logo相关方法
-    handleRemove(file, imgUrl) {
-      console.log(file, imgUrl);
+    // 上传之前判断文件类型
+    beforeAvatarUpload(file) {
+      debugger
+      const isImg = (file.type === "image/jpeg" || file.type === "image/png");
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isImg) {
+        this.$message.error("上传头像图片只能是 JPG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+      }
+      return isImg && isLt2M;
     },
-    handlePreview(file) {
-      console.log(file);
+
+    // 图片上传成功
+    successUpload(response, file, fileList) {
+      debugger
+      this.projectForm.imgUrl[0].name = response[0].name;
+      this.projectForm.imgUrl[0].url = response[0].url;
+      console.log(response, file, fileList);
     },
+
+    // 图片上传失败
+    errorUpload(err, file, fileList) {
+      this.$message.warning("图片上传失败！")
+      console.log(err, file, fileList);
+    },
+
+    // 图片限制个数
     handleExceed(files, imgUrl) {
       this.$message.warning(
         `当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
           files.length + imgUrl.length
         } 个文件`
       );
-    },
-    beforeRemove(file, imgUrl) {
-      return this.$confirm(`确定移除 ${file.name}？`);
     },
 
     // 发布 或 更新
@@ -214,6 +235,7 @@ export default {
               ...this.projectForm,
               imgUrl: this.projectForm.imgUrl[0]["url"],
             };
+            debugger
             res = await createProject(params);
             debugger;
           } else {
@@ -226,6 +248,7 @@ export default {
               abstract: this.projectForm.abstract,
               imgUrl: this.projectForm.imgUrl[0]["url"],
             };
+            debugger
             res = await updateProject(params);
             debugger;
           }
