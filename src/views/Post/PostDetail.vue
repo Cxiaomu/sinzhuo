@@ -118,7 +118,6 @@ export default {
           "YYYY-MM-DD"
         );
         this.author = res[1];
-        debugger;
       }
     },
 
@@ -128,7 +127,6 @@ export default {
 
     toApply() {
       this.applyDialog = true;
-      debugger;
     },
   },
 };

@@ -79,6 +79,7 @@
 <script>
 import { getProjectField, getProjectPhase } from "@/api/home.js";
 import { getProjectDetail, createProject, updateProject } from "@/api/project";
+import { mapGetters } from "vuex";
 export default {
   name: "CreateProject",
   data() {
@@ -87,6 +88,7 @@ export default {
       uploadUrl: "http://localhost:3000/project/projectLogo",
       btnText: "发布",
       projectId: "",
+      userId: 0,
       fieldList: [],
       phaseList: [],
       projectForm: {
@@ -125,7 +127,12 @@ export default {
 
   watch: {},
 
+  computed: {
+    ...mapGetters(["userInfo"]),
+  },
+
   created() {
+    this.userId = this.userInfo.id;
     this.getFieldList();
     this.getPhaseList();
     if (this.$route.query.projectId) {
@@ -169,7 +176,6 @@ export default {
         this.projectForm.imgUrl = [
           { name: "logo", url: this.projectForm.imgUrl },
         ];
-        debugger;
       }
     },
 
@@ -180,7 +186,7 @@ export default {
       const isImg = (file.type === "image/jpeg" || file.type === "image/png");
       const isLt2M = file.size / 1024 / 1024 < 2;
       if (!isImg) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
+        this.$message.error("上传头像图片只能是 JPG 或 PNG 格式!");
       }
       if (!isLt2M) {
         this.$message.error("上传头像图片大小不能超过 2MB!");
@@ -190,7 +196,6 @@ export default {
 
     // 图片上传成功
     successUpload(response, file, fileList) {
-      debugger
       this.projectForm.imgUrl[0].name = response[0].name;
       this.projectForm.imgUrl[0].url = response[0].url;
       console.log(response, file, fileList);
@@ -231,24 +236,22 @@ export default {
               }
             });
             params = {
-              userId: "1",
+              userId: this.userId,
               ...this.projectForm,
               imgUrl: this.projectForm.imgUrl[0]["url"],
             };
-            debugger
             res = await createProject(params);
             debugger;
           } else {
             // 更新
             params = {
               projectId: this.projectId,
-              userId: "1",
+              userId: this.userId,
               phase: this.projectForm.phase,
               financing: this.projectForm.financing,
               abstract: this.projectForm.abstract,
               imgUrl: this.projectForm.imgUrl[0]["url"],
             };
-            debugger
             res = await updateProject(params);
             debugger;
           }

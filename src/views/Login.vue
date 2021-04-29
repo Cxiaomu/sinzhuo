@@ -48,10 +48,10 @@
                         </el-option>
                       </el-select>
                     </el-form-item>
-                    <el-form-item label="账号：" prop="userName">
+                    <el-form-item label="账号：" prop="username">
                       <el-input
                         class="form-input"
-                        v-model="loginForm.userName"
+                        v-model="loginForm.username"
                         placeholder="请输入账号/手机号"
                         clearable
                       >
@@ -185,7 +185,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { getUserInfo, registerUser } from "@/api/user";
-import { RegTel } from "@/utils/ways"
+import { RegTel } from "@/utils/ways";
 export default {
   name: "Login",
   data() {
@@ -208,12 +208,12 @@ export default {
       ],
       loginForm: {
         role: 1,
-        userName: "",
+        username: "",
         password: "",
       },
       loginRule: {
         role: [{ required: true, message: "请选择身份", trigger: "change" }],
-        userName: [
+        username: [
           { required: true, message: "请输入账号", trigger: "blur" },
           {
             min: 3,
@@ -256,9 +256,7 @@ export default {
         rePassword: [
           { required: true, message: "请再次输入密码", trigger: "blur" },
         ],
-         tel: [
-          { required: true, message: "请输入手机号", trigger: "blur" },
-        ],
+        tel: [{ required: true, message: "请输入手机号", trigger: "blur" }],
       },
     };
   },
@@ -270,6 +268,10 @@ export default {
     ...mapGetters(["isLogin"]),
   },
   created() {
+    if (localStorage.getItem("userInfo")) {
+      let userInfo = JSON.parse(localStorage.getItem("userInfo"))
+      this.loginForm = userInfo;
+    }
     // 若已登录 -> 首页
     if (this.isLogin) {
       this.$router.push("/index");
@@ -285,20 +287,21 @@ export default {
     toLogin() {
       this.$refs["loginForm"].validate(async (valid) => {
         if (valid) {
-          if (this.remember) {
-            this.toRemember();
-          }
           let params = {
             role: this.loginForm.role,
-            username: this.loginForm.userName,
+            username: this.loginForm.username,
             password: this.loginForm.password,
           };
           let res = await getUserInfo(params);
           debugger;
           // 用户存在
           if (res.length > 0) {
-            let data = await this.userLogin(params);
+            let data = await this.userLogin(res[0]);
+            debugger;
             if (data) {
+              if (this.remember) {
+                this.toRemember(res[0]);
+              }
               this.$router.push("/index");
             }
           } else {
@@ -306,17 +309,17 @@ export default {
           }
           console.log(res);
         } else {
-          this.$message.warning( "请填写完整登录信息");
+          this.$message.warning("请填写完整登录信息");
         }
       });
     },
 
     // 记住密码
-    toRemember() {
+    toRemember(params) {
       if (typeof Storage !== "undefined") {
         localStorage.setItem("loginStatus", true);
         localStorage.setItem("role", this.loginForm.role);
-        localStorage.setItem("userInfo", this.loginForm);
+        localStorage.setItem("userInfo", JSON.stringify(params));
       } else {
         this.$message.warning("记住密码失败！该浏览器暂不支持记住密码");
       }
@@ -331,15 +334,15 @@ export default {
         if (valid) {
           if (this.registerForm.password !== this.registerForm.rePassword) {
             this.$message.warning("两次密码不一致");
-            return
+            return;
           }
-          if ( !RegTel(this.registerForm.tel)) {
+          if (!RegTel(this.registerForm.tel)) {
             this.$message.warning("手机号格式不正确");
-            return
+            return;
           }
-           if (!this.agree) {
+          if (!this.agree) {
             this.$message.warning("同意注册协议");
-            return
+            return;
           }
           this.registerApi();
         } else {
@@ -347,7 +350,7 @@ export default {
         }
       });
     },
-    // 请求注册接口 
+    // 请求注册接口
     async registerApi() {
       let params = {
         role: this.registerForm.role,
@@ -358,7 +361,7 @@ export default {
       let res = await registerUser(params);
       if (res.success && !res.exist) {
         this.$message.success("注册成功，请切换登录");
-      } else if (res.exist){
+      } else if (res.exist) {
         this.$message.warning("该用户已存在");
       } else {
         this.$message.warning("注册失败");

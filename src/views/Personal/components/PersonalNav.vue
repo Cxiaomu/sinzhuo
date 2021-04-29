@@ -24,11 +24,12 @@
 
 <script>
 import { getNav } from "@/api/home.js";
+import { mapGetters } from "vuex";
 export default {
   name: "PersonalNav",
   data() {
     return {
-      userStatus: "3", // 1-企业，2-教师，3-学生
+      userStatus: "0", // 1-企业，2-教师，3-学生
       activeIndex: "0",
       navList: [],
     };
@@ -37,7 +38,13 @@ export default {
 
   watch: {},
 
+  computed: {
+    ...mapGetters(["role"]),
+  },
   created() {
+    if (localStorage.getItem('loginStatus')) {
+      this.userStatus = this.role;
+    }
     this.getNavList();
   },
 
@@ -66,7 +73,7 @@ export default {
       let res = await getNav();
       if (res) {
         let navList = res.data.filter((item) => {
-          return item.type.includes("0") || item.type.includes(this.userStatus);
+          return item.type.includes(0) || item.type.includes(this.userStatus);
         });
         this.navList = navList;
       }

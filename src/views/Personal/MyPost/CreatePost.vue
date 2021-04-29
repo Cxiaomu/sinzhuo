@@ -104,6 +104,7 @@
 
 <script>
 import { getPostDetail, createPost, updatePost } from "@/api/post";
+import { mapGetters } from "vuex";
 export default {
   name: "CreatePost",
   data() {
@@ -111,6 +112,7 @@ export default {
       isCreate: true, // 是否为新建
       btnText: "发布",
       postId: "",
+      userId: 0,
       educationOptions: [
         { id: "001", name: "大专" },
         { id: "002", name: "本科" },
@@ -191,7 +193,12 @@ export default {
 
   watch: {},
 
+  computed: {
+    ...mapGetters(["userInfo"]),
+  },
+
   created() {
+    this.userId = this.userInfo.id;
     if (this.$route.query.postId) {
       this.postId = this.$route.query.postId;
       this.isCreate = false;
@@ -210,7 +217,6 @@ export default {
       debugger;
       if (res.length > 0) {
         this.postForm = res[0];
-        debugger;
       }
     },
 
@@ -219,7 +225,7 @@ export default {
       this.$refs["newPost"].validate(async (valid) => {
         if (valid) {
           let params = {
-            userId: "2",
+            userId: this.userId,
             ...this.postForm,
           };
           let res = [];

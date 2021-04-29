@@ -59,6 +59,7 @@
 
 <script>
 import { getMyPost, delPost } from "@/api/post";
+import { mapGetters } from "vuex";
 export default {
   name: "MyPost",
   data() {
@@ -85,7 +86,12 @@ export default {
 
   watch: {},
 
+  computed: {
+    ...mapGetters(["userInfo"]),
+  },
+
   created() {
+    this.userId = this.userInfo.id;
     this.handlePost();
     this.initData();
   },
@@ -102,8 +108,8 @@ export default {
 
     // 初始化岗位列表
     async initData() {
-      let userId = localStorage.getItem("userId");
-      let res = await getMyPost({ userId: 2 });
+      let userId = this.userId
+      let res = await getMyPost({ userId });
       debugger;
       this.postList = res;
     },
@@ -130,7 +136,6 @@ export default {
         },
       };
       this.$router.push(route);
-      debugger;
     },
 
     // 删除

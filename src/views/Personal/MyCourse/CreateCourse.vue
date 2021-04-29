@@ -56,6 +56,7 @@
 
 <script>
 import { getCourseDetail, createCourse, updateCourse } from "@/api/course";
+import { mapGetters } from "vuex";
 export default {
   name: "CreateCourse",
   data() {
@@ -63,6 +64,7 @@ export default {
       isCreate: true, // 是否为新建
       btnText: "发布",
       courseId: "",
+      userId: 0,
       courseForm: {
         id: "001",
         name: "前端开发",
@@ -106,7 +108,12 @@ export default {
 
   watch: {},
 
+  computed: {
+    ...mapGetters(["userInfo"]),
+  },
+  
   created() {
+    this.userId = this.userInfo.id;
     if (this.$route.query.courseId) {
       this.courseId = this.$route.query.courseId;
       this.isCreate = false;
@@ -125,7 +132,6 @@ export default {
       debugger;
       if (res.length > 0) {
         this.courseForm = res[0];
-        debugger;
       }
     },
 
@@ -138,14 +144,14 @@ export default {
           // 发布
           if (this.btnText === "发布") {
             params = {
-              userId: "2",
+              userId: this.userId,
               ...this.courseForm,
             };
             res = await createCourse(params);
             debugger;
           } else {
             params = {
-              userId: "2",
+              userId: this.userId,
               courseId: this.courseId,
               link: this.courseForm.link,
               abstract: this.courseForm.abstract,

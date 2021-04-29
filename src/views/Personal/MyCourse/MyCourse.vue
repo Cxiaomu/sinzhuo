@@ -55,10 +55,12 @@
 <script>
 import { getMyCourse, delCourse } from "@/api/course";
 import { formateDate } from "@/utils/ways";
+import { mapGetters } from "vuex";
 export default {
   name: "MyCourse",
   data() {
     return {
+      userId: 0,
       styleObj: {
         height: "",
       },
@@ -78,7 +80,12 @@ export default {
 
   watch: {},
 
+  computed: {
+    ...mapGetters(["userInfo"]),
+  },
+
   created() {
+    this.userId = this.userInfo.id;
     this.handleCourse();
     this.initData();
   },
@@ -95,8 +102,8 @@ export default {
 
     // 初始化课程列表
     async initData() {
-      let userId = localStorage.getItem("userId");
-      let res = await getMyCourse({ userId: 2 });
+      let userId = this.userId;
+      let res = await getMyCourse({ userId });
       this.courseList = res;
       this.courseList.forEach((item) => {
         item.time = formateDate(new Date(item.time));
@@ -125,7 +132,6 @@ export default {
         },
       };
       this.$router.push(route);
-      debugger;
     },
 
     // 删除

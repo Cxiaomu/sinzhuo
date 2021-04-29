@@ -147,10 +147,12 @@
 
 <script>
 import { getUser, changePwd, changeInfo } from "@/api/user";
+import { mapGetters } from "vuex";
 export default {
   name: "MySetting",
   data() {
     return {
+      userId: 0,
       isNew: true,
       showPwdModel: false,
       roleArr: [
@@ -239,14 +241,19 @@ export default {
 
   watch: {},
 
+  computed: {
+    ...mapGetters(["userInfo"]),
+  },
+
   created() {
+    this.userId = this.userInfo.id;
     this.initData();
   },
 
   methods: {
     // 初始化个人信息
     async initData() {
-      let params = { userId: "1" };
+      let params = { userId: this.userId };
       let res = await getUser(params);
       if (res.length === 0) {
         this.$message.warning("获取用户信息失败！");
@@ -283,7 +290,9 @@ export default {
     },
 
     // 取消修改
-    toQuite() {},
+    toQuite() {
+      window.location.reload();
+    },
 
     // 修改密码
     changePwd() {

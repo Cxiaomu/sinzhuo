@@ -19,7 +19,6 @@ export const get = function (url, params) {
 }
 
 export const post = function (url, params) {
-  debugger
   return axios.post(url, params)
     .then(res => res.data)
     .catch((err) => {
@@ -29,7 +28,6 @@ export const post = function (url, params) {
 }
 
 export const postImg = function (url, params) {
-  debugger
   return axios.post(url, params, {
     headers: {
       "content-type": "multipart/form-data"

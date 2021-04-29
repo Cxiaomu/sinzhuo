@@ -69,47 +69,7 @@ export default {
           company: "稀里哗啦", //公司名
           need: [100, 200], // 招聘人数
           address: "上海 洋浦", // 工作地址
-        },
-        {
-          id: "002",
-          name: " Java开发工程师",
-          price: ["8k", "12k"],
-          company: "稀里哗啦",
-          need: [100, 200],
-          address: "上海 洋浦",
-        },
-        {
-          id: "003",
-          name: "测试工程师",
-          price: ["8k", "12k"],
-          company: "稀里哗啦",
-          need: [100, 200],
-          address: "上海 洋浦",
-        },
-        {
-          id: "004",
-          name: "运维工程师",
-          price: ["8k", "12k"],
-          company: "稀里哗啦",
-          need: [100, 200],
-          address: "上海 洋浦",
-        },
-        {
-          id: "005",
-          name: "UI设计师",
-          price: ["8k", "12k"],
-          company: "稀里哗啦",
-          need: [100, 200],
-          address: "上海 洋浦",
-        },
-        {
-          id: "006",
-          name: "WEB前端开发",
-          price: ["8k", "12k"],
-          company: "稀里哗啦",
-          need: [100, 200],
-          address: "上海 洋浦",
-        },
+        }
       ],
     };
   },

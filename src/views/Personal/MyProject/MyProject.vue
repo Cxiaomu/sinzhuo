@@ -59,10 +59,12 @@
 <script>
 import MyProjectList from "./components/MyProjectList.vue";
 import { getMyProject, delProject } from "@/api/project";
+import { mapGetters } from "vuex";
 export default {
   name: "MyProject",
   data() {
     return {
+      userId: 0,
       styleObj: {
         height: "",
       },
@@ -82,7 +84,12 @@ export default {
 
   watch: {},
 
+  computed: {
+    ...mapGetters(["userInfo"]),
+  },
+
   created() {
+    this.userId = this.userInfo.id;
     this.initData();
   },
 
@@ -98,8 +105,8 @@ export default {
 
     // 初始化项目列表
     async initData() {
-      let userId = localStorage.getItem("userId");
-      let res = await getMyProject({ userId: 1 });
+      let userId = this.userId;
+      let res = await getMyProject({ userId });
       debugger;
       this.projectList = res;
     },
@@ -124,7 +131,6 @@ export default {
         },
       };
       this.$router.push(route);
-      debugger;
     },
 
     // 删除
@@ -137,7 +143,6 @@ export default {
         this.$message.error("删除失败！");
       }
       this.initData();
-      debugger;
     },
 
     // 新建项目
