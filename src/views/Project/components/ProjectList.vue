@@ -22,9 +22,9 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        :page-size="3"
+        :page-size="pageSize"
         :pager-count="5"
-        :total="projectList.length"
+        :total="total"
         @current-change="changePage"
       >
       </el-pagination>
@@ -37,6 +37,9 @@ export default {
   name: "ProjectList",
   data() {
     return {
+      pageSize: 8,
+      nowPage: 1,
+      total: 0,
       columns: [{
           title: "项目",
           prop: "name",
@@ -53,11 +56,11 @@ export default {
           prop: "field",
           styleClass: "more-text-3"
         },
-        {
-          title: "负责人",
-          prop: "author",
-          styleClass: "oneline"
-        },
+        // {
+        //   title: "负责人",
+        //   prop: "author",
+        //   styleClass: "oneline"
+        // },
         {
           title: "项目阶段",
           prop: "phase",
@@ -73,108 +76,21 @@ export default {
       projectList: [
         //处理后的项目列表
         {
-          id: "1",
-          name: "航空巴拉巴拉巴拉",
-          imgUrl: require("../../../assets/img/project/1-project.jpg"),
-          abstract: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
-          航空公司建立了长期的合作关系，如在深圳航空公司，翡翠国际货运航空公司，中国南方航空公司，
-          中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。`,
-          field: "001",
-          author: "Cxiaomu",
-          phase: "001",
-          financing: true,
-        },
-        {
-          id: "2",
-          name: "航空",
-          imgUrl: require("../../../assets/img/project/2-project.jpg"),
-          abstract: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
-          航空公司建立了长期的合作关系，如在深圳航空公司，翡翠国际货运航空公司，中国南方航空公司，
-          中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。
-          翡翠国际货运航空公司，中国南方航空公司，中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，
-          是一家值得信赖的深圳航空货运公司。`,
-          field: "002",
-          author: "阿爸阿爸吧6",
-          phase: "002",
-          financing: true,
-        },
-        {
-          id: "3",
-          name: "航空巴拉巴拉巴拉案例",
-          imgUrl: require("../../../assets/img/project/3-project.jpg"),
-          abstract: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
-          航空公司建立了长期的合作关系。`,
-          field: "003",
-          author: "顺丰物流有限公司承接",
-          phase: "003",
-          financing: true,
-        },
-        {
-          id: "4",
-          name: "航空巴拉",
-          imgUrl: require("../../../assets/img/project/4-project.jpg"),
-          abstract: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
-          航空公司建立了长期的合作关系，如在深圳航空公司，翡翠国际货运航空公司，中国南方航空公司，
-          中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。`,
-          author: "深圳市顺丰物流有限公司",
-          field: "004",
-          phase: "004",
-          financing: true,
-        },
-        {
-          id: "5",
-          name: "航空巴拉巴拉巴拉案例",
-          imgUrl: require("../../../assets/img/project/5-project.jpg"),
-          abstract: `深圳市顺丰物流有限公司承接深圳至全国。`,
-          author: "vggggggggg",
-          field: "005",
-          phase: "005",
+          id: 0,
+          name: "",
+          abstract: '',
+          field: "",
+          author: "",
+          phase: "",
           financing: true,
         },
       ],
     };
   },
-  props: {
-    field: {
-      type: Array,
-      default: () => [],
-    },
-    phase: {
-      type: Array,
-      default: () => [],
-    }
-  },
+
   components: {},
 
-  watch: {
-    // 监听所属领域数据
-    field: {
-      handler(val) {
-        if (val) {
-          this.projectList.forEach((item) => {
-            val.forEach((field) => {
-              if (field.id == item.field) {
-                item.field = field.name;
-              }
-            });
-          });
-        }
-      },
-    },
-    phase: {
-      handler(val) {
-        if (val) {
-          this.projectList.forEach((item) => {
-            val.forEach((phase) => {
-              if (phase.id == item.phase) {
-                item.phase = phase.name;
-              }
-            });
-          });
-        }
-      },
-    }
-  },
+  watch: { },
 
   created() {},
 

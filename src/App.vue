@@ -14,8 +14,9 @@ export default {
     ...mapGetters(["userInfo"])
   },
   created() {
-    if (localStorage.getItem('loginStatus')) {
+    if (localStorage.getItem('loginStatus') === 'true') {
       let params = JSON.parse(localStorage.getItem('userInfo'));
+      debugger
       this.userLogin(params);
     }
 
@@ -23,6 +24,7 @@ export default {
     window.addEventListener('beforeunload', () => {
       localStorage.setItem('role', this.role);
       localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+      localStorage.setItem('loginStatus', this.isLogin)
     });
   },
   methods: {

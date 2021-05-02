@@ -268,7 +268,8 @@ export default {
     ...mapGetters(["isLogin"]),
   },
   created() {
-    if (localStorage.getItem("userInfo")) {
+    if (localStorage.getItem("userInfo")!== '{}') {
+      debugger
       let userInfo = JSON.parse(localStorage.getItem("userInfo"))
       this.loginForm = userInfo;
     }

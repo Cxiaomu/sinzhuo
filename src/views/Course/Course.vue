@@ -42,7 +42,7 @@
         <el-pagination
           background
           layout="prev, pager, next"
-          :page-size="this.pageSize"
+          :page-size="pageSize"
           :pager-count="5"
           :total="total"
           @current-change="changePage"

@@ -33,15 +33,15 @@ export default {
   },
   created() {
     // 未登录
-    // if (!this.isLogin) {
-    //   let params = {
-    //     activeType: "login",
-    //   };
-    //   this.$router.push({
-    //     name: "Login",
-    //     params: params,
-    //   });
-    // }
+    if (!this.isLogin) {
+      let params = {
+        activeType: "login",
+      };
+      this.$router.push({
+        name: "Login",
+        params: params,
+      });
+    }
   },
 
   methods: {

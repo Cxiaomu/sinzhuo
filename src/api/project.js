@@ -7,7 +7,12 @@ import {
 
 // 根据筛选条件获取项目列表
 export function getProjectList(params) {
-  return get("/project/projectList", params);
+  return get("/project/filter", params);
+}
+
+// 根据筛选条件获取项目列表
+export function getProjectListByKey(params) {
+  return get("/project/keywords", params);
 }
 
 // 获取项目详情

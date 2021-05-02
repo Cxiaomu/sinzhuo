@@ -1,7 +1,11 @@
 <template>
   <div id="header-wrapper">
     <div class="header-container">
-      <img class="logo-img" @click="toIndex" src="../assets/img/logo/logo-all.png" />
+      <img
+        class="logo-img"
+        @click="toIndex"
+        src="../assets/img/logo/logo-all.png"
+      />
       <div style="display: inline-block; float: right" class="nav-wrapper">
         <el-menu
           :default-active="activeMenu"
@@ -15,28 +19,28 @@
             :index="menu.id"
           >
             <template slot="title">
-              <span :class="['iconfont', 'iconyonghu' ,'nav-icon', menu.icon]"></span>
+              <span
+                :class="['iconfont', 'iconyonghu', 'nav-icon', menu.icon]"
+              ></span>
               <span class="nav-title" v-text="menu.name"></span>
             </template>
           </el-menu-item>
           <!-- 登录部分 start-->
-          <el-menu-item index="5">
+          <el-submenu index="5">
             <template slot="title">
               <div class="nav-title" v-if="!isLogin">
                 <span @click="toLogin">登录</span>
                 <el-divider direction="vertical"></el-divider>
                 <span @click="toRegister">注册</span>
               </div>
-              <div class="nav-title userName" v-else @click="toPersonal">
+              <div class="nav-title userName" v-else>
                 <span class="iconfont iconyonghu nav-icon"></span>
-                <span
-                  class=""
-                  v-text="username"
-                  title="个人中心"
-                ></span>
+                <span class="" v-text="username" title="个人中心"></span>
               </div>
             </template>
-          </el-menu-item>
+            <el-menu-item index="5-1" v-if="isLogin" @click="toPersonal">个人中心</el-menu-item>
+            <el-menu-item index="5-2" v-if="isLogin" @click="toLogout">退出</el-menu-item>
+          </el-submenu>
           <!-- 登录部分 end-->
         </el-menu>
       </div>
@@ -46,35 +50,38 @@
 
 <script>
 import { getMenu } from "@/api/home.js";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "SHeader",
   data() {
     return {
       activeMenu: "1",
       menuList: [],
-      username: "啦啦啦啦",
+      username: "",
     };
   },
   components: {},
 
   watch: {
     $route: {
-      // 导航栏高亮 
+      // 导航栏高亮
       handler(val) {
         this.activeHeader(val);
-      }
-    }
+      },
+    },
   },
 
   computed: {
     ...mapGetters(["isLogin"]),
+    ...mapGetters(["userInfo"]),
   },
   created() {
+    this.username = this.userInfo.username
     this.getMenu();
-    this.activeHeader(this.$route)
+    this.activeHeader(this.$route);
   },
   methods: {
+    ...mapActions(["userLogout"]),
     // 获取导航栏数据
     async getMenu() {
       let res = await getMenu();
@@ -85,32 +92,42 @@ export default {
 
     // 点击菜单栏
     changeMenu(index, indexPath) {
-      if (index !== '5') {
-        let url = this.menuList[index-1].path
+      debugger
+      if (index !== "5-1" && index !== "5-2") {
+        let url = this.menuList[index - 1].path;
         this.$router.push(url);
       }
     },
 
     // 去首页
     toIndex() {
-      this.$router.push('/index')
+      this.$router.push("/index");
     },
 
-    // 导航栏高亮 
+    // 导航栏高亮
     activeHeader(route) {
       let nowPath = route.path;
-      switch(nowPath) {
-        case '/index': this.activeMenu = '1'; break;
-        case '/project': this.activeMenu = '2'; break;
-        case '/post': this.activeMenu = '3'; break;
-        case '/course': this.activeMenu = '4'; break;
-        default: this.activeMenu = '0'
+      switch (nowPath) {
+        case "/index":
+          this.activeMenu = "1";
+          break;
+        case "/project":
+          this.activeMenu = "2";
+          break;
+        case "/post":
+          this.activeMenu = "3";
+          break;
+        case "/course":
+          this.activeMenu = "4";
+          break;
+        default:
+          this.activeMenu = "0";
       }
     },
 
     // 登录
     toLogin() {
-      console.log(this.$router)
+      console.log(this.$router);
       let params = {
         activeType: "login",
       };
@@ -135,15 +152,22 @@ export default {
     toPersonal() {
       this.$router.push("/personal");
     },
+
+    // 退出
+    toLogout() {
+      this.userLogout();
+      this.isLogin;
+      debugger
+    }
   },
 };
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/global.scss';
+@import "@/styles/global.scss";
 #header-wrapper {
-    width: 85%;
-    margin: 0 auto;
+  width: 85%;
+  margin: 0 auto;
   .header-container {
     padding: 1rem 0;
     overflow: hidden;

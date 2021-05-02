@@ -44,6 +44,7 @@ const user = {
         },
         // 用户退出
         async userLogout({ commit }) {
+            debugger
             commit(SET_LOGIN_STATUS, false);
             commit(SET_USER_ROLE, '');
             commit(SET_USER_ID, 0);

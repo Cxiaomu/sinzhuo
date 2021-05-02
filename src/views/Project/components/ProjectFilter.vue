@@ -66,6 +66,11 @@ export default {
   name: "ProjectFilter",
   data() {
     return {
+      searchData: {
+        financing: -1,
+        field: 0,
+        phase: 0,
+      },
       activeName: "1",
       keywords: "",
       isFinancing: 0, // 需要融资激活索引
@@ -119,18 +124,7 @@ export default {
   created() {
     this.getPorjectConfig();
   },
-  mounted() {
-    // 监听所属领域数据，取得则上传参数与事件
-    this.$watch('filterOptions', () => {
-      let phase = this.filterOptions[1].optionList;
-      let field = this.filterOptions[2].optionList;
-        if (field && phase) {
-          this.$emit('getField', field, phase)
-        }
-      }, {
-        deep: true
-      })
-  },
+  mounted() { },
   methods: {
     async getPorjectConfig() {
       // 项目阶段
@@ -160,18 +154,32 @@ export default {
     stopExpand() {}, 
 
     // 关键字搜索
-    toSearch() {},
+    toSearch() {
+      debugger
+      this.$emit('to-search', this.keywords)
+    },
 
     // 点击span进行切换、过滤
     toFilter(type, index) {
       if (type == "financing") {
         this.isFinancing = index;
+        let data = index
+        debugger
+        switch(index) {
+          case 0: data = -1; break;
+          case 1: data = 1; break;
+          case 2: data = 0; break;
+        } 
+        this.searchData.financing = data;
       } else if (type == "phase") {
         this.isPhase = index;
+        this.searchData.phase = index;
       } else if (type == "field") {
         this.isField = index;
+        this.searchData.field = index;
       }
       // 上传参数过滤
+      this.$emit('to-filter', this.searchData)
     },
   },
 };
