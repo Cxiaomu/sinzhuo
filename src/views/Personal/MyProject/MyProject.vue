@@ -57,7 +57,6 @@
 </template>
 
 <script>
-import MyProjectList from "./components/MyProjectList.vue";
 import { getMyProject, delProject } from "@/api/project";
 import { mapGetters } from "vuex";
 export default {
@@ -80,7 +79,7 @@ export default {
     };
   },
 
-  components: { MyProjectList },
+  components: {},
 
   watch: {},
 
@@ -100,7 +99,8 @@ export default {
   methods: {
     // 设置卡片高度
     setNewCardHeigh() {
-      this.styleObj.height = this.$refs.projectCard[0].clientHeight - 21 + "px";
+      // this.styleObj.height = this.$refs.projectCard[0].clientHeight - 21 + "px";
+      this.styleObj.height = 198 + "px";
     },
 
     // 初始化项目列表

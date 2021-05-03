@@ -41,9 +41,9 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="账号：" prop="userName">
+        <el-form-item label="账号：" prop="username">
           <el-input
-            v-model="userForm.userName"
+            v-model="userForm.username"
             :disabled="true"
             clearable
             class="input-3"
@@ -111,9 +111,9 @@
         label-width="100px"
         label-position="left"
       >
-        <el-form-item label="账号：" prop="userName">
+        <el-form-item label="账号：" prop="username">
           <el-input
-            v-model="pwdForm.userName"
+            v-model="pwdForm.username"
             clearable
             disabled
             class="input-3"
@@ -147,7 +147,7 @@
 
 <script>
 import { getUser, changePwd, changeInfo } from "@/api/user";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "MySetting",
   data() {
@@ -170,7 +170,7 @@ export default {
         },
       ],
       pwdForm: {
-        userName: "",
+        username: "",
         oldPassword: "",
         newPassword: "",
       },
@@ -178,7 +178,7 @@ export default {
         name: "陈柘含",
         sex: "男",
         role: 1,
-        userName: "201711101040",
+        username: "201711101040",
         password: "2eqwadsfsd",
         unit: "山东建筑大学",
         department: "计算机科学与技术学院",
@@ -189,7 +189,7 @@ export default {
         啦啦啦啦啦 自信成长有你相伴 leap frog  快乐的一只小青蛙`,
       },
       pwdrules: {
-        userName: [
+        username: [
           { required: true, message: "请输入账号/手机号", trigger: "blur" },
         ],
         oldPassword: [
@@ -206,7 +206,7 @@ export default {
         ],
         sex: [{ required: true, message: "请选择性别", trigger: "change" }],
         role: [{ required: true, message: "请选择身份", trigger: "change" }],
-        userName: [
+        username: [
           { required: true, message: "请输入账号/手机号", trigger: "blur" },
         ],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
@@ -214,8 +214,8 @@ export default {
           { required: true, message: "请输入所在单位或学校", trigger: "blur" },
           {
             min: 2,
-            max: 15,
-            message: "长度在 2 到 15 个字符",
+            max: 16,
+            message: "长度在 2 到 16 个字符",
             trigger: "blur",
           },
         ],
@@ -223,8 +223,8 @@ export default {
           { required: true, message: "请输入所在部门或学院", trigger: "blur" },
           {
             min: 2,
-            max: 10,
-            message: "长度在 2 到 10 个字符",
+            max: 12,
+            message: "长度在 2 到 12 个字符",
             trigger: "blur",
           },
         ],
@@ -251,10 +251,13 @@ export default {
   },
 
   methods: {
+    ...mapActions(["userLogin"]),
+
     // 初始化个人信息
     async initData() {
       let params = { userId: this.userId };
       let res = await getUser(params);
+      debugger
       if (res.length === 0) {
         this.$message.warning("获取用户信息失败！");
         return;
@@ -265,7 +268,7 @@ export default {
     // 修改密码dialog
     showModel() {
       this.showPwdModel = true;
-      this.pwdForm.userName = this.userForm.userName;
+      this.pwdForm.username = this.userForm.username;
       this.pwdForm.oldPassword = null;
     },
 
@@ -280,6 +283,9 @@ export default {
           debugger;
           if (res.success) {
             this.$message.success("个人信息修改成功！");
+            await this.userLogin(this.userForm);
+            window.location.reload();
+            debugger
           } else {
             this.$message.warning("个人信息修改失败！");
           }

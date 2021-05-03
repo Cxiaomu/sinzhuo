@@ -40,13 +40,13 @@ export default {
   name: "PersonalHeader",
   data() {
     return {
-      headerAvatar: require("@/assets/img/avatar/1-avatar.jpg"),
+      headerAvatar: require(`@/assets/img/avatar/${parseInt(Math.random()*10)}-avatar.jpg`),
       headerInfo: {
-        name: "陈柘含",
-          unit: "山东建筑大学", // 学校、公司
-          department: "计算机科学与技术学院", // 学院、部门
-        tel: "17860618426",
-        email: "Cxiaomu_la@163.com",
+        name: "",
+        unit: "", // 学校、公司
+        department: "", // 学院、部门
+        tel: "",
+        email: "",
       },
     };
   },
@@ -58,8 +58,9 @@ export default {
   watch: {},
 
   created() {
-    if (localStorage.getItem('loginStatus')) {
+    if (localStorage.getItem("loginStatus")) {
       this.headerInfo = this.userInfo;
+      debugger
     }
   },
 

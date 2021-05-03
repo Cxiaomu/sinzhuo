@@ -25,9 +25,13 @@
                 <span v-text="course.unit"></span>
               </p>
               <p>
-                <el-link :href="course.link" v-text="course.link"></el-link>
+                链接：
+                <a :href="course.link" target="_blank">点击观看</a>
               </p>
-              <p v-text="course.time"></p>
+              <p>
+                发布时间：
+                <span v-text="course.time"></span>
+              </p>
             </div>
             <div style="text-align: right">
               <el-button type="text" @click="toEdit(course.id)">编辑</el-button>
@@ -97,7 +101,8 @@ export default {
 
   methods: {
     setNewCardHeigh() {
-      this.styleObj.height = this.$refs.courseCard[0].clientHeight - 21 + "px";
+      // this.styleObj.height = this.$refs.courseCard[0].clientHeight - 21 + "px";
+      this.styleObj.height = 198 + "px";
     },
 
     // 初始化课程列表
@@ -113,7 +118,7 @@ export default {
     // 前往课程详情
     toCourseById(id) {
       let query = {
-        courserId: id,
+        courseId: id,
       };
       this.$router.push({
         path: "/courseDetail",
@@ -157,6 +162,16 @@ export default {
 
 <style scoped lang="scss">
 @import "@/styles/global.scss";
+a {
+  text-decoration: none;
+  &:link, &:visited{
+    color: $darkenGrayText;
+  }
+  &:hover, &:active {
+    color: $activeColor;
+  }
+}
+
 >>> .el-card__body {
   padding: 10px 20px;
 }

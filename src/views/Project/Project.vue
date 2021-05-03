@@ -10,7 +10,7 @@
     </div>
     <!-- <div style="background-color: #f4f4f4; height: 25px"></div> -->
     <div>
-      <project-list ref="proList"></project-list>
+      <project-list ref="proList" @to-filter="toFilter"></project-list>
     </div>
   </div>
 </template>
@@ -51,16 +51,19 @@ export default {
     async toFilter() {
       let pageSize = this.$refs.proList.pageSize;
       let nowPage = this.$refs.proList.nowPage;
+      let searchData = this.$refs.proFilter.searchData;
       let params = {
         ...arguments[0],
+        ...searchData,
         pageSize,
         nowPage,
       };
       debugger;
       let res = await getProjectList(params);
+      debugger;
       this.$refs.proList.projectList = res.list;
       this.$refs.proList.total = res.total;
-      debugger;
+      
     },
     async toSearch(key) {
       let keywords = key

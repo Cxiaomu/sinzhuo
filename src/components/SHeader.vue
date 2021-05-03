@@ -34,7 +34,7 @@
                 <span @click="toRegister">注册</span>
               </div>
               <div class="nav-title userName" v-else>
-                <span class="iconfont iconyonghu nav-icon"></span>
+                <!-- <span class="iconfont iconyonghu nav-icon"></span> -->
                 <span class="" v-text="username" title="个人中心"></span>
               </div>
             </template>

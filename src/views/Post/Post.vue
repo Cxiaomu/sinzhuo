@@ -16,8 +16,7 @@
             <div class="item-header">
               <h2 v-text="post.name"></h2>
               <p class="price-box">
-                月薪
-                <span v-text="post.price[0]"></span>k -
+                <span v-text="post.price[0]"></span> -
                 <span v-text="post.price[1]"></span>k
               </p>
             </div>
@@ -28,9 +27,12 @@
                 <span v-text="post.need[1]"></span>
                 <span>人</span>
               </p>
-              <p>
+              <p class="more-text">
                 <span>公司：</span>
-                <span v-text="post.company"></span>
+                <span v-text="post.unit"></span>
+              </p>
+              <p class="more-text">
+                <span>地点：</span>
                 <span v-text="post.address"></span>
               </p>
             </div>
@@ -59,14 +61,14 @@ export default {
   data() {
     return {
       nowPage: 1,
-      pageSize: 10,
+      pageSize: 8,
       total: 10,
       postList: [
         {
           id: "001",
           name: "WEB前端开发", // 岗位名称
           price: ["8k", "12k"], // 薪资范围
-          company: "稀里哗啦", //公司名
+          unit: "稀里哗啦", //公司名
           need: [100, 200], // 招聘人数
           address: "上海 洋浦", // 工作地址
         }

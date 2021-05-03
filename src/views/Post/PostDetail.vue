@@ -34,6 +34,8 @@
           <p v-text="postInfo.duty"></p>
           <h3>岗位要求</h3>
           <p v-text="postInfo.require"></p>
+          <h3>公司名称</h3>
+          <p v-text="postInfo.unit"></p>
           <h3>工作地址</h3>
           <p v-text="postInfo.address"></p>
         </div>

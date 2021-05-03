@@ -37,6 +37,7 @@
 
 <script>
 import SIndexItem from "./SIndexItem.vue";
+import { getProjectTop } from "@/api/project"
 export default {
   name: "SIndexProject",
   data() {
@@ -97,13 +98,20 @@ export default {
 
   watch: {},
 
-  created() {},
+  created() {
+    this.initData()
+  },
 
   mounted() {
     this.setHeight();
   },
 
   methods: {
+    async initData() {
+      let res =  await getProjectTop();
+      debugger
+      this.projectLis = res;
+    },
     // 设置项目简介盒子高度
     setHeight() {
       for (let i = 0; i < this.$refs.imgBox.length; i++) {

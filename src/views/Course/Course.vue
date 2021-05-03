@@ -15,25 +15,20 @@
           <div class="course-wrapper" @click="toCourseById(course.id)">
             <div class="course-detail-box">
               <h3 class="course-title" v-text="course.name"></h3>
-              <p class="course-detail" v-text="course.abstract"></p>
               <div class="course-info">
                 <el-row>
-                  <el-col :span="12">
-                    <el-rate
-                      v-model="course.score"
-                      disabled
-                      show-score
-                      text-color="#ff9900"
-                    ></el-rate>
+                  <el-col :span="10" style="text-align: right">
+                    <span v-text="course.author"></span>
                   </el-col>
-                  <el-col :span="1">
+                  <el-col :span="2">
                     <el-divider direction="vertical"></el-divider>
                   </el-col>
-                  <el-col :span="11">
-                    <span v-text="course.view"></span>人观看
+                  <el-col :span="12">
+                    <span v-text="course.unit"></span>
                   </el-col>
                 </el-row>
               </div>
+              <p class="course-detail" v-text="course.abstract"></p>
             </div>
           </div>
         </el-col>
@@ -60,15 +55,15 @@ export default {
   data() {
     return {
       nowPage: 1,
-      pageSize: 10,
+      pageSize: 8,
       total: 10,
       courseList: [
         {
           id: 9,
           name: "",
-          abstract: "",
-          score: 4,
-          view: 123,
+          author: "",
+          unit: "",
+          abstract: ""
         }
       ],
     };
@@ -117,7 +112,9 @@ export default {
     },
 
     // 当前页改变 nowPage（改变后的页数）
-    changePage(nowPage) {},
+    changePage(nowPage) {
+      this.initData(nowPage, this.pageSize);
+    },
   },
 };
 </script>

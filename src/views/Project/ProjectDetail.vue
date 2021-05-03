@@ -12,7 +12,7 @@
               <p>
                 需要融资：
                 <span v-if="projectInfo.financing">是</span>
-                <span else>否</span>
+                <span v-else>否</span>
               </p>
               <p>发布时间：<span v-text="projectInfo.time"></span></p>
             </div>

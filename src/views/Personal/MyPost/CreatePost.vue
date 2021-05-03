@@ -125,7 +125,9 @@ export default {
         { id: "001", name: "在校生" },
         { id: "002", name: "应届生" },
         { id: "003", name: "1-3年" },
-        { id: "004", name: "无需经验" },
+        { id: "004", name: "3-5年" },
+        { id: "005", name: "5-8年" },
+        { id: "006", name: "无需经验" },
       ],
       postForm: {
         id: "",
@@ -147,8 +149,8 @@ export default {
           { required: true, message: "请输入岗位名称", trigger: "blur" },
           {
             min: 2,
-            max: 10,
-            message: "长度在 2 到 10 个字符",
+            max: 16,
+            message: "长度在 2 到 16 个字符",
             trigger: "blur",
           },
         ],
@@ -172,8 +174,8 @@ export default {
           { required: true, message: "请输入公司名称", trigger: "blur" },
           {
             min: 4,
-            max: 15,
-            message: "长度在 4 到 15 个字符",
+            max: 16,
+            message: "长度在 4 到 16 个字符",
             trigger: "blur",
           },
         ],
@@ -181,8 +183,8 @@ export default {
           { required: true, message: "请输入工作地址", trigger: "blur" },
           {
             min: 4,
-            max: 25,
-            message: "长度在 2 到 25 个字符",
+            max: 32,
+            message: "长度在 2 到 32 个字符",
             trigger: "blur",
           },
         ],

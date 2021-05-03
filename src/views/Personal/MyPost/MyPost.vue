@@ -29,10 +29,13 @@
                 <el-divider direction="vertical"></el-divider>
                 经验：<span v-text="post.experience"></span>
               </p>
-              <p>招聘人数：<span v-text="post.experience"></span></p>
               <p>
-                <span v-text="post.unit"></span>
-                <el-divider direction="vertical"></el-divider>
+                招聘人数：
+                <span v-text="post.need[0]"></span> -
+                <span v-text="post.need[1]"></span> 人
+              </p>
+              <p>
+                地址：
                 <span v-text="post.address"></span>
               </p>
             </div>
@@ -72,7 +75,6 @@ export default {
           id: "",
           name: "", // 岗位名称
           price: [], //薪资范围
-          unit: "", //公司名
           education: "", // 学历
           experience: "", // 经验
           need: [], // 招聘人数
@@ -103,12 +105,13 @@ export default {
 
   methods: {
     setNewCardHeigh() {
-      this.styleObj.height = this.$refs.postCard[0].clientHeight - 21 + "px";
+      // this.styleObj.height = this.$refs.postCard[0].clientHeight - 21 + "px";
+      this.styleObj.height = 235 + "px";
     },
 
     // 初始化岗位列表
     async initData() {
-      let userId = this.userId
+      let userId = this.userId;
       let res = await getMyPost({ userId });
       debugger;
       this.postList = res;

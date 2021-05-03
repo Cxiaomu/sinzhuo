@@ -10,6 +10,7 @@
 <script>
 import SHeader from "../components/SHeader.vue";
 import SFooter from "../components/SFooter.vue";
+import { mapGetters } from "vuex";
 export default {
   name: "Layout",
   data() {
@@ -22,7 +23,21 @@ export default {
 
   watch: {},
 
-  created() {},
+   computed: {
+    ...mapGetters(["isLogin"]),
+  },
+  created() {
+    // 未登录
+    if (!this.isLogin) {
+      let params = {
+        activeType: "login",
+      };
+      this.$router.push({
+        name: "Login",
+        params: params,
+      });
+    }
+  },
 
   methods: {},
 };

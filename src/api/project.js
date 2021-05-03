@@ -6,6 +6,11 @@ import {
 } from "@/utils/httpService";
 
 // 根据筛选条件获取项目列表
+export function getProjectTop(params) {
+  return get("/project/top", params);
+}
+
+// 根据筛选条件获取项目列表
 export function getProjectList(params) {
   return get("/project/filter", params);
 }

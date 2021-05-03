@@ -46,7 +46,7 @@ export default {
   padding: 0;
 }
 >>> .el-main {
-  min-height: 300px;
+  min-height: 400px;
 }
 >>> .el-header {
   width: 100%;

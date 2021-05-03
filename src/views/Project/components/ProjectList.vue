@@ -1,19 +1,27 @@
 <template>
   <div id="project-list-wrapper" class="content-wrapper">
     <el-table
-    style="width: 100%"
+      style="width: 100%"
       :data="projectList"
       :header-cell-style="{ background: '#2ea1d6', color: '#fff' }"
       @row-click="toProjectDetail"
     >
-      <el-table-column v-for="(column, index) in columns" :key="index" align="center" :label="column.title"> 
+      <el-table-column
+        v-for="(column, index) in columns"
+        :key="index"
+        align="center"
+        :label="column.title"
+      >
         <template slot-scope="scope">
           <div v-if="column.prop === 'financing'">
             <span v-if="scope.row.financing">是</span>
             <span v-else>否</span>
           </div>
           <div v-else>
-            <span v-text="scope.row[column.prop]" :class="column.styleClass"></span>
+            <span
+              v-text="scope.row[column.prop]"
+              :class="column.styleClass"
+            ></span>
           </div>
         </template>
       </el-table-column>
@@ -37,24 +45,25 @@ export default {
   name: "ProjectList",
   data() {
     return {
-      pageSize: 8,
+      pageSize: 6,
       nowPage: 1,
       total: 0,
-      columns: [{
+      columns: [
+        {
           title: "项目",
           prop: "name",
-          styleClass: "on-line"
+          styleClass: "on-line",
         },
 
         {
           title: "项目概述",
           prop: "abstract",
-          styleClass: "more-text-3"
+          styleClass: "more-text-3",
         },
         {
           title: "所属领域",
           prop: "field",
-          styleClass: "more-text-3"
+          styleClass: "more-text-3",
         },
         // {
         //   title: "负责人",
@@ -64,12 +73,12 @@ export default {
         {
           title: "项目阶段",
           prop: "phase",
-          styleClass: "oneline"
+          styleClass: "oneline",
         },
         {
           title: "需要融资",
           prop: "financing",
-          styleClass: "oneline"
+          styleClass: "oneline",
         },
       ],
       constProjectList: [], // 请求的项目列表
@@ -78,7 +87,7 @@ export default {
         {
           id: 0,
           name: "",
-          abstract: '',
+          abstract: "",
           field: "",
           author: "",
           phase: "",
@@ -90,7 +99,7 @@ export default {
 
   components: {},
 
-  watch: { },
+  watch: {},
 
   created() {},
 
@@ -105,20 +114,22 @@ export default {
         },
       });
     },
-    
+
     // 当前页改变 nowPage（改变后的页数）
     changePage(nowPage) {
+      this.nowPage = nowPage;
+      this.$emit('to-filter');
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/global.scss';
+@import "@/styles/global.scss";
 .el-row >>> .el-col {
   text-align: center;
 }
->>>.el-table__row {
+>>> .el-table__row {
   cursor: pointer;
 }
 .more-text-3 {
@@ -146,12 +157,12 @@ export default {
     text-align: right;
     margin: 2rem 0 1rem;
   }
-  .project-list-pagination >>>.btn-prev,
-  .project-list-pagination >>>.btn-next,
-  .project-list-pagination >>>.el-pager li {
+  .project-list-pagination >>> .btn-prev,
+  .project-list-pagination >>> .btn-next,
+  .project-list-pagination >>> .el-pager li {
     background-color: $white;
   }
-  .project-list-pagination >>>.el-pager li.active {
+  .project-list-pagination >>> .el-pager li.active {
     background-color: $activeColor;
     color: $white;
   }
