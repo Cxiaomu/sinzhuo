@@ -55,41 +55,17 @@ export default new Router({
           component: () => import("@/views/Course/CourseDetail")
         },
         {
-          path: '/firm',
-          name: 'Firm',
-          component: () => import("@/views/Firm/Firm")
-        },
-        {
-          path: '/firmDetail',
-          name: 'FirmDetail',
-          component: () => import("@/views/Firm/FirmDetail")
-        },
-        {
           path: '/personal',
           name: 'Personal',
           component: () => import("@/views/Personal/Personal"),
           redirect: {
-            name: "MyNews"
+            name: "MySetting"
           },
-          children: [{
-              path: '/myNews',
-              name: 'MyNews',
-              component: () => import("@/views/Personal/MyNews/MyNews")
-            },
+          children: [
             {
               path: '/myCourse',
               name: 'MyCourse',
               component: () => import("@/views/Personal/MyCourse/MyCourse")
-            },
-            {
-              path: '/myFirm',
-              name: 'MyFirm',
-              component: () => import("@/views/Personal/MyFirm/MyFirm")
-            },
-            {
-              path: '/myFocus',
-              name: 'MyFocus',
-              component: () => import("@/views/Personal/MyFocus/MyFocus")
             },
             {
               path: '/myPost',
@@ -117,11 +93,6 @@ export default new Router({
           path: '/createPost',
           name: 'CreatePost',
           component: () => import("@/views/Personal/MyPost/CreatePost")
-        },
-        {
-          path: '/createFirm',
-          name: 'CreateFirm',
-          component: () => import("@/views/Personal/MyFirm/CreateFirm")
         },
         {
           path: '/createCourse',

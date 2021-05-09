@@ -13,7 +13,6 @@
             <span
               v-text="postInfo.company"
               class="post-company"
-              @click="toFirm"
             ></span>
           </h3>
           <p>
@@ -130,9 +129,7 @@ export default {
       }
     },
 
-    toFirm() {
-      this.$router.push("/firm");
-    },
+    
 
     toApply() {
       this.applyDialog = true;

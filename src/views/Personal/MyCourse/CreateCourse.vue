@@ -44,7 +44,7 @@
             ></el-input>
           </el-form-item>
         </el-form>
-        <!-- 岗位表单 end -->
+        <!-- 课程表单 end -->
         <div class="button-wrapper">
           <el-button type="primary" @click="toPublish">{{ btnText }}</el-button>
           <el-button @click="toQuite">取消</el-button>
@@ -66,21 +66,19 @@ export default {
       courseId: "",
       userId: 0,
       courseForm: {
-        id: "001",
-        name: "前端开发",
-        author: "Cxiaomu",
-        unit: "山东建筑大学",
-        link: "http://localhost/iekcpt/index.php/Home/Teacher/gongxue.html",
-        abstract: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
-        航空公司建立了长期的合作关系，如在深圳航空公司，翡翠国际货运航空公司，中国南方航空公司，
-        中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。
-        中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。
-        中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。
-        中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。`,
+        id: "",
+        name: "Node.JS-黑马程序员",
+        author: "黑马程序员",
+        unit: "黑马程序员",
+        link: "https://www.bilibili.com/video/BV1Ns411N7HU?p=1",
+        abstract: `Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。
+        Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型,使其轻量又高效。
+        Node.js 的包管理器 npm,是全球最大的开源库生态系统。
+        此视频教程为黑马node.js视频（最优入门视频）`,
       },
       courseRule: {
         name: [
-          { required: true, message: "请输入岗位名称", trigger: "blur" },
+          { required: true, message: "请输入课程名称", trigger: "blur" },
           {
             min: 2,
             message: "长度至少为 2 个字符",

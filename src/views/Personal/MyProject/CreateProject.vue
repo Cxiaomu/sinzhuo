@@ -92,14 +92,20 @@ export default {
       fieldList: [],
       phaseList: [],
       projectForm: {
-        imgUrl: [{ name: "LOGO", url: "" }],
+        imgUrl: [{ name: "LOGO", url: "http://localhost:3000/project/projectImg?imgName=1620564048940.jpg" }],
         // imgUrl: [],
-        name: "",
-        field: "",
+        name: "解馋机",
+        field: "住宿和餐饮业",
         time: "",
-        abstract: "",
-        phase: "",
-        financing: null,
+        abstract: `在前期，我们为了了解大学生校园内对于零食的需求，
+        我们走访了很多大学，进行线下的调研，也只做了调查问卷。
+        调研中，我们发现很多学校的大学生，还是对我们的零食贩售机很感兴趣，
+        甚至是觉得这是必要的。调查显示，大学生上超市购买零食的频率非常高，
+        甚至是一天一两次，他们也很认为零食贩售机可以节省他们的时间，很支持。
+        再加上学校超市的营业时间有限，会导致一些早起或者是晚睡的同学买不到
+        零食或者饮料，那么零食贩售机又很好的解决了这个问题。`,
+        phase: "项目规划",
+        financing: 1,
       },
       projectRule: {
         name: [
