@@ -22,7 +22,7 @@
                 <el-col :xs="24" :sm="24" :md="15" :lg="15" :xl="15">
                   <div class="project-detail-box" ref="detailBox">
                     <h3 class="project-title" v-text="project.name" @click="toProjectById(project.id)"></h3>
-                    <p class="project-detail" v-text="project.detail"></p>
+                    <p class="project-detail" v-text="project.abstract"></p>
                     <!-- {{ project.detail }} -->
                   </div>
                 </el-col>
@@ -47,50 +47,12 @@ export default {
       bgColor: "#f4f4f4",
       projectList: [
         {
-          id: "001",
-          name: "航空巴拉巴拉巴拉案例",
-          imgUrl: require("../assets/img/project/1-project.jpg"),
-          detail: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
-          航空公司建立了长期的合作关系，如在深圳航空公司，翡翠国际货运航空公司，中国南方航空公司，
-          中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。`,
-          label: ["制造业", "航天航空"],
-        },
-        {
-          id: "002",
-          name: "航空巴拉",
-          imgUrl: require("../assets/img/project/2-project.jpg"),
-          detail: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
-          航空公司建立了长期的合作关系，如在深圳航空公司，翡翠国际货运航空公司，中国南方航空公司，
-          中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。`,
-          label: ["制造业", "航天航空"],
-        },
-        {
-          id: "003",
-          name: "航空巴拉巴拉巴拉案例dscvx",
-          imgUrl: require("../assets/img/project/3-project.jpg"),
-          detail: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
-          航空公司建立了长期的合作关系，如在深圳航空公司，翡翠国际货运航空公司，中国南方航空公司，
-          中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。`,
-          label: ["制造业", "航天航空"],
-        },
-        {
-          id: "004",
-          name: "航空巴拉巴拉巴拉案例吃的饭DVD",
-          imgUrl: require("../assets/img/project/4-project.jpg"),
-          detail: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
-          航空公司建立了长期的合作关系，如在深圳航空公司，翡翠国际货运航空公司，中国南方航空公司，
-          中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。`,
-          label: ["制造业", "航天航空"],
-        },
-        {
-          id: "005",
-          name: "航空巴拉巴拉巴拉",
-          imgUrl: require("../assets/img/project/5-project.jpg"),
-          detail: `深圳市顺丰物流有限公司承接深圳至全国、世界各地航空货物运输业务我公司与国内各大
-          航空公司建立了长期的合作关系，如在深圳航空公司，翡翠国际货运航空公司，中国南方航空公司，
-          中国国际航空公司，中国东方航空公司订有专用舱位，能确保到货时间，是一家值得信赖的深圳航空货运公司。`,
-          label: ["制造业", "航天航空"],
-        },
+          id: "",
+          name: "",
+          imgUrl: "",
+          detail: "",
+          label: [],
+        }
       ],
     };
   },
@@ -110,7 +72,7 @@ export default {
     async initData() {
       let res =  await getProjectTop();
       debugger
-      this.projectLis = res;
+      this.projectList = res;
     },
     // 设置项目简介盒子高度
     setHeight() {
@@ -125,10 +87,10 @@ export default {
     // 前往项目详情页
     toProjectById(id) {
       let query  = {
-        id: id
+        projectId: id
       }
       this.$router.push({
-        path: '/project',
+        path: '/projectDetail',
         query: query
       })
     },

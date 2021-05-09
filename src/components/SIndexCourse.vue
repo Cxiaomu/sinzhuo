@@ -4,9 +4,9 @@
       <template v-slot:index-item-content>
         <el-row>
           <el-col
-            :xs="12"
-            :sm="6"
-            :md="4"
+            :xs="24"
+            :sm="12"
+            :md="8"
             :lg="8"
             :xl="8"
             v-for="course in courseList"

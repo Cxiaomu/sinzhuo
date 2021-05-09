@@ -5,10 +5,10 @@
         <!-- filter title start -->
         <template slot="title">
           <el-row type="flex" justify="space-between" class="collapse-title">
-            <el-col :span="18">
+            <el-col :span="12">
               <span class="filter-title">筛选</span>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="12">
               <div class="search-box" @click.stop="stopExpand">
                 <el-input
                   placeholder="请输入关键字"
