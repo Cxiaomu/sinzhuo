@@ -109,10 +109,12 @@ export default {
     async initData() {
       let userId = this.userId;
       let res = await getMyCourse({ userId });
-      this.courseList = res;
-      this.courseList.forEach((item) => {
-        item.time = formateDate(new Date(item.time));
-      });
+      if (res.length > 0) {
+        this.courseList = res;
+        this.courseList.forEach((item) => {
+          item.time = formateDate(new Date(item.time));
+        });
+      }
     },
 
     // 前往课程详情
@@ -164,10 +166,12 @@ export default {
 @import "@/styles/global.scss";
 a {
   text-decoration: none;
-  &:link, &:visited{
+  &:link,
+  &:visited {
     color: $darkenGrayText;
   }
-  &:hover, &:active {
+  &:hover,
+  &:active {
     color: $activeColor;
   }
 }

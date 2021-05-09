@@ -36,6 +36,7 @@
                     <el-form-item label="身份：" prop="role">
                       <el-select
                         class="form-input"
+                        @change="changeRole"
                         v-model="loginForm.role"
                         placeholder="请选择身份"
                       >
@@ -208,8 +209,8 @@ export default {
       ],
       loginForm: {
         role: 1,
-        username: "",
-        password: "",
+        username: "wangwu",
+        password: "123456abc",
       },
       loginRule: {
         role: [{ required: true, message: "请选择身份", trigger: "change" }],
@@ -284,6 +285,18 @@ export default {
   methods: {
     ...mapActions(["userLogin"]),
 
+    // 登录切换角色
+    changeRole() {
+      let username = '';
+      let password = '';
+      switch (arguments[0]) {
+        case 1: username = 'wangwu'; password = '123456abc'; break;
+        case 2: username = 'lisi'; password = '123456abc'; break;
+        case 3: username = 'zhangsan'; password = '123456abc'; break;
+      }
+      this.loginForm.username = username;
+      this.loginForm.password = password;
+    },
     // 点击登录
     toLogin() {
       this.$refs["loginForm"].validate(async (valid) => {
