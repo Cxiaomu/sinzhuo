@@ -41,7 +41,7 @@
               <p>联系电话：<span v-text="author.tel"></span></p>
             </li>
             <li>
-              <p>联系邮箱：<span v-text="author.email"></span></p>
+              <p>联系邮箱：<a class="link-a" :href="'mailto:'+author.email" target="_blank">{{ author.email }}</a></p>
             </li>
           </ul>
         </div>
@@ -127,6 +127,7 @@ $darkenWhite: #f4f4f4;
       .item-tag {
         margin-left: 2rem;
         margin-bottom: 0rem;
+        cursor: text;
       }
       h3 {
         margin-top: 2rem;
@@ -141,6 +142,9 @@ $darkenWhite: #f4f4f4;
         margin-block-start: 0;
         margin-block-end: 0;
         padding-inline-start: 0;
+        .link-a {
+          font-size: 1rem;
+        }
       }
     }
   }

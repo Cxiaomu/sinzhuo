@@ -56,7 +56,14 @@
             <p>联系电话：<span v-text="author.tel"></span></p>
           </li>
           <li>
-            <p>联系邮箱：<span v-text="author.email"></span></p>
+            <p>
+              联系邮箱：<a
+                class="link-a"
+                :href="'mailto:' + author.email"
+                target="_blank"
+                >{{ author.email }}</a
+              >
+            </p>
           </li>
         </ul>
       </div>
@@ -182,6 +189,9 @@ export default {
       p {
         padding-left: 2rem;
         line-height: 1.6rem;
+        font-size: 1rem;
+      }
+      .link-a {
         font-size: 1rem;
       }
     }

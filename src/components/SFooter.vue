@@ -129,11 +129,6 @@ export default {
 
 <style scoped lang="scss">
 @import '@/styles/global.scss';
-.link {
-  line-height: 25px;
-  color: $darkenGrayText;
-  font-size: 0.9rem;
-}
 #footer-wrapper {
   .footer-container-first {
     background-color: $darkenActiveColor;
@@ -169,13 +164,6 @@ export default {
         li {
           display: inline-block;
           margin: 0 0.5rem;
-        }
-      }
-      .link-a {
-        @extend .link;
-        text-decoration: none;
-        &:hover {
-          color: $activeColor;
         }
       }
       p {

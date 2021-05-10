@@ -114,3 +114,17 @@ $delRed: #f56c6c;
     height: 2.5rem;
   }
 }
+
+// a 链接
+.link {
+  line-height: 25px;
+  color: $darkenGrayText;
+  font-size: 0.9rem;
+}
+.link-a {
+  @extend .link;
+  text-decoration: none;
+  &:hover {
+    color: $activeColor;
+  }
+}
