@@ -186,6 +186,7 @@
 import { mapGetters, mapActions } from "vuex";
 import { getUserInfo, registerUser } from "@/api/user";
 import { RegTel } from "@/utils/ways";
+import md5 from 'js-md5';
 export default {
   name: "Login",
   data() {
@@ -291,7 +292,7 @@ export default {
           let params = {
             role: this.loginForm.role,
             username: this.loginForm.username,
-            password: this.loginForm.password,
+            password: md5(this.loginForm.password),
           };
           let res = await getUserInfo(params);
           debugger;
@@ -356,7 +357,7 @@ export default {
       let params = {
         role: this.registerForm.role,
         tel: this.registerForm.tel,
-        password: this.registerForm.password,
+        password: md5(this.registerForm.password),
       };
       // 注册
       let res = await registerUser(params);

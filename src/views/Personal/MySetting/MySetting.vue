@@ -148,6 +148,7 @@
 <script>
 import { getUser, changePwd, changeInfo } from "@/api/user";
 import { mapGetters, mapActions } from "vuex";
+import md5 from "js-md5"
 export default {
   name: "MySetting",
   data() {
@@ -306,8 +307,8 @@ export default {
         if (valid) {
           let params = {
             id: "1",
-            oldPassword: this.pwdForm.oldPassword,
-            newPassword: this.pwdForm.newPassword,
+            oldPassword: md5(this.pwdForm.oldPassword),
+            newPassword: md5(this.pwdForm.newPassword),
           };
           let res = await changePwd(params);
           if (res.success) {
