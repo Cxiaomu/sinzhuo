@@ -38,8 +38,12 @@
                 <span class="" v-text="username" title="个人中心"></span>
               </div>
             </template>
-            <el-menu-item index="5-1" v-if="isLogin" @click="toPersonal">个人中心</el-menu-item>
-            <el-menu-item index="5-2" v-if="isLogin" @click="toLogout">退出</el-menu-item>
+            <el-menu-item index="5-1" v-if="isLogin" @click="toPersonal"
+              >个人中心</el-menu-item
+            >
+            <el-menu-item index="5-2" v-if="isLogin" @click="toLogout"
+              >退出</el-menu-item
+            >
           </el-submenu>
           <!-- 登录部分 end-->
         </el-menu>
@@ -76,7 +80,7 @@ export default {
     ...mapGetters(["userInfo"]),
   },
   created() {
-    this.username = this.userInfo.username
+    this.username = this.userInfo.username;
     this.getMenu();
     this.activeHeader(this.$route);
   },
@@ -92,7 +96,7 @@ export default {
 
     // 点击菜单栏
     changeMenu(index, indexPath) {
-      debugger
+      debugger;
       if (index !== "5-1" && index !== "5-2") {
         let url = this.menuList[index - 1].path;
         this.$router.push(url);
@@ -157,8 +161,8 @@ export default {
     toLogout() {
       this.userLogout();
       this.isLogin;
-      debugger
-    }
+      debugger;
+    },
   },
 };
 </script>

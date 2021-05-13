@@ -68,16 +68,7 @@ export default {
       styleObj: {
         height: "",
       },
-      courseList: [
-        {
-          id: "",
-          name: "",
-          author: "",
-          time: "",
-          unit: "",
-          link: "",
-        },
-      ],
+      courseList: [],
     };
   },
   components: {},

@@ -124,7 +124,7 @@ export default {
   created() {
     this.getPorjectConfig();
   },
-  mounted() { },
+  mounted() {},
   methods: {
     async getPorjectConfig() {
       // 项目阶段
@@ -151,25 +151,31 @@ export default {
     },
 
     // 防止点击搜索、输入框折叠面板展开/收缩
-    stopExpand() {}, 
+    stopExpand() {},
 
     // 关键字搜索
     toSearch() {
-      debugger
-      this.$emit('to-search', this.keywords)
+      debugger;
+      this.$emit("to-search", this.keywords);
     },
 
     // 点击span进行切换、过滤
     toFilter(type, index) {
       if (type == "financing") {
         this.isFinancing = index;
-        let data = index
-        debugger
-        switch(index) {
-          case 0: data = -1; break;
-          case 1: data = 1; break;
-          case 2: data = 0; break;
-        } 
+        let data = index;
+        debugger;
+        switch (index) {
+          case 0:
+            data = -1;
+            break;
+          case 1:
+            data = 1;
+            break;
+          case 2:
+            data = 0;
+            break;
+        }
         this.searchData.financing = data;
       } else if (type == "phase") {
         this.isPhase = index;
@@ -179,14 +185,14 @@ export default {
         this.searchData.field = index;
       }
       // 上传参数过滤
-      this.$emit('to-filter', this.searchData)
+      this.$emit("to-filter", this.searchData);
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/global.scss';
+@import "@/styles/global.scss";
 #project-filter-wrapper >>> .el-collapse-item__content {
   padding-bottom: 0;
 }

@@ -5,7 +5,9 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 
-import ElementUI, { TabPane } from 'element-ui'
+import ElementUI, {
+  TabPane
+} from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './styles/element-variables.scss'
 import 'element-ui/lib/theme-chalk/display.css';
@@ -24,7 +26,9 @@ new Vue({
   el: '#app',
   router,
   store,
-  components: { App },
+  components: {
+    App
+  },
   template: '<App/>'
 })
 
@@ -38,6 +42,6 @@ router.beforeEach((to, from, next) => {
 })
 
 // 页面跳转 滚动到顶部
-router.afterEach((to,from,next) => {
-  window.scrollTo(0,0);
+router.afterEach((to, from, next) => {
+  window.scrollTo(0, 0);
 });

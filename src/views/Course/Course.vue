@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { getCourseList, getCourseTotal } from '@/api/course'
+import { getCourseList, getCourseTotal } from "@/api/course";
 export default {
   name: "Course",
   data() {
@@ -63,8 +63,8 @@ export default {
           name: "",
           author: "",
           unit: "",
-          abstract: ""
-        }
+          abstract: "",
+        },
       ],
     };
   },
@@ -73,7 +73,7 @@ export default {
   watch: {},
 
   created() {
-    this.getTotal()
+    this.getTotal();
     this.initData(this.nowPage, this.pageSize);
   },
 
@@ -83,8 +83,8 @@ export default {
     // 获取岗位个数
     async getTotal() {
       let res = await getCourseTotal();
-      this.total = res.total
-      debugger
+      this.total = res.total;
+      debugger;
     },
 
     // 数据初始化

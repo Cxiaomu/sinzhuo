@@ -118,7 +118,7 @@ export default {
     // 当前页改变 nowPage（改变后的页数）
     changePage(nowPage) {
       this.nowPage = nowPage;
-      this.$emit('to-filter');
+      this.$emit("to-filter");
     },
   },
 };

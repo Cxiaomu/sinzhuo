@@ -71,7 +71,7 @@ export default {
           unit: "稀里哗啦", //公司名
           need: [100, 200], // 招聘人数
           address: "上海 洋浦", // 工作地址
-        }
+        },
       ],
     };
   },
@@ -80,7 +80,7 @@ export default {
   watch: {},
 
   created() {
-    this.getTotal()
+    this.getTotal();
     this.initData(this.nowPage, this.pageSize);
   },
 
@@ -88,8 +88,8 @@ export default {
     // 获取岗位个数
     async getTotal() {
       let res = await getPostTotal();
-      this.total = res.total
-      debugger
+      this.total = res.total;
+      debugger;
     },
 
     // 数据初始化

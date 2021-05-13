@@ -77,9 +77,9 @@
                           <span>记住密码</span>
                         </el-checkbox>
                       </el-col>
-                      <el-col :span="16">
+                      <!-- <el-col :span="16">
                         <span class="forget" @click="toReSetPwd">忘记密码</span>
-                      </el-col>
+                      </el-col> -->
                     </el-row>
                   </div>
                   <div class="btn-wrapper">
@@ -187,7 +187,7 @@
 import { mapGetters, mapActions } from "vuex";
 import { getUserInfo, registerUser } from "@/api/user";
 import { RegTel } from "@/utils/ways";
-import md5 from 'js-md5';
+import md5 from "js-md5";
 export default {
   name: "Login",
   data() {
@@ -270,9 +270,9 @@ export default {
     ...mapGetters(["isLogin"]),
   },
   created() {
-    if (localStorage.getItem("userInfo")!== '{}') {
-      debugger
-      let userInfo = JSON.parse(localStorage.getItem("userInfo"))
+    if (localStorage.getItem("userInfo") !== "{}") {
+      debugger;
+      let userInfo = JSON.parse(localStorage.getItem("userInfo"));
       this.loginForm = userInfo;
     }
     // 若已登录 -> 首页
@@ -288,12 +288,21 @@ export default {
 
     // 登录切换角色
     changeRole() {
-      let username = '';
-      let password = '';
+      let username = "";
+      let password = "";
       switch (arguments[0]) {
-        case 1: username = 'wangwu'; password = '123456abc'; break;
-        case 2: username = 'lisi'; password = '123456abc'; break;
-        case 3: username = 'zhangsan'; password = '123456abc'; break;
+        case 1:
+          username = "wangwu";
+          password = "123456abc";
+          break;
+        case 2:
+          username = "lisi";
+          password = "123456abc";
+          break;
+        case 3:
+          username = "zhangsan";
+          password = "123456abc";
+          break;
       }
       this.loginForm.username = username;
       this.loginForm.password = password;

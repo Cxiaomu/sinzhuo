@@ -10,10 +10,7 @@
             <span v-text="postInfo.price[1]"></span>k / 月
           </p>
           <h3 class="margin">
-            <span
-              v-text="postInfo.company"
-              class="post-company"
-            ></span>
+            <span v-text="postInfo.company" class="post-company"></span>
           </h3>
           <p>
             学历：<span v-text="postInfo.education"></span>
@@ -128,8 +125,6 @@ export default {
         this.author = res[1];
       }
     },
-
-    
 
     toApply() {
       this.applyDialog = true;

@@ -18,7 +18,7 @@
 <script>
 import ProjectFilter from "./components/ProjectFilter.vue";
 import ProjectList from "./components/ProjectList.vue";
-import { getProjectList,getProjectListByKey } from "@/api/project.js";
+import { getProjectList, getProjectListByKey } from "@/api/project.js";
 export default {
   name: "Project",
   data() {
@@ -35,9 +35,7 @@ export default {
 
   watch: {},
 
-  created() {
-    
-  },
+  created() {},
   mounted() {
     let params = {
       financing: -1,
@@ -63,12 +61,11 @@ export default {
       debugger;
       this.$refs.proList.projectList = res.list;
       this.$refs.proList.total = res.total;
-      
     },
     async toSearch(key) {
-      let keywords = key
+      let keywords = key;
       let res = await getProjectListByKey({ keywords });
-      debugger
+      debugger;
       this.$refs.proList.projectList = res;
     },
   },

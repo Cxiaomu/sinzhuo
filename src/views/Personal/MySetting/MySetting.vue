@@ -148,7 +148,7 @@
 <script>
 import { getUser, changePwd, changeInfo } from "@/api/user";
 import { mapGetters, mapActions } from "vuex";
-import md5 from "js-md5"
+import md5 from "js-md5";
 export default {
   name: "MySetting",
   data() {
@@ -258,7 +258,7 @@ export default {
     async initData() {
       let params = { userId: this.userId };
       let res = await getUser(params);
-      debugger
+      debugger;
       if (res.length === 0) {
         this.$message.warning("获取用户信息失败！");
         return;
@@ -286,7 +286,7 @@ export default {
             this.$message.success("个人信息修改成功！");
             await this.userLogin(this.userForm);
             window.location.reload();
-            debugger
+            debugger;
           } else {
             this.$message.warning("个人信息修改失败！");
           }

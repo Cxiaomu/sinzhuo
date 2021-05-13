@@ -40,7 +40,9 @@ export default {
   name: "PersonalHeader",
   data() {
     return {
-      headerAvatar: require(`@/assets/img/avatar/${parseInt(Math.random()*10)}-avatar.jpg`),
+      headerAvatar: require(`@/assets/img/avatar/${parseInt(
+        Math.random() * 10
+      )}-avatar.jpg`),
       headerInfo: {
         name: "",
         unit: "", // 学校、公司
@@ -60,7 +62,7 @@ export default {
   created() {
     if (localStorage.getItem("loginStatus")) {
       this.headerInfo = this.userInfo;
-      debugger
+      debugger;
     }
   },
 
