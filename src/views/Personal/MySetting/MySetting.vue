@@ -148,6 +148,7 @@
 <script>
 import { getUser, changePwd, changeInfo } from "@/api/user";
 import { mapGetters, mapActions } from "vuex";
+import { RegTel, RegEmail } from "@/utils/ways";
 import md5 from "js-md5";
 export default {
   name: "MySetting",
@@ -277,6 +278,14 @@ export default {
     toChange() {
       this.$refs["userForm"].validate(async (valid) => {
         if (valid) {
+          if (!RegEmail(this.userForm.email)) {
+            this.$message.warning("邮箱格式不正确！");
+            return;
+          }
+          if (!RegTel(this.userForm.tel)) {
+            this.$message.warning("手机号格式不正确");
+            return;
+          }
           let params = {
             ...this.userForm,
           };

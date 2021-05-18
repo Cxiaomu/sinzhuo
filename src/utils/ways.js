@@ -4,6 +4,12 @@ export const RegTel = function (tel) {
   return patt.test(tel);
 }
 
+// 验证邮箱
+export const RegEmail  = function (email) {
+  let patt = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+  return patt.test(email);
+}
+
 // 时间格式化
 export const formateDate = (date, fmt = "YYYY-MM-DD") => {
   function padLeftZero(n) {
