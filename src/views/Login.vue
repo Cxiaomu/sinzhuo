@@ -288,21 +288,12 @@ export default {
 
     // 登录切换角色
     changeRole() {
-      let username = "";
-      let password = "";
+      let username = '';
+      let password = '';
       switch (arguments[0]) {
-        case 1:
-          username = "wangwu";
-          password = "123456abc";
-          break;
-        case 2:
-          username = "lisi";
-          password = "123456abc";
-          break;
-        case 3:
-          username = "zhangsan";
-          password = "123456abc";
-          break;
+        case 1: username = 'wangwu'; password = '123456abc'; break;
+        case 2: username = 'lisi'; password = '123456abc'; break;
+        case 3: username = 'zhangsan'; password = '123456abc'; break;
       }
       this.loginForm.username = username;
       this.loginForm.password = password;

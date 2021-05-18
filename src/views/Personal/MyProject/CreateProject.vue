@@ -92,13 +92,7 @@ export default {
       fieldList: [],
       phaseList: [],
       projectForm: {
-        imgUrl: [
-          {
-            name: "LOGO",
-            url:
-              "http://localhost:3000/project/projectImg?imgName=1620564048940.jpg",
-          },
-        ],
+        imgUrl: [{ name: "LOGO", url: "http://localhost:3000/project/projectImg?imgName=1620564048940.jpg" }],
         // imgUrl: [],
         name: "解馋机",
         field: "住宿和餐饮业",
