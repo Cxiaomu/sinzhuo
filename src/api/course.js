@@ -9,9 +9,14 @@ export function getCourseList(params) {
   return get("/course/filter", params);
 }
 
-// 
+// 获取课程总条数
 export function getCourseTotal() {
   return get("/course/courseTotal");
+}
+
+// 根据关键字获取课程列表
+export function getCourseListByKey(params) {
+  return get("/course/keywords", params);
 }
 
 // 获取课程详情

@@ -2,6 +2,19 @@
 <template>
   <div style="background: #f4f4f4">
     <div id="course-list-wrapper" class="content-wrapper">
+      <div class="search-box">
+        <el-input
+          placeholder="请输入关键字"
+          size="medium"
+          maxlength="10"
+          v-model="keywords"
+          class="title-input"
+        >
+        </el-input>
+        <el-button type="primary" size="medium" @click="toSearch"
+          >搜索</el-button
+        >
+      </div>
       <el-row>
         <el-col
           :xs="24"
@@ -49,7 +62,7 @@
 </template>
 
 <script>
-import { getCourseList, getCourseTotal } from '@/api/course'
+import { getCourseList, getCourseTotal, getCourseListByKey } from "@/api/course";
 export default {
   name: "Course",
   data() {
@@ -57,14 +70,15 @@ export default {
       nowPage: 1,
       pageSize: 8,
       total: 10,
+      keywords: "",
       courseList: [
         {
           id: 9,
           name: "",
           author: "",
           unit: "",
-          abstract: ""
-        }
+          abstract: "",
+        },
       ],
     };
   },
@@ -73,7 +87,7 @@ export default {
   watch: {},
 
   created() {
-    this.getTotal()
+    this.getTotal();
     this.initData(this.nowPage, this.pageSize);
   },
 
@@ -83,8 +97,8 @@ export default {
     // 获取岗位个数
     async getTotal() {
       let res = await getCourseTotal();
-      this.total = res.total
-      debugger
+      this.total = res.total;
+      debugger;
     },
 
     // 数据初始化
@@ -95,6 +109,21 @@ export default {
       };
       this.courseList = await getCourseList(params);
       debugger;
+    },
+
+    async toSearch() {
+      let keywords = this.keywords;
+      if (!keywords) {
+        this.getTotal();
+        this.initData(this.nowPage, this.pageSize);
+        return
+      }
+      let res = await getCourseListByKey({ keywords });
+      debugger
+      if (res.length > 0) {
+        this.total = res.length
+      }
+      this.courseList = res;
     },
 
     toCourseById(courseId) {
@@ -124,6 +153,21 @@ export default {
 $courseColor: #6b7484;
 #course-list-wrapper {
   padding: 0rem 2rem 1rem;
+  .search-box {
+    padding: 2rem 0 1rem;
+    text-align: center;
+    .title-input {
+      width: 50%;
+    }
+    button {
+      margin-left: 1rem;
+      background-color: $activeColor;
+      color: $white;
+      &:hover {
+        background-color: darken($activeColor, 10%);
+      }
+    }
+  }
   .course-wrapper {
     cursor: pointer;
     margin: 1rem 0.5rem;

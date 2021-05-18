@@ -2,6 +2,19 @@
 <template>
   <div id="post-wrapper">
     <div class="f-container post-container">
+      <div class="search-box">
+        <el-input
+          placeholder="请输入关键字"
+          size="medium"
+          maxlength="10"
+          v-model="keywords"
+          class="title-input"
+        >
+        </el-input>
+        <el-button type="primary" size="medium" @click="toSearch"
+          >搜索</el-button
+        >
+      </div>
       <el-row>
         <el-col
           :xs="24"
@@ -55,7 +68,7 @@
 </template>
 
 <script>
-import { getPostList, getPostTotal } from "@/api/post";
+import { getPostList, getPostTotal, getPostListByKey } from "@/api/post";
 export default {
   name: "Post",
   data() {
@@ -63,6 +76,7 @@ export default {
       nowPage: 1,
       pageSize: 8,
       total: 10,
+      keywords: "",
       postList: [
         {
           id: "001",
@@ -71,7 +85,7 @@ export default {
           unit: "稀里哗啦", //公司名
           need: [100, 200], // 招聘人数
           address: "上海 洋浦", // 工作地址
-        }
+        },
       ],
     };
   },
@@ -80,7 +94,7 @@ export default {
   watch: {},
 
   created() {
-    this.getTotal()
+    this.getTotal();
     this.initData(this.nowPage, this.pageSize);
   },
 
@@ -88,8 +102,8 @@ export default {
     // 获取岗位个数
     async getTotal() {
       let res = await getPostTotal();
-      this.total = res.total
-      debugger
+      this.total = res.total;
+      debugger;
     },
 
     // 数据初始化
@@ -100,6 +114,22 @@ export default {
       };
       this.postList = await getPostList(params);
       debugger;
+    },
+
+    // 搜索
+    async toSearch() {
+      let keywords = this.keywords;
+      if (!keywords) {
+        this.getTotal();
+        this.initData(this.nowPage, this.pageSize);
+        return
+      }
+      let res = await getPostListByKey({ keywords });
+      debugger
+      if (res.length > 0) {
+        this.total = res.length
+      }
+      this.postList = res;
     },
 
     // 岗位详情
@@ -127,6 +157,21 @@ export default {
   background-color: $darkenWhite;
   .post-container {
     padding: 1rem 0;
+    .search-box {
+      padding: 1rem 0 1.5rem;
+      text-align: center;
+      .title-input {
+        width: 50%;
+      }
+      button {
+        margin-left: 1rem;
+        background-color: $activeColor;
+        color: $white;
+        &:hover {
+          background-color: darken($activeColor, 10%);
+        }
+      }
+    }
     .post-item {
       background-color: $white;
       margin: 0.5rem;

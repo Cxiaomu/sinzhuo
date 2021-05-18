@@ -9,9 +9,14 @@ export function getPostList(params) {
   return get("/post/filter", params);
 }
 
-// 
+// 获取岗位总条数
 export function getPostTotal() {
   return get("/post/postTotal");
+}
+
+// 根据关键字获取岗位列表
+export function getPostListByKey(params) {
+  return get("/post/keywords", params);
 }
 
 // 获取岗位详情
