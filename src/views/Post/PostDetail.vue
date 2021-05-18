@@ -10,7 +10,10 @@
             <span v-text="postInfo.price[1]"></span>k / 月
           </p>
           <h3 class="margin">
-            <span v-text="postInfo.company" class="post-company"></span>
+            <span
+              v-text="postInfo.company"
+              class="post-company"
+            ></span>
           </h3>
           <p>
             学历：<span v-text="postInfo.education"></span>
@@ -126,6 +129,11 @@ export default {
       }
     },
 
+<<<<<<< HEAD
+=======
+    
+
+>>>>>>> 8ea5b98... default data
     toApply() {
       this.applyDialog = true;
     },

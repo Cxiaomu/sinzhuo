@@ -61,7 +61,8 @@ export default new Router({
           redirect: {
             name: "MySetting"
           },
-          children: [{
+          children: [
+            {
               path: '/myCourse',
               name: 'MyCourse',
               component: () => import("@/views/Personal/MyCourse/MyCourse")
