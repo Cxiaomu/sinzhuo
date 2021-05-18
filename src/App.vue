@@ -1,41 +1,41 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 export default {
-  name: 'App',
+  name: "App",
   computed: {
     ...mapGetters(["isLogin"]),
     ...mapGetters(["role"]),
-    ...mapGetters(["userInfo"])
+    ...mapGetters(["userInfo"]),
   },
   created() {
-    if (localStorage.getItem('loginStatus') === 'true') {
-      let params = JSON.parse(localStorage.getItem('userInfo'));
-      debugger
+    if (localStorage.getItem("loginStatus") === "true") {
+      let params = JSON.parse(localStorage.getItem("userInfo"));
+      debugger;
       this.userLogin(params);
     }
 
     //在页面刷新时将vuex里的信息保存到sessionStorage里
-    window.addEventListener('beforeunload', () => {
-      localStorage.setItem('role', this.role);
-      localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
-      localStorage.setItem('loginStatus', this.isLogin)
+    window.addEventListener("beforeunload", () => {
+      localStorage.setItem("role", this.role);
+      localStorage.setItem("userInfo", JSON.stringify(this.userInfo));
+      localStorage.setItem("loginStatus", this.isLogin);
     });
   },
   methods: {
     ...mapActions(["userLogin"]),
-  }
-}
+  },
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

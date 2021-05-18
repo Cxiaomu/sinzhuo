@@ -46,7 +46,8 @@
             <ul>
               <li v-for="link in linkList" :key="link.name">
                 <a class="link-a" :href="link.href" target="_blank">
-                  {{ link.name }}</a>
+                  {{ link.name }}</a
+                >
               </li>
             </ul>
           </el-col>
@@ -56,7 +57,7 @@
             <p class="link">
               @2021-2023 版权所有 鄂ICP备20005633号-1
               <a class="link-a" href="http://cxiaomu.cn/" target="_blank">
-              cxiaomu.cn
+                cxiaomu.cn
               </a>
             </p>
           </el-col>
@@ -128,7 +129,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/global.scss';
+@import "@/styles/global.scss";
 #footer-wrapper {
   .footer-container-first {
     background-color: $darkenActiveColor;

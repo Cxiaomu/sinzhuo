@@ -23,7 +23,7 @@ export default {
 
   watch: {},
 
-   computed: {
+  computed: {
     ...mapGetters(["isLogin"]),
   },
   created() {

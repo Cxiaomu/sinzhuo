@@ -109,7 +109,7 @@ export default {
   computed: {
     ...mapGetters(["userInfo"]),
   },
-  
+
   created() {
     this.userId = this.userInfo.id;
     if (this.$route.query.courseId) {

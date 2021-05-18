@@ -10,6 +10,7 @@ $grayText: #eeeeee;
 $darkenGrayText: #999999;
 $createIconColor: #cccccc;
 $delRed: #f56c6c;
+
 /**  
  * 继承
 */
@@ -19,6 +20,7 @@ $delRed: #f56c6c;
   margin: 0.2rem auto;
   padding: 1rem 2rem;
 }
+
 // h2 p margin
 .margin {
   margin-block-start: 0.5rem;
@@ -45,12 +47,15 @@ $delRed: #f56c6c;
 // 首页项目、岗位、精品课程通用组件
 .index-item-wrapper {
   text-align: center;
+
   .index-item-container {
     @extend .f-container;
+
     .index-item-title {
-        font-size: 2rem;
-        color: #282828;
+      font-size: 2rem;
+      color: #282828;
     }
+
     // .index-item-detail {}
     .index-item-line {
       width: 3rem;
@@ -58,14 +63,17 @@ $delRed: #f56c6c;
       margin: 1.5rem auto 1rem;
       background-color: $activeColor;
     }
+
     .index-item-more {
       padding: 3rem 0 1rem 0;
+
       button {
         width: 10rem;
         height: 3rem;
         font-size: 1.05rem;
         color: $activeColor;
         border-color: $activeColor;
+
         &:hover {
           background-color: $activeColor;
           color: #ffffff;
@@ -78,8 +86,8 @@ $delRed: #f56c6c;
 // 页面主题
 .content-wrapper {
   @extend .f-container;
-  .content-container {
-  }
+
+  .content-container {}
 }
 
 // 创意项目组件
@@ -93,11 +101,13 @@ $delRed: #f56c6c;
   border: solid 1px #fff;
   border-radius: 3px;
   padding: 0 0.9rem;
+
   &:hover {
     cursor: pointer;
     color: $activeColor;
   }
 }
+
 .item-activetag {
   color: $activeColor;
   border-color: rgba($activeColor, 0.3);
@@ -109,6 +119,7 @@ $delRed: #f56c6c;
   width: 100%;
   margin-top: 3rem;
   text-align: center;
+
   button {
     width: 8rem;
     height: 2.5rem;
@@ -121,9 +132,11 @@ $delRed: #f56c6c;
   color: $darkenGrayText;
   font-size: 0.9rem;
 }
+
 .link-a {
   @extend .link;
   text-decoration: none;
+
   &:hover {
     color: $activeColor;
   }

@@ -1,6 +1,11 @@
 <template>
   <div>
-    <s-index-item :title="title" :bgColor="bgColor" :detail="detail" @toMore="toCourse">
+    <s-index-item
+      :title="title"
+      :bgColor="bgColor"
+      :detail="detail"
+      @toMore="toCourse"
+    >
       <template v-slot:index-item-content>
         <el-row>
           <el-col
@@ -14,20 +19,24 @@
           >
             <div class="course-wrapper">
               <div class="course-img-box">
-                <img :src="course.imgUrl" class="course-img" @click="toCourseById(course.id)"/>
+                <img
+                  :src="course.imgUrl"
+                  class="course-img"
+                  @click="toCourseById(course.id)"
+                />
               </div>
               <div class="course-detail-box">
                 <h3 class="course-title" v-text="course.name"></h3>
-                <p class="course-detail" v-text="course.intro"> </p>
+                <p class="course-detail" v-text="course.intro"></p>
                 <div class="course-info">
                   <el-row>
                     <el-col :span="12">
-                      <el-rate 
-                        v-model="course.score" 
+                      <el-rate
+                        v-model="course.score"
                         disabled
                         show-score
                         text-color="#ff9900"
-                        ></el-rate>
+                      ></el-rate>
                     </el-col>
                     <el-col :span="1">
                       <el-divider direction="vertical"></el-divider>
@@ -150,24 +159,24 @@ export default {
 
   methods: {
     toCourseById(id) {
-      let query  = {
-        id: id
-      }
+      let query = {
+        id: id,
+      };
       this.$router.push({
-        path: '/course',
-        query: query
-      })
+        path: "/course",
+        query: query,
+      });
     },
 
     toCourse() {
-      this.$router.push('/course')
-    }
+      this.$router.push("/course");
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/global.scss';
+@import "@/styles/global.scss";
 $courseColor: #6b7484;
 .course-wrapper {
   margin: 1rem;
@@ -178,7 +187,7 @@ $courseColor: #6b7484;
   -webkit-transition: transform 0.25s;
   &:hover {
     position: relative;
-    transform: translate(-4px,-6px);
+    transform: translate(-4px, -6px);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
   }
   .course-img-box {

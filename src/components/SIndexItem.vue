@@ -1,5 +1,8 @@
 <template>
-  <div class="index-item-wrapper" :style="{'background': bgColor ? bgColor:'#fff'}">
+  <div
+    class="index-item-wrapper"
+    :style="{ background: bgColor ? bgColor : '#fff' }"
+  >
     <div class="index-item-container">
       <h2 class="index-item-title" v-text="title"></h2>
       <p class="index-item-detail" v-text="detail"></p>
@@ -8,11 +11,9 @@
         <slot name="index-item-content"></slot>
       </div>
       <div class="index-item-more">
-        <el-button 
-        type="primary" 
-        class="more-button"
-        @click="toMore"
-        plain>查看更多</el-button>
+        <el-button type="primary" class="more-button" @click="toMore" plain
+          >查看更多</el-button
+        >
       </div>
     </div>
   </div>
@@ -22,29 +23,26 @@
 export default {
   name: "SIndexItem",
   data() {
-    return { 
-    }
+    return {};
   },
   props: {
-      title: String,
-      detail: String,
-      bgColor: String,
+    title: String,
+    detail: String,
+    bgColor: String,
   },
-  components: { },
+  components: {},
 
-  watch: { },
+  watch: {},
 
-  created() { },
+  created() {},
 
   methods: {
     toMore() {
-      this.$emit('toMore')
-    }
+      this.$emit("toMore");
+    },
   },
-
-}
+};
 </script>
 
 <style scoped lang="scss">
-
 </style>

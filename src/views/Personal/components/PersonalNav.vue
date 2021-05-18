@@ -42,7 +42,7 @@ export default {
     ...mapGetters(["role"]),
   },
   created() {
-    if (localStorage.getItem('loginStatus')) {
+    if (localStorage.getItem("loginStatus")) {
       this.userStatus = this.role;
     }
     this.getNavList();

@@ -1,6 +1,11 @@
 <template>
   <div>
-    <s-index-item :title="title" :bgColor="bgColor" :detail="detail" @toMore="toPost">
+    <s-index-item
+      :title="title"
+      :bgColor="bgColor"
+      :detail="detail"
+      @toMore="toPost"
+    >
       <template v-slot:index-item-content>
         <el-row>
           <el-col
@@ -95,24 +100,24 @@ export default {
 
   methods: {
     toPostById(id) {
-      let query  = {
-        id: id
-      }
+      let query = {
+        id: id,
+      };
       this.$router.push({
-        path: '/post',
-        query: query
-      })
+        path: "/post",
+        query: query,
+      });
     },
 
     toPost() {
-      this.$router.push('/post')
-    }
+      this.$router.push("/post");
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/global.scss';
+@import "@/styles/global.scss";
 $courseColor: #2ea1d6;
 .post-wrapper {
   margin: 1rem;
@@ -133,7 +138,7 @@ $courseColor: #2ea1d6;
       transition: transform 1.4s;
       -webkit-transition: transform 1.4s;
       &:hover {
-        transform: scale(1.2)
+        transform: scale(1.2);
       }
     }
   }

@@ -92,7 +92,13 @@ export default {
       fieldList: [],
       phaseList: [],
       projectForm: {
-        imgUrl: [{ name: "LOGO", url: "http://localhost:3000/project/projectImg?imgName=1620564048940.jpg" }],
+        imgUrl: [
+          {
+            name: "LOGO",
+            url:
+              "http://localhost:3000/project/projectImg?imgName=1620564048940.jpg",
+          },
+        ],
         // imgUrl: [],
         name: "解馋机",
         field: "住宿和餐饮业",
@@ -188,8 +194,8 @@ export default {
     // 项目logo相关方法
     // 上传之前判断文件类型
     beforeAvatarUpload(file) {
-      debugger
-      const isImg = (file.type === "image/jpeg" || file.type === "image/png");
+      debugger;
+      const isImg = file.type === "image/jpeg" || file.type === "image/png";
       const isLt2M = file.size / 1024 / 1024 < 2;
       if (!isImg) {
         this.$message.error("上传头像图片只能是 JPG 或 PNG 格式!");
@@ -209,7 +215,7 @@ export default {
 
     // 图片上传失败
     errorUpload(err, file, fileList) {
-      this.$message.warning("图片上传失败！")
+      this.$message.warning("图片上传失败！");
       console.log(err, file, fileList);
     },
 

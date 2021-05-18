@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import SIndexCourse from '../components/SIndexCourse.vue';
-import SIndexPost from '../components/SIndexPost.vue';
-import SIndexProject from '../components/SIndexProject.vue';
-import SSwiper from '../components/SSwiper.vue';
+import SIndexCourse from "../components/SIndexCourse.vue";
+import SIndexPost from "../components/SIndexPost.vue";
+import SIndexProject from "../components/SIndexProject.vue";
+import SSwiper from "../components/SSwiper.vue";
 export default {
   name: "Index",
   data() {
@@ -22,17 +22,17 @@ export default {
     SSwiper,
     SIndexProject,
     SIndexPost,
-    SIndexCourse
-    },
+    SIndexCourse,
+  },
 
   watch: {},
 
-  created() { },
+  created() {},
 
   methods: {
     toLogin() {
-      this.$router.push('/login')
-    }
+      this.$router.push("/login");
+    },
   },
 };
 </script>
