@@ -365,7 +365,7 @@ export default {
             return;
           }
           if (!this.agree) {
-            this.$message.warning("同意注册协议");
+            this.$message.warning("请同意注册协议");
             return;
           }
           this.registerApi();

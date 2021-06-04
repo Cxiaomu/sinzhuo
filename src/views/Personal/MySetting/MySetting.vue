@@ -314,6 +314,8 @@ export default {
     changePwd() {
       this.$refs["pwdForm"].validate(async (valid) => {
         if (valid) {
+          if (this.pwdForm.oldPassword === this.pwdForm.newPassword) 
+          his.$message.success("新密码不可与原密码相同！");
           let params = {
             id: "1",
             oldPassword: md5(this.pwdForm.oldPassword),
